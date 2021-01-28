@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Content-Language" content="en">
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+
+<title>:: Epic :: Documentation</title>
+
+<!-- Bootstrap Core and Font Icon -->
+<link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
+
+<!-- Core css -->
+<link rel="stylesheet" href="../assets/css/style.min.css"/>
+</head>
+
+<body class="sidebar-white font-opensans">
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+    </div>
+</div>
+
+<div id="main_content">
+
+    <div id="header_top" class="header_top">
+        <div class="container">
+            <div class="hleft">
+                <a class="header-brand" href="index.html"><i class="fa fa-graduation-cap brand-logo"></i></a>
+                <div class="dropdown">
+                    <a href="javascript:void(0)" class="nav-link icon menu_toggle"><i class="fe fe-align-center"></i></a>
+                    <a href="javascript:void(0)" class="nav-link icon"><i class="fe fe-search" data-toggle="tooltip" data-placement="right" title="Search..."></i></a>
+                    <a href="javascript:void(0)"  class="nav-link icon app_inbox"><i class="fe fe-inbox" data-toggle="tooltip" data-placement="right" title="Inbox"></i></a>
+                    <a href="javascript:void(0)"  class="nav-link icon app_file xs-hide"><i class="fe fe-folder" data-toggle="tooltip" data-placement="right" title="File Manager"></i></a>
+                    <a href="javascript:void(0)"  class="nav-link icon xs-hide"><i class="fe fe-share-2" data-toggle="tooltip" data-placement="right" title="Social Media"></i></a>
+                    <a href="javascript:void(0)" class="nav-link icon theme_btn"><i class="fe fe-feather"></i></a>
+                    <a href="javascript:void(0)" class="nav-link icon settingbar"><i class="fe fe-settings"></i></a>
+                </div>
+            </div>
+            <div class="hright">
+                <a href="javascript:void(0)" class="nav-link icon right_tab"><i class="fe fe-align-right"></i></a>
+                <a href="login.html" class="nav-link icon settingbar"><i class="fe fe-power"></i></a>                
+            </div>
+        </div>
+    </div>
+
+    <div id="rightsidebar" class="right_sidebar">
+        <a href="javascript:void(0)" class="p-3 settingbar float-right"><i class="fa fa-close"></i></a>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Settings" aria-expanded="true">Settings</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#activity" aria-expanded="false">Activity</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane vivify fadeIn active" id="Settings" aria-expanded="true">
+                <div class="mb-4">
+                    <h6 class="font-14 font-weight-bold text-muted">Font Style</h6>
+                    <div class="custom-controls-stacked font_setting">
+                        <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="font" value="font-muli" checked="">
+                            <span class="custom-control-label">Muli Google Font</span>
+                        </label>
+                        <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="font" value="font-montserrat">
+                            <span class="custom-control-label">Montserrat Google Font</span>
+                        </label>
+                        <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="font" value="font-poppins">
+                            <span class="custom-control-label">Poppins Google Font</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <h6 class="font-14 font-weight-bold text-muted">Dropdown Menu Icon</h6>
+                    <div class="custom-controls-stacked arrow_option">
+                        <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="marrow" value="arrow-a" checked="">
+                            <span class="custom-control-label">A</span>
+                        </label>
+                        <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="marrow" value="arrow-b">
+                            <span class="custom-control-label">B</span>
+                        </label>
+                        <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="marrow" value="arrow-c">
+                            <span class="custom-control-label">C</span>
+                        </label>
+                    </div>
+                    <h6 class="font-14 font-weight-bold mt-4 text-muted">SubMenu List Icon</h6>
+                    <div class="custom-controls-stacked list_option">
+                        <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="listicon" value="list-a" checked="">
+                            <span class="custom-control-label">A</span>
+                        </label>
+                        <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="listicon" value="list-b">
+                            <span class="custom-control-label">B</span>
+                        </label>
+                        <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="listicon" value="list-c">
+                            <span class="custom-control-label">C</span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <h6 class="font-14 font-weight-bold mt-4 text-muted">General Settings</h6>
+                    <ul class="setting-list list-unstyled mt-1 setting_switch">
+                        <li>
+                            <label class="custom-switch">
+                                <span class="custom-switch-description">Night Mode</span>
+                                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-darkmode">
+                                <span class="custom-switch-indicator"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom-switch">
+                                <span class="custom-switch-description">Fix Navbar top</span>
+                                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-fixnavbar">
+                                <span class="custom-switch-indicator"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom-switch">
+                                <span class="custom-switch-description">Header Dark</span>
+                                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-pageheader">
+                                <span class="custom-switch-indicator"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom-switch">
+                                <span class="custom-switch-description">Min Sidebar Dark</span>
+                                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-min_sidebar">
+                                <span class="custom-switch-indicator"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom-switch">
+                                <span class="custom-switch-description">Sidebar Dark</span>
+                                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-sidebar">
+                                <span class="custom-switch-indicator"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom-switch">
+                                <span class="custom-switch-description">Icon Color</span>
+                                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-iconcolor">
+                                <span class="custom-switch-indicator"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom-switch">
+                                <span class="custom-switch-description">Gradient Color</span>
+                                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-gradient">
+                                <span class="custom-switch-indicator"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom-switch">
+                                <span class="custom-switch-description">Box Shadow</span>
+                                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-boxshadow">
+                                <span class="custom-switch-indicator"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom-switch">
+                                <span class="custom-switch-description">RTL Support</span>
+                                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-rtl">
+                                <span class="custom-switch-indicator"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom-switch">
+                                <span class="custom-switch-description">Box Layout</span>
+                                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-boxlayout">
+                                <span class="custom-switch-indicator"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label class="d-block">Storage <span class="float-right">77%</span></label>
+                    <div class="progress progress-sm">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;"></div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block mt-3">Upgrade Storage</button>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane vivify fadeIn" id="activity" aria-expanded="false">
+                <ul class="new_timeline mt-3">
+                    <li>
+                        <div class="bullet pink"></div>
+                        <div class="time">11:00am</div>
+                        <div class="desc">
+                            <h3>Attendance</h3>
+                            <h4>Computer Class</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="bullet pink"></div>
+                        <div class="time">11:30am</div>
+                        <div class="desc">
+                            <h3>Added an interest</h3>
+                            <h4>“Volunteer Activities”</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="bullet green"></div>
+                        <div class="time">12:00pm</div>
+                        <div class="desc">
+                            <h3>Developer Team</h3>
+                            <h4>Hangouts</h4>
+                            <ul class="list-unstyled team-info margin-0 p-t-5">                                            
+                                <li><img src="../assets/images/xs/avatar1.jpg" alt="Avatar"></li>
+                                <li><img src="../assets/images/xs/avatar2.jpg" alt="Avatar"></li>
+                                <li><img src="../assets/images/xs/avatar3.jpg" alt="Avatar"></li>
+                                <li><img src="../assets/images/xs/avatar4.jpg" alt="Avatar"></li>                                            
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="bullet green"></div>
+                        <div class="time">2:00pm</div>
+                        <div class="desc">
+                            <h3>Responded to need</h3>
+                            <a href="javascript:void(0)">“In-Kind Opportunity”</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="bullet orange"></div>
+                        <div class="time">1:30pm</div>
+                        <div class="desc">
+                            <h3>Lunch Break</h3>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="bullet green"></div>
+                        <div class="time">2:38pm</div>
+                        <div class="desc">
+                            <h3>Finish</h3>
+                            <h4>Go to Home</h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme_div">
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group list-unstyled">
+                    <li class="list-group-item mb-2">
+                        <p>Light Version</p>
+                        <a href="../university/index.html"><img src="../assets/images/themes/default.png" class="img-fluid" alt="" /></a>
+                    </li>
+                    <li class="list-group-item mb-2">
+                        <p>Dark Version</p>
+                        <a href="../university-dark/index.html"><img src="../assets/images/themes/dark.png" class="img-fluid" alt="" /></a>
+                    </li>
+                    <li class="list-group-item mb-2">
+                        <p>RTL Version</p>
+                        <a href="../university-rtl/index.html"><img src="../assets/images/themes/rtl.png" class="img-fluid" alt="" /></a>
+                    </li>
+                </ul>
+            </div>
+        </div>        
+    </div>
+
+    <div class="user_div">
+        <h5 class="brand-name mb-4">Ericsson University</h5>
+        <div class="card">
+            <div class="card-body">
+                <div class="media">
+                    <img class="avatar avatar-xl mr-3" src="../assets/images/sm/avatar1.jpg" alt="avatar">
+                    <div class="media-body">
+                        <h5 class="m-0">Sara Hopkins</h5>
+                        <p class="text-muted mb-0">Webdeveloper</p>
+                        <ul class="social-links list-inline mb-0 mt-2">
+                            <li class="list-inline-item"><a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="1234567890"><i class="fa fa-phone"></i></a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="@skypename"><i class="fa fa-skype"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Statistics</h3>
+                <div class="card-options">
+                    <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>                                
+                    <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="row">
+                        <div class="col-6 pb-3">
+                            <label class="mb-0">Balance</label>
+                            <h4 class="font-30 font-weight-bold">$545</h4>
+                        </div>
+                        <div class="col-6 pb-3">
+                            <label class="mb-0">Growth</label>
+                            <h4 class="font-30 font-weight-bold">27%</h4>
+                        </div>
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <label class="d-block">Total Income<span class="float-right">77%</span></label>
+                    <div class="progress progress-xs">
+                        <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="d-block">Total Expenses <span class="float-right">50%</span></label>
+                    <div class="progress progress-xs">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
+                    </div>
+                </div>
+                <div class="form-group mb-0">
+                    <label class="d-block">Gross Profit <span class="float-right">23%</span></label>
+                    <div class="progress progress-xs">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width: 23%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Friends</h3>
+                <div class="card-options">
+                    <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>                                
+                    <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+                </div>
+            </div>
+            <ul class="right_chat list-unstyled mb-0">
+                <li class="online">
+                    <a href="javascript:void(0);" class="media">
+                        <img class="media-object " src="../assets/images/xs/avatar4.jpg" alt="">
+                        <div class="media-body">
+                            <span class="name">Donald Gardner</span>
+                            <span class="message">Designer, Blogger</span>
+                            <span class="badge badge-outline status"></span>
+                        </div>
+                    </a>                            
+                </li>
+                <li class="online">
+                    <a href="javascript:void(0);" class="media">
+                        <img class="media-object " src="../assets/images/xs/avatar5.jpg" alt="">
+                        <div class="media-body">
+                            <span class="name">Wendy Keen</span>
+                            <span class="message">Java Developer</span>
+                            <span class="badge badge-outline status"></span>
+                        </div>
+                    </a>                            
+                </li>
+                <li class="offline">
+                    <a href="javascript:void(0);" class="media">
+                        <img class="media-object " src="../assets/images/xs/avatar2.jpg" alt="">
+                        <div class="media-body">
+                            <span class="name">Matt Rosales</span>
+                            <span class="message">CEO, anchortheme</span>
+                            <span class="badge badge-outline status"></span>
+                        </div>
+                    </a>                            
+                </li>                      
+            </ul>
+        </div>
+        <div class="card b-none">
+            <ul class="list-group">
+                <li class="list-group-item d-flex">
+                    <div class="box-icon sm rounded bg-blue"><i class="fa fa-credit-card"></i> </div>
+                    <div class="ml-3">
+                        <div>+$29 New sale</div>
+                        <a href="javascript:void(0)">Admin Template</a>
+                        <div class="text-muted font-12">5 min ago</div>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex">
+                    <div class="box-icon sm rounded bg-pink"><i class="fa fa-upload"></i> </div>
+                    <div class="ml-3">
+                        <div>Project Update</div>
+                        <a href="javascript:void(0)">New HTML page</a>
+                        <div class="text-muted font-12">10 min ago</div>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex">
+                    <div class="box-icon sm rounded bg-teal"><i class="fa fa-file-word-o"></i> </div>
+                    <div class="ml-3">
+                        <div>You edited the file</div>
+                        <a href="javascript:void(0)">reposrt.doc</a>
+                        <div class="text-muted font-12">11 min ago</div>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex">
+                    <div class="box-icon sm rounded bg-cyan"><i class="fa fa-user"></i> </div>
+                    <div class="ml-3">
+                        <div>New user</div>
+                        <a href="javascript:void(0)">Puffin web - view</a>
+                        <div class="text-muted font-12">17 min ago</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="left-sidebar" class="sidebar ">
+        <h5 class="brand-name">Ericsson University</h5>
+        <nav id="left-sidebar-nav" class="sidebar-nav">
+            <ul class="metismenu">
+                <li class="g_heading">Directories</li>
+                <li><a href="../university/index.html"><i class="icon-home"></i><span>Dashboard</span></a></li>
+                <li class="active"><a href="index.html"><i class="fe fe-flag"></i></span>Introduction</a></li>
+                <li><a href="alerts.html"><i class="fe fe-alert-triangle"></i></span>Alerts</a></li>
+                <li><a href="avatars.html"><i class="fe fe-user"></i></span>Avatars</a></li>
+                <li><a href="buttons.html"><i class="fe fe-toggle-right"></i></span>Buttons</a></li>
+                <li><a href="breadcrumb.html"><i class="fe fe-link-2"></i></span>Breadcrumb</a></li>
+                <li><a href="forms.html"><i class="fe fe-layers"></i></span>Input group</a></li>
+                <li><a href="list-group.html"><i class="fe fe-list"></i></span>List group</a></li>
+                <li><a href="modal.html"><i class="fe fe-square"></i></span>Modal</a></li>
+                <li><a href="pagination.html"><i class="fe fe-file-text"></i></span>Pagination</a></li>
+                <li><a href="colors.html"><i class="fe fe-feather"></i></span>Colors</a></li>
+                <li><a href="cards.html"><i class="fe fe-image"></i></span>Cards</a></li>
+                <li><a href="charts.html"><i class="fe fe-pie-chart"></i></span>Charts</a></li>
+                <li><a href="form-components.html"><i class="fe fe-check-square"></i></span>Form components</a></li>
+                <li><a href="tags.html"><i class="fe fe-tag"></i></span>Tags</a></li>
+                <li><a href="typography.html"><i class="fe fe-type"></i></span>Typography</a></li>
+            </ul>
+        </nav>        
+    </div>
+
+    <div class="page">
+        <div id="page_top" class="section-body">
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="left">
+                        <h1 class="page-title">Introduction</h1>
+                        <select class="custom-select">
+                            <option>Year</option>
+                            <option>Month</option>
+                            <option>Week</option>
+                        </select>
+                        <div class="input-group xs-hide">
+                            <input type="text" class="form-control" placeholder="Search...">
+                        </div>                        
+                    </div>
+                    <div class="right">
+                        <div class="notification d-flex">
+                            <div class="dropdown d-flex">
+                                <a class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-1" data-toggle="dropdown"><i class="fa fa-language"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a class="dropdown-item" href="#"><img class="w20 mr-2" src="../assets/images/flags/us.svg" alt="">English</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"><img class="w20 mr-2" src="../assets/images/flags/es.svg" alt="">Spanish</a>
+                                    <a class="dropdown-item" href="#"><img class="w20 mr-2" src="../assets/images/flags/jp.svg" alt="">japanese</a>
+                                    <a class="dropdown-item" href="#"><img class="w20 mr-2" src="../assets/images/flags/bl.svg" alt="">France</a> 
+                                </div>
+                            </div>
+                            <div class="dropdown d-flex">
+                                <a class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-1" data-toggle="dropdown"><i class="fa fa-envelope"></i><span class="badge badge-success nav-unread"></span></a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <ul class="right_chat list-unstyled w350 p-0">
+                                        <li class="online">
+                                            <a href="javascript:void(0);" class="media">
+                                                <img class="media-object" src="../assets/images/xs/avatar4.jpg" alt="">
+                                                <div class="media-body">
+                                                    <span class="name">Donald Gardner</span>
+                                                    <div class="message">It is a long established fact that a reader</div>
+                                                    <small>11 mins ago</small>
+                                                    <span class="badge badge-outline status"></span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="online">
+                                            <a href="javascript:void(0);" class="media">
+                                                <img class="media-object " src="../assets/images/xs/avatar5.jpg" alt="">
+                                                <div class="media-body">
+                                                    <span class="name">Wendy Keen</span>
+                                                    <div class="message">There are many variations of passages of Lorem Ipsum</div>
+                                                    <small>18 mins ago</small>
+                                                    <span class="badge badge-outline status"></span>
+                                                </div>
+                                            </a>                            
+                                        </li>
+                                        <li class="offline">
+                                            <a href="javascript:void(0);" class="media">
+                                                <img class="media-object " src="../assets/images/xs/avatar2.jpg" alt="">
+                                                <div class="media-body">
+                                                    <span class="name">Matt Rosales</span>
+                                                    <div class="message">Contrary to popular belief, Lorem Ipsum is not simply</div>
+                                                    <small>27 mins ago</small>
+                                                    <span class="badge badge-outline status"></span>
+                                                </div>
+                                            </a>                            
+                                        </li>
+                                        <li class="online">
+                                            <a href="javascript:void(0);" class="media">
+                                                <img class="media-object " src="../assets/images/xs/avatar3.jpg" alt="">
+                                                <div class="media-body">
+                                                    <span class="name">Phillip Smith</span>
+                                                    <div class="message">It has roots in a piece of classical Latin literature from 45 BC</div>
+                                                    <small>33 mins ago</small>
+                                                    <span class="badge badge-outline status"></span>
+                                                </div>
+                                            </a>                            
+                                        </li>                        
+                                    </ul>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="javascript:void(0)" class="dropdown-item text-center text-muted-dark readall">Mark all as read</a>
+                                </div>
+                            </div>
+                            <div class="dropdown d-flex">
+                                <a class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-1" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="badge badge-primary nav-unread"></span></a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <ul class="list-unstyled feeds_widget">
+                                        <li>
+                                            <div class="feeds-left">
+                                                <span class="avatar avatar-blue"><i class="fa fa-check"></i></span>
+                                            </div>
+                                            <div class="feeds-body ml-3">
+                                                <p class="text-muted mb-0">Campaign <strong class="text-blue font-weight-bold">Holiday</strong> is nearly reach budget limit.</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="feeds-left">
+                                                <span class="avatar avatar-green"><i class="fa fa-user"></i></span>
+                                            </div>
+                                            <div class="feeds-body ml-3">
+                                                <p class="text-muted mb-0">New admission <strong class="text-green font-weight-bold">32</strong> in computer department.</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="feeds-left">
+                                                <span class="avatar avatar-red"><i class="fa fa-info"></i></span>
+                                            </div>
+                                            <div class="feeds-body ml-3">
+                                                <p class="text-muted mb-0">6th sem result <strong class="text-red font-weight-bold">67%</strong> in computer department.</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="feeds-left">
+                                                <span class="avatar avatar-azure"><i class="fa fa-thumbs-o-up"></i></span>
+                                            </div>
+                                            <div class="feeds-body ml-3">
+                                                <p class="text-muted mb-0">New Feedback <strong class="text-azure font-weight-bold">53</strong> for university assessment.</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="javascript:void(0)" class="dropdown-item text-center text-muted-dark readall">Mark all as read</a>
+                                </div>
+                            </div>
+                            <div class="dropdown d-flex">
+                                <a href="javascript:void(0)" class="chip ml-3" data-toggle="dropdown">
+                                    <span class="avatar" style="background-image: url(../assets/images/xs/avatar5.jpg)"></span> George</a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a class="dropdown-item" href="page-profile.html"><i class="dropdown-icon fe fe-user"></i> Profile</a>
+                                    <a class="dropdown-item" href="app-setting.html"><i class="dropdown-icon fe fe-settings"></i> Settings</a>
+                                    <a class="dropdown-item" href="app-email.html"><span class="float-right"><span class="badge badge-primary">6</span></span><i class="dropdown-icon fe fe-mail"></i> Inbox</a>
+                                    <a class="dropdown-item" href="javascript:void(0)"><i class="dropdown-icon fe fe-send"></i> Message</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="javascript:void(0)"><i class="dropdown-icon fe fe-help-circle"></i> Need help?</a>
+                                    <a class="dropdown-item" href="login.html"><i class="dropdown-icon fe fe-log-out"></i> Sign out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="container-fluid">
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-wrap p-lg-6">
+                                    <h2 class="mt-0 mb-4">Introduction</h2>                                
+                                    <p>We’ve created this admin panel for everyone who wants to create any templates based on our ready components. Our mission is to deliver a user-friendly, clear and easy administration panel, that can be used by both, simple websites and sophisticated systems. The only requirement is a basic HTML and CSS knowledge—as a reward, you’ll be able to manage and visualize different types of data in the easiest possible way!</p>
+                                    <p>puffin is a popular open source WebApp template for admin dashboards and admin panels. It’s responsive HTML template, which is based on the Bootstrap 4X framework. It utilizes all of the Bootstrap components in design and re-styles many commonly used plugins to create a consistent design that can be used as a user interface for backend applications.</p>
+                                    <p>puffin is based on a modular design, which allows it to be easily customised and built upon any backend project in no-time. Our documentation will guide you through installing the template and exploring the various components that are bundled with the template.</p>
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>Note:-</strong> jQuery plugin dependencies may relay on used platform and their versions.
+                                    </div>
+
+                                    <hr>
+                                    <h3>Grunt File & Installation</h3>
+                                    <span>The JavaScript Task Runner.</span>
+                                    <div class="mt-3">
+                                        <p><strong>Installing Grunt:</strong> Run <code>npm install grunt --save-dev</code> command from your teminal to install grunt within your project.</p>
+                                        <p><strong>Grunt Sass:</strong> Run <code>grunt sass</code> command from your project directory. It will compile SASS to CSS for the project. This will read the file `assets/scss/filename.scss` and output a plain-css file to `/assets/css/filename.css`. </p>
+                                        <p><strong>Grunt JSHint:</strong> Run <code>grunt jshint</code> command from your project directory. It will checks all *.js files under `assetsjs/filename` for common syntax or coding errors using the JSHint utility.</p>
+                                        <p><strong>Grunt Sprite:</strong> Run <code>grunt sprite</code> command from your project directory. </p>                        
+                                        <p><strong>Further help:</strong> To get more help on the grunt checkout <a href="https://gruntjs.com/getting-started">Grunt</a></p>
+                                        <p><strong>Note:</strong> However, any SASS code you write must be able compile via Grunt as well.It will generate pre-compiled javascript templates.</p>
+                                        <p><a href="https://gruntjs.com/" target="_blank"><strong>Grunt</strong></a> is a JavaScript task runner, a tool used to automatically perform frequent tasks such as minification, compilation, unit testing, and linting. It uses a command-line interface to run custom tasks defined in a file.</p>
+                                    </div>
+                                    <hr>
+
+                                    <h3>SCSS Structure</h3>
+                                    <p class="introduction"> Before you can use Sass, you need to set it up on your project. If you want to just browse here, go ahead, but we recommend you go install Sass first. <a href="https://sass-lang.com/install">Go here</a> if you want to learn how to get everything setup. </p>
+                                    <hr>
+
+                                    <h3>Folder Structure</h3>
+                                    <div class="mt-3">
+<pre class="prettyprint"><span class="pln">HTML</span><span class="pun">/</span><span class="pln">
+</span><span class="pun">├──</span><span class="pln"> assets</span>
+    </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> bundles<span class="pun">/</span>
+    </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> css<span class="pun">/</span>
+    </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> fonts<span class="pun">/</span>
+    </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> images<span class="pun">/</span>
+    </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> js<span class="pun">/</span>
+    </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> plugins<span class="pun">/</span>
+    </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> sass<span class="pun">/</span>
+</span><span class="pun">├──</span><span class="pln"> dark</span>
+    </span><span class="pun">├──</span><span class="pln"> assets</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> css<span class="pun">/</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> js<span class="pun">/</span>
+    </span><span class="pun">├──</span><span class="pln"> HTML</span>
+</span><span class="pun">├──</span><span class="pln"> doc</span>
+</span><span class="pun">├──</span><span class="pln"> horizontal</span>
+    </span><span class="pun">├──</span><span class="pln"> assets</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> css<span class="pun">/</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> js<span class="pun">/</span>
+    </span><span class="pun">├──</span><span class="pln"> HTML</span>
+</span><span class="pun">├──</span><span class="pln"> light</span>
+    </span><span class="pun">├──</span><span class="pln"> assets</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> css<span class="pun">/</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> js<span class="pun">/</span>
+    </span><span class="pun">├──</span><span class="pln"> HTML</span>
+</span><span class="pun">├──</span><span class="pln"> rtl</span>
+    </span><span class="pun">├──</span><span class="pln"> assets</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> css<span class="pun">/</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> js<span class="pun">/</span>
+    </span><span class="pun">├──</span><span class="pln"> HTML</span>
+</span><span class="pun">├──</span><span class="pln"> theme1</span>
+    </span><span class="pun">├──</span><span class="pln"> assets</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> css<span class="pun">/</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> js<span class="pun">/</span>
+    </span><span class="pun">├──</span><span class="pln"> HTML</span>
+</span><span class="pun">├──</span><span class="pln"> theme2</span>
+    </span><span class="pun">├──</span><span class="pln"> assets</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> css<span class="pun">/</span>
+        </span><span class="pun"></span><span class="pln"></span><span class="pun">├──</span><span class="pln"> js<span class="pun">/</span>
+    </span><span class="pun">├──</span><span class="pln"> HTML</span>
+</span></pre>
+                                    </div>
+                                    <hr>
+
+                                    <h3>Font Used</h3>
+                                    <div class="mt-3">
+                                        <p>Google fonts are used in the template. They are as follows: <a href="https://fonts.google.com/specimen/Source+Sans+Pro">Source Sans Pro</a></p>
+                                        <p>Font Awesome: <a href="https://fontawesome.com/v4.7.0/">Click to See</a></p>
+                                        <p>All Images are used: <a href="https://www.pexels.com/">Pexels.com</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-body">
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            Copyright © 2019 <a href="https://themeforest.net/user/puffintheme/portfolio">PuffinTheme</a>.
+                        </div>
+                        <div class="col-md-6 col-sm-12 text-md-right">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item"><a href="../doc/index.html">Documentation</a></li>
+                                <li class="list-inline-item"><a href="javascript:void(0)">FAQ</a></li>
+                                <li class="list-inline-item"><a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">Buy Now</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/bundles/lib.vendor.bundle.js"></script>
+<script src="../assets/js/core.js"></script>
+</body>
+</html>
