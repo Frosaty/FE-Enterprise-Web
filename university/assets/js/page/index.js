@@ -1,4 +1,3 @@
-
 $(function() {
     "use strict";
     $('.counter').counterUp({
@@ -19,17 +18,17 @@ $(document).ready(function() {
         },
         colors: ['#7568a7', '#fed284'],
         series: [{
-            name: 'Fees',
+            name: 'Contribution',
             type: 'column',
             data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
         }, {
-            name: 'Donation',
+            name: 'Contributor',
             type: 'line',
             data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
         }],
         stroke: {
             width: [0, 4]
-        },        
+        },
         // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
         xaxis: {
@@ -37,13 +36,13 @@ $(document).ready(function() {
         },
         yaxis: [{
             title: {
-                text: 'Fees',
+                text: 'Contribution',
             },
 
         }, {
             opposite: true,
             title: {
-                text: 'Donation'
+                text: 'Contributor'
             }
         }]
     }
@@ -71,13 +70,13 @@ $(document).ready(function() {
         },
         colors: ['#17a2b8', '#6435c9', '#45aaf2'],
         series: [{
-            name: 'Sales',
+            name: 'PC',
             data: [80, 50, 30, 40, 100, 20],
         }, {
-            name: 'Income',
+            name: 'Tablet',
             data: [20, 30, 40, 80, 20, 80],
         }, {
-            name: 'Expense',
+            name: 'Mobile',
             data: [44, 76, 78, 13, 43, 10],
         }],
         stroke: {
@@ -98,16 +97,17 @@ $(document).ready(function() {
     );
 
     chart.render();
+
     function update() {
 
         function randomSeries() {
             var arr = []
-            for(var i = 0; i < 6; i++) {
-                arr.push(Math.floor(Math.random() * 100)) 
+            for (var i = 0; i < 6; i++) {
+                arr.push(Math.floor(Math.random() * 100))
             }
 
             return arr
-        }       
+        }
 
         chart.updateSeries([{
             name: 'Sales',

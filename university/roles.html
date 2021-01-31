@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="icon" href="favicon.ico" type="image/x-icon"/>
-<title>:: Ericsson :: Leave</title>
+<title>:: Home :: Role</title>
 
 <!-- Bootstrap Core and vandor -->
 <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
@@ -743,7 +743,7 @@
     </div>
     <!-- Start Main leftbar navigation -->
     <div id="left-sidebar" class="sidebar">
-        <h5 class="brand-name">Ericsson<a href="javascript:void(0)" class="menu_option float-right"><i class="icon-grid font-16" data-toggle="tooltip" data-placement="left" title="Grid & List Toggle"></i></a></h5>
+        <h5 class="brand-name">Home<a href="javascript:void(0)" class="menu_option float-right"><i class="icon-grid font-16" data-toggle="tooltip" data-placement="left" title="Grid & List Toggle"></i></a></h5>
         <ul class="nav nav-tabs">
             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#menu-uni">University</a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu-admin">Admin</a></li>
@@ -754,9 +754,9 @@
                     <ul class="metismenu">
                         <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
                         <li><a href="students.html"><i class="fa fa-users"></i><span>Students</span></a></li>
-                        <li><a href="departments.html"><i class="fa fa-users"></i><span>Faculty</span></a></li>
-                        <li><a href="courses.html"><i class="fa fa-graduation-cap"></i><span>Topic</span></a></li>
-                        <li><a href="library.html"><i class="fa fa-book"></i><span>Assignment</span></a></li>
+                        <li><a href="faculty.html"><i class="fa fa-users"></i><span>Faculty</span></a></li>
+                        <li><a href="topic.html"><i class="fa fa-graduation-cap"></i><span>Topic</span></a></li>
+                        <li><a href="assignment.html"><i class="fa fa-book"></i><span>Assignment</span></a></li>
                         <li><a href="app-chat.html"><i class="fa fa-comments-o"></i><span>Chat App</span></a></li>
                         <li><a href="app-filemanager.html"><i class="fa fa-folder"></i><span>FileManager</span></a></li>
                     </ul>
@@ -767,11 +767,11 @@
                     <ul class="metismenu">
 
                         <li><a href="taskboard.html"><i class="fa fa-list-ul"></i><span>Taskboard</span></a></li>
-                        <li><a href="payments.html"><i class="fa fa-dashboard"></i><span>Hostel</span></a></li>
-                        <li><a href="professors.html"><i class="fa fa-black-tie"></i><span>Maketing Coordinator</span></a></li>
-                        <li><a href="staff.html"><i class="fa fa-user-circle-o"></i><span>Marketing Manager</span></a></li>
+                        <li><a href="std-admin.html"><i class="fa fa-dashboard"></i><span>Student</span></a></li>
+                        <li><a href="marketing-coordinator.html"><i class="fa fa-black-tie"></i><span>Maketing Coordinator</span></a></li>
+                        <li><a href="marketing-manager.html"><i class="fa fa-user-circle-o"></i><span>Marketing Manager</span></a></li>
                         <li><a href="attendance.html"><i class="fa fa-calendar-check-o"></i><span>Attendance</span></a></li>
-                        <li><a href="leave.html"><i class="fa fa-flag"></i><span>Leave</span></a></li>
+                        <li><a href="roles.html"><i class="fa fa-flag"></i><span>Role</span></a></li>
                         <li><a href="setting.html"><i class="fa fa-gear"></i><span>Settings</span></a></li>
                     </ul>
                 </nav>
@@ -945,13 +945,14 @@
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center ">
                     <div class="header-action">
-                        <h1 class="page-title">Leave</h1>
+                        <h1 class="page-title">Roles</h1>
                         <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Ericsson</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Leave</li>
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Role & Permission</li>
                         </ol>
                     </div>
-                    <a href="javascript:void(0)" class="btn btn-info btn-sm">Export Excel</a>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Roles_Permissions">Roles &amp; Permissions</a></li>
+
                 </div>
             </div>
         </div>
@@ -960,125 +961,190 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="table-responsive">                                
-                                <table class="table table-hover table-striped table-vcenter text-nowrap mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Student ID</th>
-                                            <th>Date</th>
-                                            <th>Leave Reason</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="width45">
-                                                <span class="avatar avatar-orange" data-toggle="tooltip" title="" data-original-title="Avatar Name">DB</span>
-                                            </td>
-                                            <td><div class="font-15">Marshall Nichols</div></td>
-                                            <td><span>LA-8150</span></td>
-                                            <td>24 July, 2019 to 26 July, 2019</td>
-                                            <td>Going to Family Function</td>
-                                            <td>
-                                                <button type="button" class="btn btn-icon btn-sm" title="Approved"><i class="fa fa-check text-success"></i></button>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>                                
-                                        <tr>
-                                            <td class="width45">
-                                                <span class="avatar avatar-pink" data-toggle="tooltip" title="" data-original-title="Avatar Name">GC</span>
-                                            </td>
-                                            <td><div class="font-15">Gary Camara</div></td>
-                                            <td><span>LA-8795</span></td>
-                                            <td>20 July, 2019 to 26 July, 2019</td>
-                                            <td>Going to Development</td>
-                                            <td>
-                                                <button type="button" class="btn btn-icon btn-sm" title="Approved"><i class="fa fa-check text-success"></i></button>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="width45">
-                                                <img class="avatar" src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" title="" data-original-title="Avatar Name">
-                                            </td>
-                                            <td><div class="font-15">Maryam Amiri</div></td>
-                                            <td><span>LA-0258</span></td>
-                                            <td>21 July, 2019 to 26 July, 2019</td>
-                                            <td>Attend Birthday party</td>
-                                            <td>
-                                                <button type="button" class="btn btn-icon btn-sm" title="Approved"><i class="fa fa-check text-success"></i></button>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="width45">
-                                                <img class="avatar" src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" title="" data-original-title="Avatar Name">
-                                            </td>
-                                            <td><div class="font-15">Frank Camly</div></td>
-                                            <td><span>LA-1515</span></td>
-                                            <td>11 Aug, 2019 to 21 Aug, 2019</td>
-                                            <td>Going to Holiday</td>
-                                            <td>
-                                                <button type="button" class="btn btn-icon btn-sm" title="Approved"><i class="fa fa-check text-success"></i></button>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="width45">
-                                                <span class="avatar avatar-blue" data-toggle="tooltip" title="" data-original-title="Avatar Name">DB</span>
-                                            </td>
-                                            <td><div class="font-15">Marshall Nichols</div></td>
-                                            <td><span>LA-8150</span></td>
-                                            <td>24 July, 2019 to 26 July, 2019</td>
-                                            <td>Going to Family Function</td>
-                                            <td>
-                                                <button type="button" class="btn btn-icon btn-sm" title="Approved"><i class="fa fa-check text-success"></i></button>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="width45">
-                                                <img class="avatar" src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" title="" data-original-title="Avatar Name">
-                                            </td>
-                                            <td><div class="font-15">Frank Camly</div></td>
-                                            <td><span>LA-1515</span></td>
-                                            <td>11 Aug, 2019 to 21 Aug, 2019</td>
-                                            <td>Going to Holiday</td>
-                                            <td>
-                                                <button type="button" class="btn btn-icon btn-sm" title="Approved"><i class="fa fa-check text-success"></i></button>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="width45">
-                                                <span class="avatar avatar-green" data-toggle="tooltip" title="" data-original-title="Avatar Name">GC</span>
-                                            </td>
-                                            <td><div class="font-15">Gary Camara</div></td>
-                                            <td><span>LA-8795</span></td>
-                                            <td>20 July, 2019 to 26 July, 2019</td>
-                                            <td>Going to Development</td>
-                                            <td>
-                                                <button type="button" class="btn btn-icon btn-sm" title="Approved"><i class="fa fa-check text-success"></i></button>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="width45">
-                                                <img class="avatar" src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" title="" data-original-title="Avatar Name">
-                                            </td>
-                                            <td><div class="font-15">Maryam Amiri</div></td>
-                                            <td><span>LA-0258</span></td>
-                                            <td>21 July, 2019 to 26 July, 2019</td>
-                                            <td>Attend Birthday party</td>
-                                            <td>
-                                                <button type="button" class="btn btn-icon btn-sm" title="Approved"><i class="fa fa-check text-success"></i></button>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="tab-pane" id="Roles_Permissions">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Roles &amp; Permissions</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Module Permission</th>
+                                                    <th>Read</th>
+                                                    <th>Write</th>
+                                                    <th>Create</th>
+                                                    <th>Delete</th>
+                                                    <th>Import</th>
+                                                    <th>Export</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>Guest</td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked="">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked="">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked="">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Student</td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked="">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked="">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked="">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Marketing Manager</td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked="">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked="">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked="">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Marketing Coordinator</td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked="">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked="">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="col-sm-12 m-t-20 text-right">
+                                                <button type="button" class="btn btn-primary">SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
