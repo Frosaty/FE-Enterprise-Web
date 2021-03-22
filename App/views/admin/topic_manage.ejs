@@ -1,0 +1,155 @@
+
+
+<head>
+    
+    <!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/sweetalert/sweetalert.css">
+    <!-- Core css -->
+    <link rel="stylesheet" href="../assets/css/style.min.css" />
+</head>
+
+<body>
+        
+            <!-- Start Page title and tab -->
+            <div class="section-body">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between align-items-center ">
+                        <div class="header-action">
+                            <h1 class="page-title">Topic</h1>
+                            <ol class="breadcrumb page-breadcrumb">
+                                <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Topic</li>
+                            </ol>
+                        </div>
+                        <ul class="nav nav-tabs page-header-tab">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#topic-list">List View</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#topic-add">Add New</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="section-body mt-4">
+                <div class="container-fluid">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="topic-list">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover js-basic-example dataTable table-striped table_custom border-style spacing5">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Title</th>
+                                                    <th>Start date</th>
+                                                    <th>End date</th>
+                                                    <th>Actual end</th>
+                                                    <th>Active</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Management Basics</td>
+                                                    <td>11/11/2011</td>
+                                                    <td>11/11/2011</td>
+                                                    <td>11/11/2011</td>
+                                                    <td>Yes</td>
+                                                    <td>
+                                                        <a href="/admin/contribution_manage" type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                        <a href="/admin/topic_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>              
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="topic-add">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Add Topic</h3>
+                    
+                                </div>
+                                <form class="card-body">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Title <span class="text-danger">*</span></label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" placeholder="Enter topic title">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Start Date <span class="text-danger">*</span></label>
+                                        <div class="col-md-5">
+                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter start date">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">End Date <span class="text-danger">*</span></label>
+                                        <div class="col-md-5">
+                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter end date">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Actual End Date <span class="text-danger">*</span></label>
+                                        <div class="col-md-5">
+                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter actual end date">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Active <span class="text-danger">*</span></label>
+                                        <div class="col-md-3 row">
+                                            <select class="form-control">
+                                                <option value=1 selected>Yes</option>
+                                                <option value=0>No</option>
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="col-md-10">
+                                            <button type="button" class="btn btn-success">Submit</button>
+                                            <button type="reset" class="btn btn-outline-secondary">Clear</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Start main footer -->
+            
+        
+    
+
+    <!-- Start Main project js, jQuery, Bootstrap -->
+    <script src="../assets/bundles/lib.vendor.bundle.js"></script>
+
+    <!-- Start Plugin Js -->
+    <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="../assets/bundles/dataTables.bundle.js"></script>
+    <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
+    
+    <!-- Start project main js  and page js -->
+    <script src="../assets/js/form/dropify.js"></script>
+    <script src="../assets/js/page/summernote.js"></script>
+
+    <!-- Start project main js  and page js -->
+    <script src="../assets/js/core.js"></script>
+    <script src="../assets/js/page/dialogs.js"></script>
+    <script src="../assets/js/table/datatable.js"></script>
+</body>
+

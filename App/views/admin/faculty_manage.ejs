@@ -1,0 +1,168 @@
+
+
+<head>
+    
+    <!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../assets/plugins/sweetalert/sweetalert.css">
+
+    <!-- Table css -->
+    <link rel="stylesheet" href="../assets/plugins/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css">
+    <!-- Core css -->
+    <link rel="stylesheet" href="../assets/css/style.min.css" />
+</head>
+
+<body>
+    
+            <!-- Start Page title and tab -->
+            <div class="section-body">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between align-items-center ">
+                        <div class="header-action">
+                            <h1 class="page-title">Faculty</h1>
+                            <ol class="breadcrumb page-breadcrumb">
+                                <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Faculty</li>
+                            </ol>
+                        </div>
+                        <ul class="nav nav-tabs page-header-tab">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#faculty-list">List View</a></li>
+                            <li class="nav-item"><a class="nav-link" id="Dep-tab-Boot" data-toggle="tab" href="#faculty-add">Add New</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="section-body mt-4">
+                <div class="container-fluid">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="faculty-list">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover js-basic-example dataTable table-striped table_custom border-style spacing5">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Name</th>
+                                                    <th>Description</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>01</td> 
+                                                    <td>Business</td>
+                                                    <td>This is description of faculty, and it will be very long.</td>
+                                                    <td>
+                                                        <a href="/admin/contribution_manage" type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                        <a href="/admin/faculty_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>01</td> 
+                                                    <td>IT</td>
+                                                    <td>This is description of faculty, and it will be very long.</td>
+                                                    <td>
+                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                        <a href="/admin/faculty_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>01</td> 
+                                                    <td>Business</td>
+                                                    <td>This is description of faculty, and it will be very long.</td>
+                                                    <td>
+                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                        <a href="/admin/faculty_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>01</td> 
+                                                    <td>IT</td>
+                                                    <td>This is description of faculty, and it will be very long.</td>
+                                                    <td>
+                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                        <a href="/admin/faculty_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>01</td> 
+                                                    <td>Graphic design</td>
+                                                    <td>This is description of faculty, and it will be very long.</td>
+                                                    <td>
+                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                        <a href="/admin/faculty_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-------------------------------------------- Add page ------------------------------------------->
+                        <div class="tab-pane" id="faculty-add">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Add Faculty</h3>
+                                    <div class="card-options ">
+                                    </div>
+                                </div>
+                                <form class="card-body">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Faculty name <span class="text-danger">*</span></label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" placeholder="Enter Faculty name">
+                                        </div>
+                                    </div>
+                    
+                                    
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Description <span class="text-danger">*</span></label>
+                                        <div class="col-md-7">
+                                            <textarea type="text" class="form-control" rows=5></textarea>
+                                        </div>
+                                    </div>
+        
+                                    <div class="form-group row">
+                                        <div class="col-md-10 text-right">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="reset"class="btn btn-outline-secondary">Clear</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Start main footer -->
+            
+    
+
+    <!-- Start Main project js, jQuery, Bootstrap -->
+    <script src="../assets/bundles/lib.vendor.bundle.js"></script>
+
+    <!-- Start Plugin Js -->
+    <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Start project main js  and page js -->
+    <script src="../assets/js/core.js"></script>
+    <script src="../assets/js/page/dialogs.js"></script>
+
+    <!-- Pagination javascript -->
+<script src="../assets/bundles/dataTables.bundle.js"></script>
+<script src="../assets/js/table/datatable.js"></script>
+</body>
+
