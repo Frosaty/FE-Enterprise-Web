@@ -38,80 +38,37 @@
                             <div class="gdlr-core-pbf-sidebar-content gdlr-core-column-40 gdlr-core-pbf-sidebar-padding gdlr-core-line-height gdlr-core-column-extend-left " >
                                 <div class="gdlr-core-pbf-sidebar-content-inner" data-skin="Personnel">
                                     <div class="gdlr-core-pbf-element">
-                            here
+                            
                                         <div class="gdlr-core-course-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-course-style-list-info gdlr-core-left-align clearfix " style="padding-bottom: 0px ;">
+                                            
+                                            <% for(var index in contributions) { %>
                                             <div class="gdlr-core-course-item-list">
-                                                <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span>Contribution title</h3>
+                                                <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span><%= contributions[index].title %></h3>
                                                 <div class="gdlr-core-course-item-info-wrap">
                                                     
                                                     <div class="gdlr-core-course-item-info">
                                                         <span class="gdlr-core-head">Topic : </span>
-                                                        <span class="gdlr-core-tail">About IT</span>
+                                                        <span class="gdlr-core-tail"><%= contributions[index].topic %></span>
                                                     </div>
                                                     
                                                     <div class="gdlr-core-course-item-info">
                                                         <span class="gdlr-core-head">Mark : </span>
-                                                        <span class="gdlr-core-tail">6.0</span>
+                                                        <span class="gdlr-core-tail"><%= contributions[index].mark %></span>
                                                     </div>
                                                     <div class="gdlr-core-course-item-info">
                                                         <span class="gdlr-core-head">Status : </span>
-                                                        <span class="gdlr-core-tail" style="color: green;">Approved</span>
+                                                        <span class="gdlr-core-tail" style="color: green;"><%= contributions[index].is_active %></span>
                                                     </div>
                                                 </div>
                                                 <div class="gdlr-core-right-align">
-                                                    <a href="/student/self_file_manage" class="gdlr-core-course-item-button gdlr-core-button">View content</a>
+                                                    <a href=<%= "/student/self_file_manage?id=" + contributions[index].id %>  class="gdlr-core-course-item-button gdlr-core-button">View content</a>
                                                 </div>
                                                     
                                             </div>
+                                            <% } %>
+                                            
 
-                                            <div class="gdlr-core-course-item-list">
-                                                <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span>Contribution title</h3>
-                                                <div class="gdlr-core-course-item-info-wrap">
-                                                    
-                                                    <div class="gdlr-core-course-item-info">
-                                                        <span class="gdlr-core-head">Topic : </span>
-                                                        <span class="gdlr-core-tail">About IT</span>
-                                                    </div>
-                                                    
-                                                    <div class="gdlr-core-course-item-info">
-                                                        <span class="gdlr-core-head">Mark : </span>
-                                                        <span class="gdlr-core-tail">6.0</span>
-                                                    </div>
-
-                                                    <div class="gdlr-core-course-item-info">
-                                                        <span class="gdlr-core-head">Status : </span>
-                                                        <span class="gdlr-core-tail" style="color: green;">Approved</span>
-                                                    </div>
-                                                </div>
-                                                <div class="gdlr-core-right-align">
-                                                    <a href="/student/self_file_manage" class="gdlr-core-course-item-button gdlr-core-button">View content</a>
-                                                </div>
-                                                    
-                                            </div>
-
-                                            <div class="gdlr-core-course-item-list">
-                                                <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span>Contribution title</h3>
-                                                <div class="gdlr-core-course-item-info-wrap">
-                                                    
-                                                    <div class="gdlr-core-course-item-info">
-                                                        <span class="gdlr-core-head">Topic : </span>
-                                                        <span class="gdlr-core-tail">About IT</span>
-                                                    </div>
-                                                    
-                                                    <div class="gdlr-core-course-item-info">
-                                                        <span class="gdlr-core-head">Mark : </span>
-                                                        <span class="gdlr-core-tail">6.0</span>
-                                                        <div class="gdlr-core-course-item-info">
-                                                            <span class="gdlr-core-head">Status : </span>
-                                                            <span class="gdlr-core-tail" style="color: green;">Approved</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gdlr-core-right-align">
-                                                    <a href="/student/self_file_manage" class="gdlr-core-course-item-button gdlr-core-button">View content</a>
-                                                </div>
-                                                    
-                                            </div>
+                                            
                                         </div>                    
                                 </div>
                                 

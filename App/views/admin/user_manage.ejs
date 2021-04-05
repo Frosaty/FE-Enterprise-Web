@@ -107,201 +107,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <% for(var index in users) { %>
                                         <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
+                                            <% num = parseInt(index) + 1 %>
+                                            <td><%= num%></td> 
+                                            <td><span class="font-16"><%= users[index].first_name + " " + users[index].last_name %></span></td>
+                                            <td><%= users[index].type %></td>
+                                            <td><%= users[index].name %></td>
+                                            <td><%= users[index].email %></td>
+                                            <td><%= users[index].phone %></td>
                                             <td>
-                                                <a href="/admin/contribution_manage" type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                                <a href=<%= "/admin/contribution_manage?id=" + users[index].id %> type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                 
+                                               <a href=<%= "/admin/user_detail?id=" + users[index].id %> type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                               
+                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm" data-message=<% "User-" + users[index].first_name + "-" + users[index].last_name + "-will-be-remoted-permantly!" %>  data-link= <%= "/delete_user?id=" + users[index].id %></button><i class="fa fa-trash-o text-danger"></i></button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td><span class="font-16">Ken Smith</span></td>
-                                            <td>Coordinate</td>
-                                            <td>Business</td>
-                                            <td>ken@gmail.com</td>
-                                            <td>(417) 646-7483</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                <a href="/admin/user_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                            </td>
-                                        </tr>
+                                        <% } %>
+                                       
+                                        
                                     </tbody>
                                 </table>
                             </div>

@@ -53,20 +53,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <% for(var index in topics) { %>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>Yes</td>
+                                                    <% num = parseInt(index) + 1 %>
+                                                    <td><%= num%></td>
+                                                    <td><%= topics[index].name %></td>
+                                                    <td><%= topics[index].start_date %></td>
+                                                    <td><%= topics[index].end_date %></td>
+                                                    <td><%= topics[index].end_date_actual %></td>
+                                                    <td><%= topics[index].is_active %></td>
                                                     <td>
-                                                        <a href="/admin/contribution_manage" type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                        <a href="/admin/topic_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                                        <a href=<%= "/admin/contribution_manage?id=" + topics[index].id %> type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                        <a href=<%= "/admin/topic_detail?id="  + topics[index].id %> type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm" data-message=<% "Topic-" + topics[index].name  + "-will-be-remoted-permantly!" %> data-link=<%= "/delete_topid?id=" + topics[index].id %>><i class="fa fa-trash-o text-danger"></i></button>
                                                     </td>
                                                 </tr>
-
+                                                <% } %>
                                             </tbody>
                                         </table>
                                     </div>

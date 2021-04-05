@@ -5,5 +5,6 @@ module.exports = {
     faculty: require('./faculty.js'),
     file: require('./file.js'),
     topic: require('./topic.js'),
-    user: require('./user.js')
+    user: require('./user.js'),
+    role: require('./role.js')
 }

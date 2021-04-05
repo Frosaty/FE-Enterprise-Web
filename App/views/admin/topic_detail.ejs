@@ -43,37 +43,40 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Title <span class="text-danger">*</span></label>
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control" placeholder="Enter topic title">
+                                            <input type="text" class="form-control" placeholder="Enter topic title" value=<%= topics[0].name %>>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Start Date <span class="text-danger">*</span></label>
                                         <div class="col-md-5">
-                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter start date">
+                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter start date" value=<%= topics[0].start_date %>>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">End Date <span class="text-danger">*</span></label>
                                         <div class="col-md-5">
-                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter end date">
+                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter end date" value=<%= topics[0].end_date %>>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Actual End Date <span class="text-danger">*</span></label>
                                         <div class="col-md-5">
-                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter actual end date">
+                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter actual end date" value=<%= topics[0].end_date_actual %>>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Active <span class="text-danger">*</span></label>
                                         <div class="col-md-3 row">
+                                            
                                             <select class="form-control">
-                                                <option value=1 selected>Yes</option>
-                                                <option value=0>No</option>
+                                                <% var select_active = ["", ""] %>
+                                                <% if (topics[0].is_active) {select_active[1] = "selected"} else select_active[0] = "selected"%>
+                                                <option value=0 <%= select_active[0] %>>No</option>
+                                                <option value=1 <%= select_active[1] %>>Yes</option>
                                             </select>
                                             
                                         </div>

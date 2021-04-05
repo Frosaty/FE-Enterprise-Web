@@ -43,168 +43,34 @@
             <div class="gdlr-core-course-search-page-content-wrap gdlr-core-column-40">
                 <div class="gdlr-core-course-search-page-content">
                     <div class="gdlr-core-course-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-course-style-list-info" style="padding-bottom: 0px ;">
-                        <div class="gdlr-core-course-item-list">
-                            <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span>Contribution title</h3>
-                            <div class="gdlr-core-course-item-info-wrap">
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Student : </span>
-                                    <span class="gdlr-core-tail">Huynh Cam Hung</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Topic : </span>
-                                    <span class="gdlr-core-tail">About IT</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Faculty : </span>
-                                    <span class="gdlr-core-tail">IT</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Mark : </span>
-                                    <span class="gdlr-core-tail">6.0</span>
-                                </div>
-                            </div>
-                            <div class="gdlr-core-right-align">
-                                <a href="/guest/file_manage" class="gdlr-core-course-item-button gdlr-core-button">View content</a>
-                            </div>
-                                
-                        </div>
                         
+                        <% for(var index in contributions) { %>
                         <div class="gdlr-core-course-item-list">
-                            <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span>Contribution title</h3>
+                            <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span><%= contributions[index].title %></h3>
                             <div class="gdlr-core-course-item-info-wrap">
                                 <div class="gdlr-core-course-item-info">
                                     <span class="gdlr-core-head">Student : </span>
-                                    <span class="gdlr-core-tail">Huynh Cam Hung</span>
+                                    <span class="gdlr-core-tail"><%= contributions[index].first_name + " " + contributions[index].last_name %></span>
                                 </div>
                                 <div class="gdlr-core-course-item-info">
                                     <span class="gdlr-core-head">Topic : </span>
-                                    <span class="gdlr-core-tail">About IT</span>
+                                    <span class="gdlr-core-tail"><%= contributions[index].topic %></span>
                                 </div>
                                 <div class="gdlr-core-course-item-info">
                                     <span class="gdlr-core-head">Faculty : </span>
-                                    <span class="gdlr-core-tail">IT</span>
+                                    <span class="gdlr-core-tail"><%= contributions[index].faculty %></span>
                                 </div>
                                 <div class="gdlr-core-course-item-info">
                                     <span class="gdlr-core-head">Mark : </span>
-                                    <span class="gdlr-core-tail">6.0</span>
+                                    <span class="gdlr-core-tail"><%= contributions[index].mark %></span>
                                 </div>
                             </div>
                             <div class="gdlr-core-right-align">
-                                <a href="/guest/file_manage" class="gdlr-core-course-item-button gdlr-core-button">View content</a>
+                                <a href=<%= "/guest/file_manage?id=" + contributions[index].id %>  class="gdlr-core-course-item-button gdlr-core-button">View content</a>
                             </div>
                                 
                         </div>
-
-                        <div class="gdlr-core-course-item-list">
-                            <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span>Contribution title</h3>
-                            <div class="gdlr-core-course-item-info-wrap">
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Student : </span>
-                                    <span class="gdlr-core-tail">Huynh Cam Hung</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Topic : </span>
-                                    <span class="gdlr-core-tail">About IT</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Faculty : </span>
-                                    <span class="gdlr-core-tail">IT</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Mark : </span>
-                                    <span class="gdlr-core-tail">6.0</span>
-                                </div>
-                            </div>
-                            <div class="gdlr-core-right-align">
-                                <a href="/guest/file_manage" class="gdlr-core-course-item-button gdlr-core-button">View content</a>
-                            </div>
-                                
-                        </div>
-
-                        <div class="gdlr-core-course-item-list">
-                            <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span>Contribution title</h3>
-                            <div class="gdlr-core-course-item-info-wrap">
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Student : </span>
-                                    <span class="gdlr-core-tail">Huynh Cam Hung</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Topic : </span>
-                                    <span class="gdlr-core-tail">About IT</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Faculty : </span>
-                                    <span class="gdlr-core-tail">IT</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Mark : </span>
-                                    <span class="gdlr-core-tail">6.0</span>
-                                </div>
-                            </div>
-                            <div class="gdlr-core-right-align">
-                                <a href="/guest/file_manage" class="gdlr-core-course-item-button gdlr-core-button">View content</a>
-                            </div>
-                                
-                        </div>
-
-                        <div class="gdlr-core-course-item-list">
-                            <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span>Contribution title</h3>
-                            <div class="gdlr-core-course-item-info-wrap">
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Student : </span>
-                                    <span class="gdlr-core-tail">Huynh Cam Hung</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Topic : </span>
-                                    <span class="gdlr-core-tail">About IT</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Faculty : </span>
-                                    <span class="gdlr-core-tail">IT</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Mark : </span>
-                                    <span class="gdlr-core-tail">6.0</span>
-                                </div>
-                            </div>
-                            <div class="gdlr-core-right-align">
-                                <a href="/guest/file_manage" class="gdlr-core-course-item-button gdlr-core-button">View content</a>
-                            </div>
-                                
-                        </div>
-
-                        <div class="gdlr-core-course-item-list">
-                            <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span>Contribution title</h3>
-                            <div class="gdlr-core-course-item-info-wrap">
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Student : </span>
-                                    <span class="gdlr-core-tail">Huynh Cam Hung</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Topic : </span>
-                                    <span class="gdlr-core-tail">About IT</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Faculty : </span>
-                                    <span class="gdlr-core-tail">IT</span>
-                                </div>
-                                <div class="gdlr-core-course-item-info">
-                                    <span class="gdlr-core-head">Mark : </span>
-                                    <span class="gdlr-core-tail">6.0</span>
-                                </div>
-                            </div>
-                            <div class="gdlr-core-right-align">
-                                <a href="/guest/file_manage" class="gdlr-core-course-item-button gdlr-core-button">View content</a>
-                            </div>
-                                
-                        </div>
-                        
-
-                        
-
-                       
-
-                        
+                        <% } %>
 
                         <div class="gdlr-core-pagination  gdlr-core-style-round gdlr-core-right-align">
                             <span aria-current="page" class="page-numbers current">1</span> 

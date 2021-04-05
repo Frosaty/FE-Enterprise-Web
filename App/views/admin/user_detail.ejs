@@ -51,22 +51,28 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">First Name <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" placeholder="Enter First name">
+                                            <input type="hidden" value= <%= users[0].id %>>
+                                            <input type="text" class="form-control" placeholder="Enter First name" value= <%= users[0].first_name %>>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Last Name <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" placeholder="Enter Last name">
+                                            <input type="text" class="form-control" placeholder="Enter Last name" value= <%= users[0].last_name %>>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">User role <span class="text-danger">*</span></label>
                                         <div class="col-md-5">
+                                            
                                             <select class="form-control">
-                                                <option value=2>Manager</option>
-                                                <option value=3>Coordinate</option>
-                                                <option value=4>Student</option>
+                                                <% var role_select = ["", "", ""] %>
+                                                <% role_select[parseInt(users[0].user_type_id) - 2] = "selected" %>
+                                                
+                                                <option value=2 <%= role_select[0] %>>Student</option>
+                                                <option value=3 <%= role_select[1] %>>Coordinate</option>
+                                                <option value=4 <%= role_select[2] %>>Manager</option>
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -84,23 +90,23 @@
                                     
                                     
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-form-label">Email <span class="text-danger">*</span></label>
+                                        <label class="col-md-3 col-form-label">Email <span class="text-danger" >*</span></label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" placeholder="Enter email address">
+                                            <input type="text" class="form-control" placeholder="Enter email address" value= <%= users[0].email %>>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Phone <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" placeholder="Enter phone number">
+                                            <input type="text" class="form-control" placeholder="Enter phone number" value= <%= users[0].phone %>>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Birth Date <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter birth date">
+                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter birth date" value= <%= users[0].dob %>>
                                         </div>
                                     </div>
                                     
@@ -108,9 +114,10 @@
                                         <label class="col-md-3 col-form-label">Gender <span class="text-danger">*</span></label>
                                         <div class="col-md-5">
                                             <select class="form-control input-height" name="gender">
-                                                <option value=0>Male</option>
-                                                <option value=1>Female</option>
-                                                <option value=-1>Other</option>
+                                                <% var gender_select = ["", ""] %>
+                                                <% gender_select[users[0].gender] = "selected" %>
+                                                <option value=0 <%= gender_select[0] %>>Male</option>
+                                                <option value=1 <%= gender_select[1] %>>Female</option>
                                         </select>
                                         </div>
                                     </div>
@@ -118,7 +125,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Address <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <textarea type="text" class="form-control" rows=5></textarea>
+                                            <textarea type="text" class="form-control" rows=5><%= users[0].address %></textarea>
                                         </div>
                                     </div>
                                     <div class="text-right">
@@ -142,7 +149,7 @@
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label>Password</label>
-                                                <input type="text" class="form-control" placeholder="Enter account password">
+                                                <input type="text" class="form-control" placeholder="Enter account password" value= <%= users[0].password %>>
                                             </div>
                                         </div>
                                         

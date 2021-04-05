@@ -105,216 +105,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <% for(var index in contributions) { %>
+
                                         <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>No</td>
+                                            <% num = parseInt(index) + 1 %>
+                                            <td><%= num%></td> 
+                                            <td><%= contributions[index].title %></td>
+                                            <td><%= contributions[index].first_name + " " + contributions[index].last_name %></td>
+                                            <td><%= contributions[index].topic %></td>
+                                            <td><%= contributions[index].faculty %></td>
+                                            <td><%= contributions[index].mark %></td>
+                                            <td><%= contributions[index].submitted_date %></td>
+                                            <td><%= contributions[index].is_active %></td>
                                             <td>
-                                                <a href="/admin/file_manage" type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
+                                                <a href=<%= "/admin/file_manage?id=" + contributions[index].id %> type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
+                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green" data-link=<%= "?id=" + contributions[index].id %>></i></a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>No</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>No</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>No</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>No</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>No</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>Yes</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>Yes</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>Yes</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>Yes</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>Yes</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>Yes</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>Yes</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>Yes</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td> 
-                                            <td>Hello world</td>
-                                            <td>Hung</td>
-                                            <td>About IT</td>
-                                            <td>Business</td>
-                                            <td>6.0</td>
-                                            <td>1/1/2021</td>
-                                            <td>Yes</td>
-                                            <td>
-                                                <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                            </td>
-                                        </tr>
+                                        <% } %>
                                     </tbody>
                                 </table>
                             </div>

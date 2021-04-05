@@ -1,6 +1,9 @@
 $(function () {
     $('.js-sweetalert').on('click', function () {
         var type = $(this).data('type');
+        var link = $(this).data('link');
+        var message = $(this).data('message');
+        message = message.replace(/-/g, " ")
         if (type === 'basic') {
             showBasicMessage();
         }
@@ -11,7 +14,7 @@ $(function () {
             showSuccessMessage();
         }
         else if (type === 'confirm') {
-            showConfirmMessage();
+            showConfirmMessage(link, message);
         }
         else if (type === 'cancel') {
             showCancelMessage();
@@ -47,17 +50,21 @@ function showSuccessMessage() {
     swal("Good job!", "You clicked the button!", "success");
 }
 
-function showConfirmMessage() {
+function showConfirmMessage(link, message) {
     swal({
         title: "Are you sure?",
-        text: "You will not be able to recover this data!",
+        text: message,
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#dc3545",
         confirmButtonText: "Yes, delete it!",
         closeOnConfirm: false
     }, function () {
-        swal("Deleted!", "The data has been deleted.", "success");
+        
+        $.post(link, function () {
+            swal("Deleted!", "The data has been deleted.", "success");
+            setTimeout(function(){location.reload()}, 2000);
+        })
     });
 }
 
