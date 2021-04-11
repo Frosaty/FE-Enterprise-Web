@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../assets/css/style.min.css" />
 </head>
 
-
+<%- include('../../layouts/functions.ejs') %> 
     <!-- Start Page title and tab -->
     <div class="section-body">
         <div class="container-fluid">
@@ -42,33 +42,37 @@
                             <div class="row">
                                 <div class="col-lg-2 col-md-4 col-sm-6">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Student name">
+                                        <input type="text" id="search-name" class="form-control" placeholder="Student name"  value='<%= search.name %>'>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-4 col-sm-6">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Title">
+                                        <input type="text" id="search-title" class="form-control" placeholder="Title"  value= '<%=search.title %>'>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-4 col-sm-6">
                                     <div class="input-group">
-                                        <select class="form-control">
-                                            <option disabled selected>Faculty</option>
-                                            <option value=1>All</option>
-                                            <option value=2>Business</option>
-                                            <option value=3>Graphic Design</option>
-                                            <option value=4>IT</option>
+                                        <select class="form-control" id="search-faculty">
+                                            <option disabled >Faculty</option>
+                                            <option value=0>All</option>
+                                            <% for(var index in faculties) { %>
+                                                <% var select = "" %>
+                                                <% if(faculties[index].id == search.faculty) select = "selected"%>
+                                            <option value='<%= faculties[index].id %>'  <%= select %>> <%= faculties[index].name %></option>
+                                            <%  } %>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-4 col-sm-6">
                                     <div class="input-group">
-                                        <select class="form-control">
-                                            <option disabled selected>Topic</option>
-                                            <option value=1>All</option>
-                                            <option value=2>About Business</option>
-                                            <option value=3>About Graphic Design</option>
-                                            <option value=4>About IT</option>
+                                        <select class="form-control" id="search-topic">
+                                            <option disabled>Topic</option>
+                                            <option value=0>All</option>
+                                            <% for(var index in topics) { %>
+                                                <% var select = "" %>
+                                                <% if(topics[index].id == search.topic) select = "selected"%>
+                                            <option value='<%= topics[index].id %>'  <%= select %>> <%= topics[index].name %></option>
+                                            <%  } %>
                                         </select>
                                     </div>
                                 </div>
@@ -81,7 +85,7 @@
                         
                                 </div>
                                 <div class="col-lg-2 col-md-4 col-sm-6">
-                                    <a href="javascript:void(0);" class="btn btn-sm btn-primary btn-block" title="">Search</a>
+                                    <button id="btn-search" class="btn btn-sm btn-primary btn-block" title="">Search</a>
                                 </div>
                             </div>
                         </div>
@@ -115,11 +119,11 @@
                                             <td><%= contributions[index].topic %></td>
                                             <td><%= contributions[index].faculty %></td>
                                             <td><%= contributions[index].mark %></td>
-                                            <td><%= contributions[index].submitted_date %></td>
+                                            <td><%= format_date(contributions[index].submitted_date) %></td>
                                             <td><%= contributions[index].is_active %></td>
                                             <td>
-                                                <a href=<%= "/admin/file_manage?id=" + contributions[index].id %> type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green" data-link=<%= "?id=" + contributions[index].id %>></i></a>
+                                                <a href='/admin/file_manage?id=<%=contributions[index].id %>' type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
+                
                                             </td>
                                         </tr>
                                         <% } %>
@@ -158,6 +162,17 @@
 <!-- Pagination javascript -->
 <script src="../assets/bundles/dataTables.bundle.js"></script>
 <script src="../assets/js/table/datatable.js"></script>
+
+<script>
+    $('#btn-search').on("click", function(){
+       
+       var name = $('#search-name').val()
+       var title = $('#search-title').val()
+       var faculty = $('#search-faculty').val()
+       var topic = $('#search-topic').val()
+       window.location.href = `/admin/contribution_manage?name=${name}&title=${title}&faculty=${faculty}&topic=${topic}`
+    })
+   </script>
 
 
 

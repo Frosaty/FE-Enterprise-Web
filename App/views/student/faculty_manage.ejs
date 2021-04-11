@@ -21,7 +21,7 @@
                     <div class="kingster-breadcrumbs-item kingster-item-pdlr">
                         <!-- Breadcrumb NavXT 6.5.0 -->
                         
-                        <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Finance." href="/student" class="post post-page"><span property="name">Home</span></a>
+                        <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Finance." href="/" class="post post-page"><span property="name">Home</span></a>
                         <meta property="position" content="1">
                         </span> &gt; 
                         <span property="itemListElement" typeof="ListItem"><span property="name" class="post post-page current-item">Faculty</span>
@@ -39,6 +39,7 @@
                                 <div class="gdlr-core-pbf-sidebar-content-inner" data-skin="Personnel">
                                     <div class="gdlr-core-pbf-element">
                                         <div class="gdlr-core-personnel-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-personnel-item-style-medium gdlr-core-personnel-style-medium">
+                                            
                                             
                                             <% for(var index in faculties) { %>
                                             <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
@@ -62,21 +63,15 @@
                                                             </p>
                                                         </div>
                                                         
-                                                             
-                                                        <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/student/contribution_manage?faculty_id=" + faculties[index].id %>>Contributions</a>
+                                                            <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/student/contribution_manage?faculty_id=" + faculties[index].id %>>Contributions</a>
+                                                            
                                                         
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                            
                                             <% } %>
 
-                                            <div class="gdlr-core-pagination  gdlr-core-style-round gdlr-core-right-align">
-                                                <span aria-current="page" class="page-numbers current">1</span> 
-                                                <a class="page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit">2</a>
-                                                <a class="next page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit"></a>
-                                            </div>
+                                            
                                         </div>    
                                     </div>                    
                                 </div>

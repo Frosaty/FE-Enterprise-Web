@@ -14,7 +14,7 @@
 </head>
 
 <body>
-        
+    <%- include('../../layouts/functions.ejs') %> 
             <!-- Start Page title and tab -->
             <div class="section-body">
                 <div class="container-fluid">
@@ -58,14 +58,14 @@
                                                     <% num = parseInt(index) + 1 %>
                                                     <td><%= num%></td>
                                                     <td><%= topics[index].name %></td>
-                                                    <td><%= topics[index].start_date %></td>
-                                                    <td><%= topics[index].end_date %></td>
-                                                    <td><%= topics[index].end_date_actual %></td>
+                                
+                                                    <td><%= format_date(topics[index].start_date) %></td>
+                                                    <td><%= format_date(topics[index].end_date) %></td>
+                                                    <td><%= format_date(topics[index].end_date_actual) %></td>
                                                     <td><%= topics[index].is_active %></td>
                                                     <td>
-                                                        <a href=<%= "/admin/contribution_manage?id=" + topics[index].id %> type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                        <a href=<%= "/admin/topic_detail?id="  + topics[index].id %> type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm" data-message=<% "Topic-" + topics[index].name  + "-will-be-remoted-permantly!" %> data-link=<%= "/delete_topid?id=" + topics[index].id %>><i class="fa fa-trash-o text-danger"></i></button>
+                                                        <a href=<%= "/admin/contribution_manage?topic=" + topics[index].id %> type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                        <a href='<%= "/admin/topic_detail?id="  + topics[index].id %>' type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
                                                     </td>
                                                 </tr>
                                                 <% } %>
@@ -79,50 +79,44 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Add Topic</h3>
-                    
+        
                                 </div>
-                                <form class="card-body">
+                                <form action="/add_topics" method="POST" class="card-body">
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Title <span class="text-danger">*</span></label>
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control" placeholder="Enter topic title">
+                                            <input type="text" class="form-control" placeholder="Enter topic title" name="title" id="title">
                                         </div>
                                     </div>
-
+        
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Start Date <span class="text-danger">*</span></label>
                                         <div class="col-md-5">
-                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter start date">
+                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter start date" name="start_date" id="start_date">
                                         </div>
                                     </div>
-
+        
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">End Date <span class="text-danger">*</span></label>
                                         <div class="col-md-5">
-                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter end date">
+                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter end date" name="end_date" id="end_date">
                                         </div>
                                     </div>
-
-                                    <div class="form-group row">
-                                        <label class="col-md-3 col-form-label">Actual End Date <span class="text-danger">*</span></label>
-                                        <div class="col-md-5">
-                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter actual end date">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
+        
+        
+        
+                                    <!-- <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Active <span class="text-danger">*</span></label>
                                         <div class="col-md-3 row">
-                                            <select class="form-control">
-                                                <option value=1 selected>Yes</option>
-                                                <option value=0>No</option>
-                                            </select>
-                                            
+                                            <select class="form-control" name="active" id="active">
+                                                        <option value=1>Yes</option>
+                                                        <option value=0>No</option>
+                                                    </select>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="text-right">
                                         <div class="col-md-10">
-                                            <button type="button" class="btn btn-success">Submit</button>
+                                            <button type="submit" class="btn btn-success">Submit</button>
                                             <button type="reset" class="btn btn-outline-secondary">Clear</button>
                                         </div>
                                     </div>

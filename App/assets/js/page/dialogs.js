@@ -3,7 +3,7 @@ $(function () {
         var type = $(this).data('type');
         var link = $(this).data('link');
         var message = $(this).data('message');
-        message = message.replace(/-/g, " ")
+    
         if (type === 'basic') {
             showBasicMessage();
         }
@@ -61,7 +61,7 @@ function showConfirmMessage(link, message) {
         closeOnConfirm: false
     }, function () {
         
-        $.post(link, function () {
+        $.get(link, function () {
             swal("Deleted!", "The data has been deleted.", "success");
             setTimeout(function(){location.reload()}, 2000);
         })

@@ -1,334 +1,162 @@
 
+
 <head>
+    
 
     <!-- Bootstrap Core and vandor -->
     <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../assets/plugins/dropify/css/dropify.min.css">
+    <link rel="stylesheet" href="../assets/plugins/summernote/dist/summernote.css" />
+    <link rel="stylesheet" href="../assets/plugins/sweetalert/sweetalert.css">
 
+    <link rel="stylesheet" href="../assets/plugins/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css">
+    
     <!-- Core css -->
     <link rel="stylesheet" href="../assets/css/style.min.css" />
 </head>
 
-<body>
-        
-            <!-- Start Page title and tab -->
-            <div class="section-body">
-                <div class="container-fluid">
-                    <div class="d-flex justify-content-between align-items-center ">
-                        <div class="header-action">
-                            <h1 class="page-title">Contribution Topic</h1>
-                            <ol class="breadcrumb page-breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">HOME</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">CONTRIBUTION TOPIC</li>
-                            </ol>
-                        </div>
-                        <button type="button" class="btn btn-primary"><i class="fa fa-cloud-upload mr-2"></i>Upload New</button>
-                    </div>
+<%- include('../../layouts/functions.ejs') %> 
+    <!-- Start Page title and tab -->
+    <div class="section-body">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center ">
+                <div class="header-action">
+                    <h1 class="page-title">Contribution</h1>
+                    <ol class="breadcrumb page-breadcrumb">
+                        <li class="breadcrumb-item"><a href="/coordinate">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Contribution</li>
+                    </ol>
                 </div>
             </div>
-            <div class="section-body mt-4">
-                <div class="container-fluid">
-                    <div class="row clearfix">
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Recently Accessed Files</h3>
-                                    <div class="card-options ">
-                                        <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                        <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+        </div>
+    </div>
+    <div class="section-body mt-4">
+        <div class="container-fluid">
+            <div class="tab-content">
+                <div class="tab-pane active" id="user-list">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="input-group">
+                                        <input type="text" id="search-name" class="form-control" placeholder="Student name"  value=<%= search.name %>>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="file_folder">
-                                        <a href="javascript:void(0);">
-                                            <div class="icon">
-                                                <i class="fa fa-folder text-success"></i>
-                                            </div>
-                                            <div class="file-name">
-                                                <p class="mb-0 text-muted">Family</p>
-                                                <small>3 File, 1.2GB</small>
-                                            </div>
-                                        </a>
-                                        <a href="javascript:void(0);">
-                                            <div class="icon">
-                                                <i class="fa fa-file-word-o text-primary"></i>
-                                            </div>
-                                            <div class="file-name">
-                                                <p class="mb-0 text-muted">Report2017.doc</p>
-                                                <small>Size: 68KB</small>
-                                            </div>
-                                        </a>
-                                        <a href="javascript:void(0);">
-                                            <div class="icon">
-                                                <i class="fa fa-file-pdf-o text-danger"></i>
-                                            </div>
-                                            <div class="file-name">
-                                                <p class="mb-0 text-muted">Report2017.pdf</p>
-                                                <small>Size: 68KB</small>
-                                            </div>
-                                        </a>
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="input-group">
+                                        <input type="text" id="search-title" class="form-control" placeholder="Title"  value= <%=search.title %>>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card bg-none b-none">
-                                <div class="card-body pt-0">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover table-vcenter table_custom text-nowrap spacing5 text-nowrap mb-0" id="my-table">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Name</th>
-                                                    <th>Share With</th>
-                                                    <th>Owner</th>
-                                                    <th>Last Update</th>
-                                                    <th>File Size</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="width45">
-                                                        <i class="fa fa-folder"></i>
-                                                    </td>
-                                                    <td>
-                                                        <span class="folder-name">Work</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="avatar-list avatar-list-stacked">
-                                                            <img class="avatar avatar-sm" src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" title="Avatar" />
-                                                            <img class="avatar avatar-sm" src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" title="Avatar" />
-                                                            <img class="avatar avatar-sm" src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" title="Avatar" />
-                                                        </div>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Me</span>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Oct 7, 2018</span>
-                                                    </td>
-                                                    <td class="width100 text-center">
-                                                        <span class="size"> - </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="width45">
-                                                        <i class="fa fa-folder"></i>
-                                                    </td>
-                                                    <td>
-                                                        <span class="folder-name">Family</span>
-                                                    </td>
-                                                    <td>
-                                                        -
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Me</span>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Oct 17, 2018</span>
-                                                    </td>
-                                                    <td class="width100 text-center">
-                                                        <span class="size"> - </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="width45">
-                                                        <i class="fa fa-folder text-danger"></i>
-                                                    </td>
-                                                    <td>
-                                                        <span class="folder-name">Holidays</span>
-                                                    </td>
-                                                    <td>
-                                                        -
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>John</span>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Oct 18, 2018</span>
-                                                    </td>
-                                                    <td class="width100 text-center">
-                                                        <span class="size"> 50MB </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="width45">
-                                                        <i class="fa fa-folder"></i>
-                                                    </td>
-                                                    <td>
-                                                        <span class="folder-name">Mobile Work </span>
-                                                    </td>
-                                                    <td>
-                                                        -
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Me</span>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>April 7, 2019</span>
-                                                    </td>
-                                                    <td class="width100 text-center">
-                                                        <span class="size"> 1GB </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="width45">
-                                                        <i class="fa fa-folder"></i>
-                                                    </td>
-                                                    <td>
-                                                        <span class="folder-name">Photoshop Data</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="avatar-list avatar-list-stacked">
-                                                            <img class="avatar avatar-sm" src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" title="Avatar" />
-                                                            <img class="avatar avatar-sm" src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" title="Avatar" />
-                                                        </div>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Andrew</span>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Nov 23, 2019</span>
-                                                    </td>
-                                                    <td class="width100 text-center">
-                                                        <span class="size"> - </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="width45">
-                                                        <i class="fa fa-folder text-danger"></i>
-                                                    </td>
-                                                    <td>
-                                                        <span class="folder-name">Holidays</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="avatar-list avatar-list-stacked">
-                                                            <img class="avatar avatar-sm" src="../assets/images/xs/avatar5.jpg" data-toggle="tooltip" title="Avatar" />
-                                                            <img class="avatar avatar-sm" src="../assets/images/xs/avatar6.jpg" data-toggle="tooltip" title="Avatar" />
-                                                            <img class="avatar avatar-sm" src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" title="Avatar" />
-                                                            <img class="avatar avatar-sm" src="../assets/images/xs/avatar4.jpg" data-toggle="tooltip" title="Avatar" />
-                                                        </div>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Me</span>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Dec 5, 2018</span>
-                                                    </td>
-                                                    <td class="width100 text-center">
-                                                        <span class="size"> 100MB </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="width45">
-                                                        <i class="fa fa-file-excel-o text-success"></i>
-                                                    </td>
-                                                    <td>
-                                                        <span class="folder-name">new timesheet.xlsx</span>
-                                                    </td>
-                                                    <td>
-                                                        -
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Me</span>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Dec 5, 2018</span>
-                                                    </td>
-                                                    <td class="width100 text-center">
-                                                        <span class="size"> 52KB </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="width45">
-                                                        <i class="fa fa-file-word-o text-warning"></i>
-                                                    </td>
-                                                    <td>
-                                                        <span class="folder-name">new project.doc</span>
-                                                    </td>
-                                                    <td>
-                                                        -
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Me</span>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>May 5, 2019</span>
-                                                    </td>
-                                                    <td class="width100 text-center">
-                                                        <span class="size"> 152KB </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="width45">
-                                                        <i class="fa fa-file-pdf-o text-warning"></i>
-                                                    </td>
-                                                    <td>
-                                                        <span class="folder-name">report.pdf</span>
-                                                    </td>
-                                                    <td>
-                                                        -
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Me</span>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>May 2, 2019</span>
-                                                    </td>
-                                                    <td class="width100 text-center">
-                                                        <span class="size"> 841KB </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="width45">
-                                                        <i class="fa fa-file-pdf-o text-warning"></i>
-                                                    </td>
-                                                    <td>
-                                                        <span class="folder-name">report-2018.pdf</span>
-                                                    </td>
-                                                    <td>
-                                                        -
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Me</span>
-                                                    </td>
-                                                    <td class="width100">
-                                                        <span>Oct 16, 2018</span>
-                                                    </td>
-                                                    <td class="width100 text-center">
-                                                        <span class="size"> 541KB </span>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="input-group">
+                                        <select class="form-control" id="search-topic">
+                                            <option disabled>Topic</option>
+                                            <option value=0>All</option>
+                                            <% for(var index in topics) { %>
+                                                <% var select = "" %>
+                                                <% if(topics[index].id == search.topic) select = "selected"%>
+                                            <option value=<%= topics[index].id %>  <%= select %>> <%= topics[index].name %></option>
+                                            <%  } %>
+                                        </select>
                                     </div>
+                                </div>
+                               
+                                <div class="col-lg-4 col-md-4 col-sm-6">
+                        
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <button id="btn-search" class="btn btn-sm btn-primary btn-block" title="">Search</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover js-basic-example dataTable table-striped table_custom border-style spacing5">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Title</th>
+                                            <th>Student</th>
+                                            <th>Topic</th> 
+                                            <th>Faculty</th>
+                                            <th>Mark</th>
+                                            <th>Submitted date</th>
+                                            <th>Selected</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(var index in contributions) { %>
+
+                                        <tr>
+                                            <% num = parseInt(index) + 1 %>
+                                            <td><%= num%></td> 
+                                            <td><%= contributions[index].title %></td>
+                                            <td><%= contributions[index].first_name + " " + contributions[index].last_name %></td>
+                                            <td><%= contributions[index].topic %></td>
+                                            <td><%= contributions[index].faculty %></td>
+                                            <td><%= contributions[index].mark %></td>
+                                            <td><%= format_date(contributions[index].submitted_date) %></td>
+                                            <td><%= contributions[index].is_active %></td>
+                                            <td>
+                                                <a href=<%= "/coordinate/file_manage?id=" + contributions[index].id %> type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
+                                               
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
+                
             </div>
-            <!-- Start main footer -->
-            <div class="section-body">
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                Copyright © 2021 <a href="facebook.com/diivn">ND</a>.
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        
+        </div>
+    </div>
+    <!-- Start main footer -->
     
+</div>
+</div>
 
-    <!-- Start Main project js, jQuery, Bootstrap -->
-    <script src="../assets/bundles/lib.vendor.bundle.js"></script>
+<!-- Start Main project js, jQuery, Bootstrap -->
+<script src="../assets/bundles/lib.vendor.bundle.js"></script>
 
-    <!-- Start project main js  and page js -->
-    <script src="../assets/js/core.js"></script>
-    <script>
-        $('#my-table td').on("click", function(){
-            window.location.href ="/coordinate/file_manage"
-        })
-    </script>
-</body>
+<!-- Start Plugin Js -->
+<script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="../assets/plugins/dropify/js/dropify.min.js"></script>
+<script src="../assets/bundles/summernote.bundle.js"></script>
+<script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!-- Start project main js  and page js -->
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/form/dropify.js"></script>
+<script src="../assets/js/page/summernote.js"></script>
+<script src="../assets/js/page/dialogs.js"></script>
+
+
+<!-- Pagination javascript -->
+<script src="../assets/bundles/dataTables.bundle.js"></script>
+<script src="../assets/js/table/datatable.js"></script>
+
+<script>
+    $('#btn-search').on("click", function(){
+       
+       var name = $('#search-name').val()
+       var title = $('#search-title').val()
+       var topic = $('#search-topic').val()
+       window.location.href = `/coordinate/contribution_manage?name=${name}&title=${title}&topic=${topic}`
+    })
+   </script>
+
+
+
 

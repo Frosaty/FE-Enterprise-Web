@@ -1,0 +1,96 @@
+
+
+<head>
+    
+    <!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../assets/plugins/sweetalert/sweetalert.css">
+
+    <!-- Table css -->
+    <link rel="stylesheet" href="../assets/plugins/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css">
+    <!-- Core css -->
+    <link rel="stylesheet" href="../assets/css/style.min.css" />
+</head>
+
+<body>
+    
+            <!-- Start Page title and tab -->
+            <div class="section-body">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between align-items-center ">
+                        <div class="header-action">
+                            <h1 class="page-title">Faculty Detail</h1>
+                            <ol class="breadcrumb page-breadcrumb">
+                                <li class="breadcrumb-item"><a href="/manager">Home</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:history.back()">Faculty</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Faculty Detail</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-body mt-4">
+                <div class="container-fluid">
+                    <div class="tab-content">
+
+                        <div class="tab-pane active">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Faculty Information</h3>
+                                    <div class="card-options ">
+                                    </div>
+                                </div>
+                                <form class="card-body" action="/update_faculty" method="POST">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Faculty name <span class="text-danger">*</span></label>
+                                        <div class="col-md-7">
+                                            <input type="hidden" name="faculty_id" value=<%= faculties[0].id %> >
+                                            <input type="text" class="form-control" name="name" placeholder="Enter Faculty name" value='<%= faculties[0].name %>' >
+                                            
+                                        </div>
+                                    </div>
+                    
+                                    
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Description <span class="text-danger">*</span></label>
+                                        <div class="col-md-7">
+                                            <textarea type="text" name="description" class="form-control" rows=5><%= faculties[0].description %></textarea>
+                                        </div>
+                                    </div>
+        
+                                    <div class="form-group row">
+                                        <div class="col-md-10 text-right">
+                                            <button type="submit" class="btn btn-primary">Change</button>
+                                            <button type="reset"class="btn btn-outline-secondary">Reset</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Start main footer -->
+            
+        
+    
+
+    <!-- Start Main project js, jQuery, Bootstrap -->
+    <script src="../assets/bundles/lib.vendor.bundle.js"></script>
+
+    <!-- Start Plugin Js -->
+    <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Start project main js  and page js -->
+    <script src="../assets/js/core.js"></script>
+    <script src="../assets/js/page/dialogs.js"></script>
+
+    <!-- Pagination javascript -->
+<script src="../assets/bundles/dataTables.bundle.js"></script>
+<script src="../assets/js/table/datatable.js"></script>
+</body>
+

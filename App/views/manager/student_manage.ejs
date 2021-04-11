@@ -1,0 +1,262 @@
+
+
+<head>
+    
+
+    <!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../assets/plugins/dropify/css/dropify.min.css">
+    <link rel="stylesheet" href="../assets/plugins/summernote/dist/summernote.css" />
+    <link rel="stylesheet" href="../assets/plugins/sweetalert/sweetalert.css">
+
+    <link rel="stylesheet" href="../assets/plugins/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css">
+    
+    <!-- Core css -->
+    <link rel="stylesheet" href="../assets/css/style.min.css" />
+</head>
+
+<%- include('../../layouts/functions.ejs') %> 
+    <!-- Start Page title and tab -->
+    <div class="section-body">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center ">
+                <div class="header-action">
+                    <h1 class="page-title">Student</h1>
+                    <ol class="breadcrumb page-breadcrumb">
+                        <li class="breadcrumb-item"><a href="/manager">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Student</li>
+                    </ol>
+                </div>
+                <ul class="nav nav-tabs page-header-tab">
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#user-list">List View</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#user-add">Add new</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="section-body mt-4">
+        <div class="container-fluid">
+            <div class="tab-content">
+                <div class="tab-pane active" id="user-list">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Name" id="search-name" value='<%= search.name%>'>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Email" id="search-email" value='<%= search.email%>'>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="input-group">
+                                        <select class="form-control" id="search-faculty">
+                                            <option disabled>Faculty</option>
+                                            <% for(var index in faculties) { %>
+                                                <% var select = "" %>
+                                                <% if(faculties[index].id == search.faculty) select = "selected"%>
+                                            <option value=<%= faculties[index].id %>  <%= select %>> <%= faculties[index].name %></option>
+                                            <%  } %>
+                                        </select>
+                                    </div>
+                                </div>
+                               
+                                <!-- <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="input-group">
+                                        <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Birth Date">
+                                    </div>
+                                </div> -->
+                                <div class="col-lg-4 col-md-4 col-sm-6">
+                        
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <button id="btn-search" class="btn btn-sm btn-primary btn-block" >Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover js-basic-example dataTable table-striped table_custom border-style spacing5">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Name</th>
+                                            
+                                            <th>Faculty</th> 
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(var index in users) { %>
+                                        <tr>
+                                            <% num = parseInt(index) + 1 %>
+                                            <td><%= num%></td> 
+                                            <td><span class="font-16"><%= users[index].first_name + " " + users[index].last_name %></span></td>
+                                            <td><%= users[index].faculty %></td>
+                                            <td><%= users[index].email %></td>
+                                            <td><%= users[index].phone %></td>
+                                            <td>
+                                                <a href=<%= "/manager/contribution_manage?id=" + users[index].id %> type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                 
+                                               <a href=<%= "/manager/student_detail?id=" + users[index].id %> type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                               
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                       
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+
+                <!-------------------------------------------- Add page ------------------------------------------->
+                <div class="tab-pane" id="user-add">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Add User</h3>
+                            <div class="card-options ">
+                            </div>
+                        </div>
+                        <form action="/add_user" method="POST" class="card-body">
+                            <input type="hidden" name="role" value=2>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">First Name <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" placeholder="Enter First name" name="first_name" id="first_name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Last Name <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" placeholder="Enter Last name" name="last_name" id="last_name">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Faculty <span class="text-danger">*</span></label>
+                                <div class="col-md-5">
+                                    <select class="form-control" name="faculty" id="faculty">
+                                        <% for(var index in faculties) { %>
+                                            <% var select = "" %>
+                                            <% if(faculties[index].id == search.faculty) select = "selected"%>
+                                        <option value=<%= faculties[index].id %>  <%= select %>> <%= faculties[index].name %></option>
+                                        <%  } %>
+                                        </select>
+                                </div>
+                            </div>
+    
+    
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Email <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" placeholder="Enter email address" name="email" id="email">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Phone <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" placeholder="Enter phone number" name="phone" id="phone">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Birth Date <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter birth date" name="dob" id="dob">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Gender <span class="text-danger">*</span></label>
+                                <div class="col-md-5">
+                                    <select class="form-control input-height" name="gender" id="gender">
+                                            <option value=0>Male</option>
+                                            <option value=1>Female</option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Address <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    <textarea type="text" class="form-control" rows=5 name="address" id="address"></textarea>
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Password <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" placeholder="Enter account password" name="password" id="password">
+                                </div>
+                            </div>
+    
+                            <div class="text-right">
+                                <div class="col-md-10">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                    <button type="reset" class="btn btn-outline-secondary">Clear</button>
+                                </div>
+                            </div>
+    
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start main footer -->
+    
+</div>
+</div>
+
+<!-- Start Main project js, jQuery, Bootstrap -->
+<script src="../assets/bundles/lib.vendor.bundle.js"></script>
+
+<!-- Start Plugin Js -->
+<script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="../assets/plugins/dropify/js/dropify.min.js"></script>
+<script src="../assets/bundles/summernote.bundle.js"></script>
+<script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!-- Start project main js  and page js -->
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/form/dropify.js"></script>
+<script src="../assets/js/page/summernote.js"></script>
+
+<!--Delete file confirmation-->
+<script src="../assets/js/page/dialogs.js"></script>
+
+
+<!-- Pagination javascript -->
+<script src="../assets/bundles/dataTables.bundle.js"></script>
+<script src="../assets/js/table/datatable.js"></script>
+
+<script>
+ $('#btn-search').on("click", function(){
+    
+    var name = $('#search-name').val()
+    var email = $('#search-email').val()
+    var faculty = $('#search-faculty').val()
+    window.location.href = `/manager/student_manage?name=${name}&email=${email}&faculty=${faculty}`
+ })
+</script>
+
+
+
+

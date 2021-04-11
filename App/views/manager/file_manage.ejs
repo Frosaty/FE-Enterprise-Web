@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css">
     <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css">
     <link rel="stylesheet" href="../assets/plugins/dropify/css/dropify.min.css">
-
+    <link rel="stylesheet" href="../assets/plugins/sweetalert/sweetalert.css">
     <!-- Core css -->
     <link rel="stylesheet" href="../assets/css/style.min.css" />
 </head>
 
 
-       
+<%- include('../../layouts/functions.ejs') %> 
             <!-- Start Page title and tab -->
             <div class="section-body">
                 <div class="container-fluid">
@@ -22,300 +22,125 @@
                         <div class="header-action">
                             <h1 class="page-title">File</h1>
                             <ol class="breadcrumb page-breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">HOME</a></li>
-                                <li class="breadcrumb-item"><a href="#">CONTRIBUTION TOPIC</a></li>
-                                <li class="breadcrumb-item"><a href="#">CONTRIBUTION FACULTY</a></li>
+                                <li class="breadcrumb-item"><a href="/manager">HOME</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:history.back()">CONTRIBUTION</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">FILE</li>
                             </ol>
                         </div>
-                        <ul class="nav nav-tabs page-header-tab">
-                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Library-all">List
-                            View</a></li>
-                            <!--                        <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab"-->
-                            <!--                                                href="#Library-add-Boot">Add new</a></li>-->
-                        </ul>
+                        <div>
+                            <a href='/update_active?id=<%= contributions[0].id%>&active=1' type="button" class="btn btn-primary"><i class="fa fa-check-circle"></i> &nbsp;Approve</a>
+                            <a href='/update_active?id=<%= contributions[0].id%>&active=0' type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i> &nbsp;Disapprove</a>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
+            
             <div class="section-body mt-4">
                 <div class="container-fluid">
                     <div class="tab-content">
                         <div class="tab-pane active" id="Library-all">
+                            <div class="row justify-content-between">
+                                <h4 class="text-left col-lg-6 col-md-6 col-sm-6"><b><%= contributions[0].title%> </b></h4>
+                                <div class="text-right col-lg-6 col-md-6 col-sm-6">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mark-modal" title="View">Edit Mark</button>
+                                    <a href='/manager/comment_manage?id=<%= contributions[0].id%>' type="button" class="btn btn-outline-secondary">Comment</a>
+                                </div>
+                                
+                            </div>
+                            <div class="row justify-content-between">
+                                <% if(contributions[0].is_active) { %>
+                                    <h5 class="text-left col-lg-6 col-md-6 col-sm-6" style="color: #17a2b8"><b>APPROVED </b><i class="fa fa-check-circle"></i></h4>
+                                <% } else { %>
+                                    <h5 class="text-left col-lg-6 col-md-6 col-sm-6" style="color: #db2828"><b>DISAPPROVED </b><i class="fa fa-minus-circle"></i></h4>
+                                <% } %>
+                                
+                                
+                            </div>
+                            <div class="row justify-content-between">
+                                <h6 class="text-left col-lg-12 col-md-12 col-sm-12" >Topic: <%= contributions[0].topic%></h6>
+                                
+                                <h6 class="text-left col-lg-12 col-md-12 col-sm-12">Student: <%= contributions[0].first_name + " " + contributions[0].last_name%></h6>
+                            </div>
+                            <div class="row justify-content-between">
+                                <h6 class="text-left col-lg-6 col-md-6 col-sm-6" >Mark: <%= contributions[0].mark%></i></h6>
+                                <div class="text-right col-lg-6 col-md-6 col-sm-6">
+                                    <span class="text-left col-lg-6 col-md-6 col-sm-6" >Ebstablish date: <%= format_date(contributions[0].submitted_date)%></i></span>
+                                </div>
+                                
+                            </div>
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-hover js-basic-example dataTable table-striped table_custom border-style spacing5">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Title</th>
-                                                    <th>Faculty</th>
-                                                    <th>Faculty</th>
-                                                    <th>Date Time</th>
-                                                    <th>File Type</th>
-                                                    <th>Download</th>
+                                                    <th>No</th>
+                                                    <th>Name</th>
+                                        
+                                                    <th>Submitted date</th>
+                                                    
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <% for(var index in files) { %>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>Designing</td>
-                                                    <td>Architecture</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>PDF</td>
-                                                    <td><span class="tag tag-green">download</span></td>
+                                                    <td><%= parseInt(index) + 1 %></td>
+                                                    <td><%= files[index].file_name %></td>
+            
+                                                    <td><%= format_date(files[index].submitted_date) %></td>
+                                                    <td>
+                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
+                                                        <a href='/download_file?path=<%= files[index].path%>&name=<%=files[index].file_name %>' type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
+                                                        
+                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm" data-message='<%= "File " + files[index].file_name  + " will be remoted permantly!" %>' data-link='/delete_file?id=<%=files[index].id %>&path=<%= files[index].path + "/" + files[index].file_name%>'><i class="fa fa-trash-o text-danger"></i></button>
+                                                    </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Java Black Txt</td>
-                                                    <td>Graphics</td>
-                                                    <td>MBA</td>
-                                                    <td>12/12/2012</td>
-                                                    <td>Word</td>
-                                                    <td><span class="tag tag-green">download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Parallel Computing</td>
-                                                    <td>Politics</td>
-                                                    <td>Architecture</td>
-                                                    <td>12/12/2012</td>
-                                                    <td>ZIP</td>
-                                                    <td><span class="tag tag-green">download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Networking</td>
-                                                    <td>Computer</td>
-                                                    <td>MBA</td>
-                                                    <td>09/09/2020</td>
-                                                    <td>ZIP</td>
-                                                    <td><span class="tag tag-green">Download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Web Programming</td>
-                                                    <td>Mechanics</td>
-                                                    <td>Computer</td>
-                                                    <td>12/12/2012</td>
-                                                    <td>Txt</td>
-                                                    <td><span class="tag tag-green">Download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>Designing</td>
-                                                    <td>Mechanics</td>
-                                                    <td>Computer</td>
-                                                    <td>12/12/2012</td>
-                                                    <td>ZIP</td>
-                                                    <td><span class="tag tag-green">download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>7</td>
-                                                    <td>Mechanics</td>
-                                                    <td>Computer</td>
-                                                    <td>Computer Engineering</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>Word</td>
-                                                    <td><span class="tag tag-green">download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>8</td>
-                                                    <td>Computer Fundamental</td>
-                                                    <td>Animation</td>
-                                                    <td>Mechanical</td>
-                                                    <td>12/12/2012</td>
-                                                    <td>PDF</td>
-                                                    <td><span class="tag tag-green">Download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>9</td>
-                                                    <td>Time History</td>
-                                                    <td>Management</td>
-                                                    <td>Mechanical</td>
-                                                    <td>12/12/2012</td>
-                                                    <td>ZIP</td>
-                                                    <td><span class="tag tag-green">download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>10</td>
-                                                    <td>Politics</td>
-                                                    <td>Designing</td>
-                                                    <td>Mechanical</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>ZIP</td>
-                                                    <td><span class="tag tag-green">download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>11</td>
-                                                    <td>Designing</td>
-                                                    <td>Mechanics</td>
-                                                    <td>Computer</td>
-                                                    <td>12/12/2012</td>
-                                                    <td>ZIP</td>
-                                                    <td><span class="tag tag-green">download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>12</td>
-                                                    <td>Mechanics</td>
-                                                    <td>Computer</td>
-                                                    <td>Computer Engineering</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>Word</td>
-                                                    <td><span class="tag tag-green">download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>13</td>
-                                                    <td>Computer Fundamental</td>
-                                                    <td>Animation</td>
-                                                    <td>Mechanical</td>
-                                                    <td>12/12/2012</td>
-                                                    <td>PDF</td>
-                                                    <td><span class="tag tag-green">Download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>14</td>
-                                                    <td>Time History</td>
-                                                    <td>Management</td>
-                                                    <td>Mechanical</td>
-                                                    <td>12/12/2012</td>
-                                                    <td>ZIP</td>
-                                                    <td><span class="tag tag-green">download</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>15</td>
-                                                    <td>Politics</td>
-                                                    <td>Designing</td>
-                                                    <td>Mechanical</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>ZIP</td>
-                                                    <td><span class="tag tag-green">download</span></td>
-                                                </tr>
+                                                <% } %>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--                    <div class="tab-pane" id="Library-add-Boot">-->
-                        <!--                        <div class="card">-->
-                        <!--                            <div class="card-header">-->
-                        <!--                                <h3 class="card-title">Add Assignment</h3>-->
-                        <!--                                <div class="card-options ">-->
-                        <!--                                    <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i-->
-                        <!--                                            class="fe fe-chevron-up"></i></a>-->
-                        <!--                                    <a href="#" class="card-options-remove" data-toggle="card-remove"><i-->
-                        <!--                                            class="fe fe-x"></i></a>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                            <form class="card-body">-->
-                        <!--                                <div class="form-group row">-->
-                        <!--                                    <label class="col-md-3 col-form-label">Title <span-->
-                        <!--                                            class="text-danger">*</span></label>-->
-                        <!--                                    <div class="col-md-7">-->
-                        <!--                                        <input type="text" class="form-control">-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="form-group row">-->
-                        <!--                                    <label class="col-md-3 col-form-label">Topic <span-->
-                        <!--                                            class="text-danger">*</span></label>-->
-                        <!--                                    <div class="col-md-7">-->
-                        <!--                                        <select class="form-control input-height" name="sub">-->
-                        <!--                                            <option value="">Select...</option>-->
-                        <!--                                            <option value="Category 1">Mathematics</option>-->
-                        <!--                                            <option value="Category 2">Science</option>-->
-                        <!--                                            <option value="Category 3">Software</option>-->
-                        <!--                                            <option value="Category 3">Other</option>-->
-                        <!--                                        </select>-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="form-group row">-->
-                        <!--                                    <label class="col-md-3 col-form-label">Start Date <span class="text-danger">*</span></label>-->
-                        <!--                                    <div class="col-md-7">-->
-                        <!--                                        <input data-provide="datepicker" data-date-autoclose="true" class="form-control"-->
-                        <!--                                               placeholder="">-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="form-group row">-->
-                        <!--                                    <label class="col-md-3 col-form-label">Exp Date <span-->
-                        <!--                                            class="text-danger">*</span></label>-->
-                        <!--                                    <div class="col-md-7">-->
-                        <!--                                        <input data-provide="datepicker" data-date-autoclose="true" class="form-control"-->
-                        <!--                                               placeholder="">-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="form-group row">-->
-                        <!--                                    <label class="col-md-3 col-form-label">Author Name <span-->
-                        <!--                                            class="text-danger">*</span></label>-->
-                        <!--                                    <div class="col-md-7">-->
-                        <!--                                        <input type="text" class="form-control">-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="form-group row">-->
-                        <!--                                    <label class="col-md-3 col-form-label">Faculty <span-->
-                        <!--                                            class="text-danger">*</span></label>-->
-                        <!--                                    <div class="col-md-7">-->
-                        <!--                                        <select class="form-control input-height" name="departmnt">-->
-                        <!--                                            <option value="">Select...</option>-->
-                        <!--                                            <option value="Category 1">Mathematics</option>-->
-                        <!--                                            <option value="Category 2">Engineering</option>-->
-                        <!--                                            <option value="Category 3">Science</option>-->
-                        <!--                                            <option value="Category 3">M.B.A.</option>-->
-                        <!--                                        </select>-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="form-group row">-->
-                        <!--                                    <label class="col-md-3 col-form-label">Asset Type <span class="text-danger">*</span></label>-->
-                        <!--                                    <div class="col-md-7">-->
-                        <!--                                        <select class="form-control input-height" name="assttype">-->
-                        <!--                                            <option value="">Select...</option>-->
-                        <!--                                            <option value="Category 1">Txt</option>-->
-                        <!--                                            <option value="Category 2">PDF</option>-->
-                        <!--                                            <option value="Category 3">Word</option>-->
-                        <!--                                            <option value="Category 3">NewsPaper</option>-->
-                        <!--                                        </select>-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="form-group row">-->
-                        <!--                                    <label class="col-md-3 col-form-label">Asset Details <span-->
-                        <!--                                            class="text-danger">*</span></label>-->
-                        <!--                                    <div class="col-md-7">-->
-                        <!--                                        <textarea rows="4" class="form-control no-resize"-->
-                        <!--                                                  placeholder="Please type what you want..."></textarea>-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                                    <div class="form-group">-->
-                        <!--                                        <label class="col-md-3 col-form-label"></label>-->
-
-                        <!--                                        <input type="file" class="dropify">-->
-                        <!--                                        <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>-->
-                        <!--                                    </div>-->
-                        <!--                                <div class="form-group row align-center">-->
-                        <!--                                    <label class="col-md-3 col-form-label"></label>-->
-                        <!--                                    <div class="col-md-7">-->
-                        <!--                                        <button type="submit" class="btn btn-primary">Submit</button>-->
-                        <!--                                        <button type="submit" class="btn btn-outline-secondary">Cancel</button>-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                            </form>-->
-                        <!--                        </div>-->
-                        <!--                    </div>-->
+                        </div>  
                     </div>
                 </div>
             </div>
-            <!-- Start main footer -->
-            <div class="section-body">
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                Copyright © 2021 <a href="facebook.com/diivn">ND</a>.
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="mark-modal" tabindex="-1" role="dialog" aria-labelledby="viewDetail" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="viewDetail">Edit mark</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                            <form action="/update_mark" method="post">
+                                                <div class="modal-body">
+                                                    
+                                                        <div class="form-group row">
+                                                            <label for="mark" class="col-md-3 col-form-label">Mark:</label>
+                                                            <div class="col-md-9">
+                                                                <input type="hidden" name="id" value=<%= contributions[0].id%>>
+                                                                <input type="number" class="form-control" id="mark" name="mark" min=0 max=10 value=<%= contributions[0].mark%> step=0.1>
+                                                            </div>
+                                                            
+                                                        </div>
+                
+                                                    
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
         
     
 

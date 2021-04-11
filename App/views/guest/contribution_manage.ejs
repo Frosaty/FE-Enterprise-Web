@@ -1,7 +1,7 @@
 <head>
    
 </head>
-            
+<%- include('../../layouts/functions.ejs') %>        
 <div class="kingster-page-title-wrap kingster-style-custom kingster-left-align" style="background-image: url(../upload/shutterstock_59887279.jpg) ;">
     <div class="kingster-header-transparent-substitute">
     </div>
@@ -29,7 +29,7 @@
             </span> &gt; 
             <span property="itemListElement" typeof="ListItem">
                 <span property="name" class="post post-page current-item">Contribution</span>
-                <meta property="url" content="https://demo.goodlayers.com/kingster/homepages/college/course-search/">
+                <meta property="url" content="">
                 <meta property="position" content="2">
             </span>
         </div>
@@ -72,11 +72,7 @@
                         </div>
                         <% } %>
 
-                        <div class="gdlr-core-pagination  gdlr-core-style-round gdlr-core-right-align">
-                            <span aria-current="page" class="page-numbers current">1</span> 
-                            <a class="page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit">2</a>
-                            <a class="next page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit"></a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -89,20 +85,29 @@
                             style="background-image: url(https://demo.goodlayers.com/kingster/homepages/college/wp-content/uploads/sites/2/2018/08/search-bg-2.jpg) ;">
                             <h3 class="gdlr-core-course-search-item-title " style="color: #ffffff ;">Search For Contribution</h3>
                             <form class="gdlr-core-course-form clearfix"
-                                action="https://demo.goodlayers.com/kingster/homepages/college/course-search/" method="GET">
+                                action="">
                                 <div class=" gdlr-core-course-column gdlr-core-column-1 gdlr-core-column-first">
                                     <div class="gdlr-core-course-search-field gdlr-core-course-field-keywords"><input type="text"
-                                            placeholder="Student Name" name="course-keywords" value=""></div>
+                                            placeholder="Student Name" name="course-keywords" id="search-name" value=<%= search.name %> ></div>
                                 </div>
                                 
+                                <div class=" gdlr-core-course-column gdlr-core-column-1 gdlr-core-column-first">
+                                    <div class="gdlr-core-course-search-field gdlr-core-course-field-keywords">
+                                        <input type="text" placeholder="Title" name="course-keywords" id="search-title" value=<%= search.title %> ></div>
+                                </div>
+
                                 <div class=" gdlr-core-course-column gdlr-core-column-1">
                                     <div class="gdlr-core-course-search-field gdlr-core-course-field-campus">
-                                        <div class="gdlr-core-course-form-combobox gdlr-core-skin-e-background"><select
-                                                class="gdlr-core-skin-e-content" name="faculty">
+                                        <div class="gdlr-core-course-form-combobox gdlr-core-skin-e-background">
+                                            <select id="search-topic"
+                                                class="gdlr-core-skin-e-content" name="">
                                                 <option value="" disabled>Topic</option>
-                                                <option value="admans-hall">About IT</option>
-                                                <option value="kingsters-80">About Graphic design</option>
-                                                <option value="ku2-hill">About Business</option>
+                                                <option value=0>All</option>
+                                                <% for(var index in topics) { %>
+                                                    <% var select = "" %>
+                                                    <% if(topics[index].id == search.topic) select = "selected"%>
+                                                <option value=<%= topics[index].id %>  <%= select %>> <%= topics[index].name %></option>
+                                                <%  } %>
                                             </select></div>
                                     </div>
                                 </div>
@@ -110,28 +115,22 @@
                                 
                                 <div class=" gdlr-core-course-column gdlr-core-column-1">
                                     <div class="gdlr-core-course-search-field gdlr-core-course-field-campus">
-                                        <div class="gdlr-core-course-form-combobox gdlr-core-skin-e-background"><select
+                                        <div class="gdlr-core-course-form-combobox gdlr-core-skin-e-background">
+                                            <select id="search-faculty"
                                                 class="gdlr-core-skin-e-content" name="faculty">
                                                 <option value="" disabled>Faculty</option>
-                                                <option value="admans-hall">IT</option>
-                                                <option value="kingsters-80">Graphic design</option>
-                                                <option value="ku2-hill">Business</option>
+                                                <option value=0>All</option>
+                                                <% for(var index in faculties) { %>
+                                                    <% var select = "" %>
+                                                    <% if(faculties[index].id == search.faculty) select = "selected"%>
+                                                <option value=<%= faculties[index].id %>  <%= select %>> <%= faculties[index].name %></option>
+                                                <%  } %>
                                             </select></div>
                                     </div>
                                 </div>
-                                <div class=" gdlr-core-course-column gdlr-core-column-1">
-                                    <div class="gdlr-core-course-search-field gdlr-core-course-field-level">
-                                        <div class="gdlr-core-course-form-combobox gdlr-core-skin-e-background"><select
-                                                class="gdlr-core-skin-e-content" name="mark">
-                                                <option value="">Mark</option>
-                                                <option value="graduate">High</option>
-                                                <option value="undergraduate">Medium</option>
-                                                <option value="undergraduate">Low</option>
-                                            </select></div>
-                                    </div>
-                                </div>                                                                                                                                                                    
+                                                                                                                                                                                               
                                 <div class="gdlr-core-course-form-submit gdlr-core-course-column gdlr-core-column-first gdlr-core-center-align">
-                                    <input class="gdlr-core-full-size" type="submit" value="Search Contribution">
+                                    <input class="gdlr-core-full-size" type="submit" value="Search Contribution" id="btn-search">
                                 </div>
                             </form>
                         </div>
@@ -168,5 +167,16 @@
     </script>
     <script src="../js/script-core.js" id="kingster-script-core-js"></script>
     <script type='text/javascript' src="../js/isotope.js"></script>
+
+    <script>
+        $('#btn-search').on("click", function(envent){
+           event.preventDefault()
+           var name = $('#search-name').val()
+           var title = $('#search-title').val()
+           var faculty = $('#search-faculty').val()
+           var topic = $('#search-topic').val()
+           window.location.href = `/guest/contribution_manage?name=${name}&title=${title}&faculty=${faculty}&topic=${topic}`
+        })
+       </script>
 </body>
 

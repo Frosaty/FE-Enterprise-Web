@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../assets/css/style.min.css" />
 </head>
 
-
+<%- include('../../layouts/functions.ejs') %> 
     <!-- Start Page title and tab -->
     <div class="section-body">
         <div class="container-fluid">
@@ -46,33 +46,39 @@
                             <div class="row">
                                 <div class="col-lg-2 col-md-4 col-sm-6">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Name">
+                                        <input type="text" class="form-control" placeholder="Name" id="search-name" value=<%= search.name%>>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-4 col-sm-6">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Email">
+                                        <input type="text" class="form-control" placeholder="Email" id="search-email" value=<%= search.email%>>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-4 col-sm-6">
                                     <div class="input-group">
-                                        <select class="form-control">
-                                            <option disabled selected>Faculty</option>
-                                            <option value=1>All</option>
-                                            <option value=2>Business</option>
-                                            <option value=3>Graphic Design</option>
-                                            <option value=4>IT</option>
+                                        <select class="form-control" id="search-faculty">
+                                            <option disabled>Faculty</option>
+                                            <option value=0>All</option>
+                                            <% for(var index in faculties) { %>
+                                                <% var select = "" %>
+                                                <% if(faculties[index].id == search.faculty) select = "selected"%>
+                                            <option value=<%= faculties[index].id %>  <%= select %>> <%= faculties[index].name %></option>
+                                            <%  } %>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-4 col-sm-6">
                                     <div class="input-group">
-                                        <select class="form-control">
-                                            <option disabled selected>User role</option>
-                                            <option value=1>All</option>
-                                            <option value=2>Manager</option>
-                                            <option value=3>Coordinate</option>
-                                            <option value=4>Student</option>
+                                        <select class="form-control" id="search-role">
+                                            <option disabled>User role</option>
+                                            <option value=0>All</option>
+
+                                            <% var select = ["","",""] %>
+                                            <% if(search.role != 0) select[search.role - 2] = "selected"%>
+                                            <option value=2 <%= select[0] %>>Student</option>
+                                            <option value=3 <%= select[1] %>>Coordinate</option>
+                                            <option value=4 <%= select[2] %>>Manager</option>
+                                                
                                         </select>
                                     </div>
                                 </div>
@@ -85,7 +91,7 @@
                         
                                 </div>
                                 <div class="col-lg-2 col-md-4 col-sm-6">
-                                    <a href="javascript:void(0);" class="btn btn-sm btn-primary btn-block" title="">Search</a>
+                                    <button id="btn-search" class="btn btn-sm btn-primary btn-block" >Search</button>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +119,7 @@
                                             <td><%= num%></td> 
                                             <td><span class="font-16"><%= users[index].first_name + " " + users[index].last_name %></span></td>
                                             <td><%= users[index].type %></td>
-                                            <td><%= users[index].name %></td>
+                                            <td><%= users[index].faculty %></td>
                                             <td><%= users[index].email %></td>
                                             <td><%= users[index].phone %></td>
                                             <td>
@@ -121,7 +127,7 @@
                                                  
                                                <a href=<%= "/admin/user_detail?id=" + users[index].id %> type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
                                                
-                                                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm" data-message=<% "User-" + users[index].first_name + "-" + users[index].last_name + "-will-be-remoted-permantly!" %>  data-link= <%= "/delete_user?id=" + users[index].id %></button><i class="fa fa-trash-o text-danger"></i></button>
+                                                
                                             </td>
                                         </tr>
                                         <% } %>
@@ -144,95 +150,96 @@
                             <div class="card-options ">
                             </div>
                         </div>
-                        <form class="card-body">
+                        <form action="/add_user" method="POST" class="card-body">
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">First Name <span class="text-danger">*</span></label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" placeholder="Enter First name">
+                                    <input type="text" class="form-control" placeholder="Enter First name" name="first_name" id="first_name">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Last Name <span class="text-danger">*</span></label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" placeholder="Enter Last name">
+                                    <input type="text" class="form-control" placeholder="Enter Last name" name="last_name" id="last_name">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">User role <span class="text-danger">*</span></label>
                                 <div class="col-md-5">
-                                    <select class="form-control">
-                                        <option value=2>Manager</option>
-                                        <option value=3>Coordinate</option>
-                                        <option value=4>Student</option>
-                                    </select>
+                                    <select class="form-control" name="role" id="role">
+                                            <option value=2>Manager</option>
+                                            <option value=3>Coordinate</option>
+                                            <option value=4>Student</option>
+                                        </select>
                                 </div>
                             </div>
-
+    
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Faculty <span class="text-danger">*</span></label>
                                 <div class="col-md-5">
-                                    <select class="form-control">
-                                        <option value=2>Business</option>
-                                        <option value=3>Graphic Design</option>
-                                        <option value=4>IT</option>
-                                    </select>
+                                    <select class="form-control" name="faculty" id="faculty">
+                                            <% for(var index in faculties) { %>
+                                                <% var select = "" %>
+                                                <% if(faculties[index].id == search.faculty) select = "selected"%>
+                                            <option value=<%= faculties[index].id %>  <%= select %>> <%= faculties[index].name %></option>
+                                            <%  } %>
+                                        </select>
                                 </div>
                             </div>
-                            
-                            
+    
+    
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Email <span class="text-danger">*</span></label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" placeholder="Enter email address">
+                                    <input type="text" class="form-control" placeholder="Enter email address" name="email" id="email">
                                 </div>
                             </div>
-
+    
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Phone <span class="text-danger">*</span></label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" placeholder="Enter phone number">
+                                    <input type="text" class="form-control" placeholder="Enter phone number" name="phone" id="phone">
                                 </div>
                             </div>
-
+    
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Birth Date <span class="text-danger">*</span></label>
                                 <div class="col-md-7">
-                                    <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter birth date">
+                                    <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter birth date" name="dob" id="dob">
                                 </div>
                             </div>
-                            
+    
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Gender <span class="text-danger">*</span></label>
                                 <div class="col-md-5">
-                                    <select class="form-control input-height" name="gender">
-                                        <option value=0>Male</option>
-                                        <option value=1>Female</option>
-                                        <option value=-1>Other</option>
-                                </select>
+                                    <select class="form-control input-height" name="gender" id="gender">
+                                            <option value=0>Male</option>
+                                            <option value=1>Female</option>
+                                    </select>
                                 </div>
                             </div>
-                            
+    
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Address <span class="text-danger">*</span></label>
                                 <div class="col-md-7">
-                                    <textarea type="text" class="form-control" rows=5></textarea>
+                                    <textarea type="text" class="form-control" rows=5 name="address" id="address"></textarea>
                                 </div>
                             </div>
-
+    
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Password <span class="text-danger">*</span></label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" placeholder="Enter account password">
+                                    <input type="text" class="form-control" placeholder="Enter account password" name="password" id="password">
                                 </div>
                             </div>
-
+    
                             <div class="text-right">
                                 <div class="col-md-10">
-                                    <button type="button" class="btn btn-success">Submit</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
                                     <button type="reset" class="btn btn-outline-secondary">Clear</button>
                                 </div>
                             </div>
-                            
+    
                         </form>
                     </div>
                 </div>
@@ -265,6 +272,17 @@
 <!-- Pagination javascript -->
 <script src="../assets/bundles/dataTables.bundle.js"></script>
 <script src="../assets/js/table/datatable.js"></script>
+
+<script>
+ $('#btn-search').on("click", function(){
+    
+    var name = $('#search-name').val()
+    var email = $('#search-email').val()
+    var faculty = $('#search-faculty').val()
+    var role = $('#search-role').val()
+    window.location.href = `/admin/user_manage?name=${name}&email=${email}&faculty=${faculty}&role=${role}`
+ })
+</script>
 
 
 

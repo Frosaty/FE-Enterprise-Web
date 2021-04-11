@@ -3,9 +3,11 @@ const express = require('express');
 const bodyParser= require('body-parser')
 const multer = require('multer')
 const zip = require('express-easy-zip');
-
+const api = require('./api')
 const expressLayouts = require('..');
-
+const alert = require('alert');
+const session = require('express-session');
+const db = require('./db')
 // const fs = require('fs');
     
 // const { promisify } = require('bluebird');
@@ -23,6 +25,7 @@ const upload = functions.upload
 const download = functions.download;
 const delete_file = functions.delete_file;
 const send_mail = functions.send_mail;
+
 
 const student = require('./functions/student')
 const staff = require('./functions/staff')
@@ -50,23 +53,46 @@ app.use(expressLayouts);
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(zip())
 
+app.use(session({
+  resave: true, 
+  saveUninitialized: true, 
+  secret: 'somesecret', 
+  cookie: { maxAge: null }}));
 
+// localstorage
+var LocalStorage = require('node-localstorage').LocalStorage,
+localStorage = new LocalStorage('./scratch');
 // -------------------------------------------------- ROUTING -----------------------------------------------
 
 // ----------------------- VIEWS ROUTING -----------------------
 
 
-app.get('/db', (req, res) => {
-    staff.user.list(req, () => {})
-})
+var get_role = (req) => {
+  var role = "guest"
+  if(!req.session.user)
+      return role
+  
+  switch(req.session.user.type){
+    case "Admin":
+      role = "admin"
+      break;
+    case "Student":
+      role = "student"
+      break;
+    case "Marketing Coordinator":
+      role = "coordinate"
+      break;
+    case "Marketing Manager":
+      role = "manager"
+      break;
+    default:
+      break;
+  }
+  return role
+}
 
-app.post('/login', (req, res) => {
-  console.log(req.body)
-})
 
 
-
-var content
 app.get('/docfile', (req, res) => {
   
   // const document = fs.readFileSync('./vovinam1.docx')
@@ -94,42 +120,101 @@ app.get('/docfile', (req, res) => {
 var guest_layout = {layout: "../layouts/guest_layout.ejs"}
 
 // INDEX VIEW 
-app.get('/', (req, res) => {
-  res.locals.title = 'Home'
-  res.render('index', guest_layout);
-  
+app.get('/', (req, res, next) => {
+    var role = get_role(req)
+    if(role != "guest")
+      res.redirect(`/${role}`)
+    else{
+      res.locals.title = 'Home'
+        res.render('index', guest_layout);
+    } 
 });
 
 
-app.get('/guest/login_decision', (req, res) => {
-  res.locals.title = 'Decision'
-  res.render('guest/login_decision');
-  
-});
+
 
 // LOGIN PAGE FOR GUEST LOGIN AS STUDENT
-app.get('/guest/login', (req, res) => {
+app.get('/guest/login', (req, res, next) => {
+  if(get_role(req) != "guest")
+    next()
   res.locals.title = "Login"
+  res.locals.alert = functions.alert(req.query.message)
   res.render('guest/login', guest_layout);
 });
 
 // LOGIN PAGE FOR GUEST LOGIN AS STAFF
-app.get('/staff/login', (req, res) => {
+app.get('/staff/login', (req, res, next) => {
+  if(get_role(req) != "guest")
+    next()
+  
+  res.locals.alert = functions.alert(req.query.message)
   res.render('staff/login');
 });
 
+// LOGIN/LOG OUT FUNCTIONS
+app.post('/login_as_staff', (req, res) => {
+  
+  staff.session.login(req, (result) => {
+    
+      var link = ""
+        if(result.length != 0 && result[0].user_type_id != 2){
+              req.session.user = result[0]
+              switch(result[0].user_type_id){
+                case 1:
+                  link = "/admin"
+                  break;
+                case 3:
+                  link = "/coordinate"
+                  break;
+                case 4:
+                  link = "/manager"
+                  break;
+                default:
+                  break;
+              }
+              res.redirect(link)
+        }
+        else{
+             res.redirect(`/staff/login?message=Invalid email or password`)
+        }
+  })
+})
+
+app.post('/login_as_student', (req, res) => {
+  
+  staff.session.login(req, (result) => {
+    if(result.length != 0 && result[0].user_type_id == 2){
+          req.session.user = result[0]
+       staff.session.add_coordinate_contact(req, (result) => {
+         req.session.coordinate_contact = result
+
+          res.redirect('/student')
+       })
+          
+    }
+    else{
+        res.redirect(`/guest/login?message=Invalid email or password`)
+    }
+  })
+})
+
 // GUEST VIEW LIST OF TOPICS
-app.get('/guest/topic_manage', (req, res) => {
+
+app.get('/guest/topic_manage', (req, res, next) => {
+  if(get_role(req) != "guest")
+    next()
     staff.topic.list(req, (content) => {
     res.locals = content
     res.locals.title = 'Topic'
     res.render('guest/topic_manage', guest_layout);
   });
 })
-  
+
 
 // GUEST VIEW LIST OF FACULTIES
-app.get('/guest/faculty_manage', (req, res) => {
+app.get('/guest/faculty_manage', (req, res, next) => {
+  if(get_role(req) != "guest")
+      next()
   staff.faculty.list(req, (content) => {
     res.locals = content
     res.locals.title = 'Faculty'
@@ -139,87 +224,181 @@ app.get('/guest/faculty_manage', (req, res) => {
 });
 
 // GUEST VIEW LIST OF CONTRIBUTIONS
-app.get('/guest/contribution_manage', (req, res) => {
-  staff.contribution.list(req, (content) => {
-    res.locals = content
-    res.locals.title = 'Contribution'
-    res.render('guest/contribution_manage', guest_layout);
-  });
+app.get('/guest/contribution_manage', (req, res, next) => {
+  if(get_role(req) != "guest")
+    next()
+  staff.contribution.list(req, (content1) => {
+    staff.faculty.list(req, (content2) => {
+        staff.topic.list(req, (content3) => {
+            content = Object.assign({}, content1, content2, content3)
+            res.locals = content
+            res.locals.title = 'Contribution'
+            res.locals.search = req.query
+            res.render('guest/contribution_manage', guest_layout);
+        })
+    })
+})
+
 });
 
 // GUEST VIEW LIST OF FILES
-app.get('/guest/file_manage', (req, res) => {
-  res.locals.title = 'File'
-  res.render('guest/file_manage', guest_layout);
+app.get('/guest/file_manage', (req, res, next) => {
+  if(get_role(req) != "guest")
+    next()
+    staff.contribution.show(req, (content1) => {
+        staff.file.list(req, (content2) => {
+            content = Object.assign({}, content1, content2)
+            res.locals = content
+            res.locals.title = 'File'
+            res.render('guest/file_manage', guest_layout);
+        })
+    })
 });
 
 
 
 
 
-
+var get_name = (req) => {
+  return req.session.user.first_name + " " +  req.session.user.last_name
+}
 // ------ VIEWS FOR STUDENT ------
 
 var student_layout = {layout: "../layouts/student_layout.ejs"}
 
 // INDEX VIEW 
-app.get('/student', (req, res) => {
+app.get('/student', (req, res, next) => {
+  if(get_role(req) != "student")
+    next()
+
   res.locals.title = "Home"
+  res.locals.username = get_name(req)
   res.render('index', student_layout);
 });
 
+app.get('/student/change_password', (req, res, next) => {
+  if(get_role(req) != "student")
+    next()
+
+  res.locals.title = "Change Password"
+  res.locals.username = get_name(req)
+  res.locals.alert = functions.alert(req.query.message)
+  res.render('student/change_password', student_layout);
+});
 // STUDENT VIEW ALL CONTRIUBTIONS
-app.get('/student/contribution_manage', (req, res) => {
-  staff.contribution.list(req, (content) => {
-    res.locals = content
-    res.locals.title = 'All Contributions'
-    res.render('student/contribution_manage', student_layout);
-  });
+app.get('/student/contribution_manage', (req, res, next) => {
+  if(get_role(req) != "student")
+    next()
+
+  staff.contribution.list(req, (content1) => {
+    staff.faculty.list(req, (content2) => {
+        staff.topic.list(req, (content3) => {
+            var content = Object.assign({}, content1, content2, content3)
+            res.locals = content
+            res.locals.search = req.query
+            res.locals.title = 'All Contributions'
+            res.locals.username = get_name(req)
+            res.render('student/contribution_manage', student_layout);
+        })
+    })
+})
+  
 });
 
 // STUDENT VIEW SELF CONTRIUBTIONS
-app.get('/student/self_contribution_manage', (req, res) => {
-  staff.contribution.list(req, (content) => {
+app.get('/student/self_contribution_manage', (req, res, next) => {
+    if(get_role(req) != "student")
+      next()
+
+    student.contribution.list(req, (content) => {
     res.locals = content
     res.locals.title = 'My Contributions'
+    res.locals.username = get_name(req)
     res.render('student/self_contribution_manage', student_layout);
   });
   
 });
 
 // STUDENT VIEW OTHER FILES
-app.get('/student/file_manage', (req, res) => {
-  res.locals.title = 'File'
-  res.render('student/file_manage', student_layout);
+app.get('/student/file_manage', (req, res, next) => {
+  if(get_role(req) != "student")
+    next()
+  staff.contribution.show(req, (content1) => {
+    staff.file.list(req, (content2) => {
+        content = Object.assign({}, content1, content2)
+        res.locals = content
+        res.locals.title = 'File'
+        res.locals.username = get_name(req)
+        res.render('student/file_manage', student_layout);
+    })
+  })
+
 });
 
+// STUDENT CREATE NEW CONTRIBUTION
+app.get('/add_contribution', (req, res, next) => {
+  if(get_role(req) != "student")
+    next()
+  student.contribution.add(req, (result) => {
 
+      res.locals.title = 'My File'
+      res.locals.username = get_name(req)
+      res.redirect('student/self_file_manage?id=' + result);
+   
+  });
+  
+});
 
 // STUDENT VIEW SELF FILES
-app.get('/student/self_file_manage', (req, res) => {
-  staff.contribution.list(req, (content) => {
-    res.locals = content
-    res.locals.title = 'My File'
-    res.render('student/self_file_manage', student_layout);
+app.get('/student/self_file_manage', (req, res, next) => {
+  
+  if(get_role(req) != "student")
+    next()
+
+  staff.contribution.show(req, (content1) => {
+    staff.file.list(req, (content2) => {
+      staff.comment.list(req, (content3) => {
+        content = Object.assign({}, content1, content2, content3)
+        res.locals = content
+        res.locals.title = 'My File'
+        res.locals.username = get_name(req)
+        res.render('student/self_file_manage', student_layout);
+      })
+     
+    })
+    
   });
   
 });
 
 // STUDENT VIEW LIST OF TOPICS
-app.get('/student/topic_manage', (req, res) => {
-  staff.topic.list(req, (content) => {
-    res.locals = content
-    res.locals.title = 'Topic'
-    res.render('student/topic_manage', student_layout);
+app.get('/student/topic_manage', (req, res, next) => {
+
+  if(get_role(req) != "student")
+    next()
+
+    staff.topic.list(req, (content1) => {
+       student.contribution.list(req, (content2) => {
+        content = Object.assign({}, content1, content2)
+        res.locals = content
+        res.locals.title = 'Topic'
+        res.locals.username = get_name(req)
+        res.render('student/topic_manage', student_layout);
+      })
+    
   });
   
 });
 
 // STUDENT VIEW LIST OF FACULTIES
-app.get('/student/faculty_manage', (req, res) => {
+app.get('/student/faculty_manage', (req, res, next) => {
+  if(get_role(req) != "student")
+    next()
+
   staff.faculty.list(req, (content) => {
     res.locals = content
     res.locals.title = 'Faculty'
+    res.locals.username = get_name(req)
     res.render('student/faculty_manage', student_layout);
   })
   
@@ -234,47 +413,83 @@ app.get('/student/faculty_manage', (req, res) => {
 
 var admin_layout = {layout: "../layouts/admin_layout.ejs"}
 
-app.get('/admin/comment_manage', (req, res) => {
-  res.locals.title = 'Comment'
-  res.render('admin/comment_manage', admin_layout);
+app.get('/admin/comment_manage', (req, res, next) => {
+  if(get_role(req) != "admin")
+    next()
+    staff.comment.list(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Comment'
+    res.locals.username = get_name(req)
+    res.render('admin/comment_manage', admin_layout);
+  })
+  
 });
 
-app.get('/admin/profile_manage', (req, res) => {
+app.get('/admin/profile_manage', (req, res, next) => {
+  if(get_role(req) != "admin")
+    next()
   staff.profile.show(req, (content) => {
     res.locals = content
     res.locals.title = 'Profile'
+    res.locals.username = get_name(req)
     res.render('admin/profile_manage', admin_layout);
   })
   
 });
 
-app.get('/staff/change_password', (req, res) => {
+app.get('/staff/change_password', (req, res, next) => {
+  var role = get_role(req)
+  if( role != "admin" && role != "manager" && role != "coordinate")
+    next()
   res.locals.title = 'Change password'
+  res.locals.alert = functions.alert(req.query.message)
   res.render('staff/change_password');
 });
 
-app.get('/admin/contribution_manage', (req, res) => {
-  staff.contribution.list(req, (content) => {
-    res.locals = content
-    res.locals.title = 'Contribution'
-    res.render('admin/contribution_manage', admin_layout);
+app.get('/admin/contribution_manage', (req, res, next) => {
+  if(get_role(req) != "admin")
+    next()
+  staff.contribution.list(req, (content1) => {
+      staff.faculty.list(req, (content2) => {
+          staff.topic.list(req, (content3) => {
+              content = Object.assign({}, content1, content2, content3)
+              res.locals = content
+              res.locals.title = 'Contribution'
+              res.locals.search = req.query
+              res.locals.username = get_name(req)
+              res.render('admin/contribution_manage', admin_layout);
+          })
+      })
   })
+});
+
+app.get('/admin/user_manage', (req, res, next) => {
+  if(get_role(req) != "admin")
+    next()
+    staff.user.list(req, (content1) => {
+      staff.faculty.list(req, (content2) => {
+        content = Object.assign({}, content1, content2)
+        
+        res.locals = content
+        res.locals.title = 'User'
+       
+        res.locals.search = req.query
+        res.locals.username = get_name(req)
+        res.render('admin/user_manage', admin_layout);
+        
+      })
+    
+    })
   
 });
 
-app.get('/admin/user_manage', (req, res) => {
-    staff.user.list(req, (content) => {
-    res.locals = content
-    res.locals.title = 'User'
-    res.render('admin/user_manage', admin_layout);
-  })
-  
-});
-
-app.get('/admin/user_detail', (req, res) => {
+app.get('/admin/user_detail', (req, res, next) => {
+  if(get_role(req) != "admin")
+      next()
     staff.user.show(req, (content) => {
     res.locals = content
     res.locals.title = 'User'
+    res.locals.username = get_name(req)
     res.render('admin/user_detail', admin_layout);
   })
     
@@ -282,159 +497,626 @@ app.get('/admin/user_detail', (req, res) => {
 
 
 
-app.get('/admin/faculty_manage', (req, res) => {
+app.get('/admin/faculty_manage', (req, res, next) => {
+  if(get_role(req) != "admin")
+    next()
   staff.faculty.list(req, (content) => {
     res.locals = content
     res.locals.title = 'Faculty'
+    res.locals.username = get_name(req)
     res.render('admin/faculty_manage', admin_layout);
   })
 });
 
-app.get('/admin/faculty_detail', (req, res) => {
+app.get('/admin/faculty_detail', (req, res, next) => {
+  if(get_role(req) != "admin")
+    next()
     staff.faculty.show(req, (content) => {
     res.locals = content
     res.locals.title = 'Faculty Detail'
+    res.locals.username = get_name(req)
     res.render('admin/faculty_detail', admin_layout);
   })
   
 });
 
 
-app.get('/admin/file_manage', (req, res) => {
-  res.locals.title = 'File'
-  res.render('admin/file_manage', admin_layout);
+app.get('/admin/file_manage', (req, res, next) => {
+  if(get_role(req) != "admin")
+    next()
+  staff.contribution.show(req, (content1) => {
+    staff.file.list(req, (content2) => {
+        
+        content = Object.assign({}, content1, content2)
+        res.locals = content
+        res.locals.title = 'File'
+        res.locals.username = get_name(req)
+        res.render('admin/file_manage', admin_layout);
+        
+    })
+})
+  
 });
 
-app.get('/admin', (req, res) => {
+app.get('/admin', (req, res, next) => {
+  if(get_role(req) != "admin")
+    next()
   res.locals.title = 'Home'
+  res.locals.username = get_name(req)
   res.render('admin', admin_layout);
 });
 
-app.get('/admin/topic_manage', (req, res) => {
+app.get('/admin/topic_manage', (req, res, next) => {
+  if(get_role(req) != "admin")
+    next()
   staff.topic.list(req, (content) => {
     res.locals = content
     res.locals.title = 'Topic'
+    res.locals.username = get_name(req)
    res.render('admin/topic_manage', admin_layout);
   })
 });
 
-app.get('/admin/topic_detail', (req, res) => {
+app.get('/admin/topic_detail', (req, res, next) => {
+  if(get_role(req) != "admin")
+    next()
     staff.topic.show(req, (content) => {
     res.locals = content
     res.locals.title = 'Topic Detail'
+    res.locals.username = get_name(req)
     res.render('admin/topic_detail', admin_layout);
   })
   
 });
 
-// app.get('/view_faculty', (req, res) => {
-//   staff.faculty.list(req, res)
-//   res.render('index')
-// });
+
 
 // ------ VIEWS FOR MANAGER ------
 
 var manager_layout = {layout: "../layouts/manager_layout.ejs"}
 
-app.get('/manager/contribution_faculty_manage', (req, res) => {
-  res.locals.title = 'Contribution Faculty'
-  res.render('manager/contribution_faculty_manage', admin_layout);
+app.get('/manager/comment_manage', (req, res, next) => {
+  if(get_role(req) != "manager")
+    next()
+    staff.comment.list(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Comment'
+    res.locals.username = get_name(req)
+    res.render('manager/comment_manage', manager_layout);
+  })
+  
 });
 
-app.get('/manager/contribution_topic_manage', (req, res) => {
-  res.locals.title = 'Contribution Topic'
-  res.render('manager/contribution_topic_manage', admin_layout);
+app.get('/manager/profile_manage', (req, res, next) => {
+  if(get_role(req) != "manager")
+    next()
+  staff.profile.show(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Profile'
+    res.locals.username = get_name(req)
+    res.render('manager/profile_manage', manager_layout);
+  })
+  
 });
 
 
-app.get('/manager/faculty_manage', (req, res) => {
-  res.locals.title = 'Faculty'
-  res.render('manager/faculty_manage', manager_layout);
+
+app.get('/manager/contribution_manage', (req, res, next) => {
+  if(get_role(req) != "manager")
+    next()
+  staff.contribution.list(req, (content1) => {
+      staff.faculty.list(req, (content2) => {
+          staff.topic.list(req, (content3) => {
+              content = Object.assign({}, content1, content2, content3)
+              res.locals = content
+              res.locals.title = 'Contribution'
+              res.locals.search = req.query
+              res.locals.username = get_name(req)
+              res.render('manager/contribution_manage', manager_layout);
+          })
+      })
+  })
+});
+
+app.get('/manager/student_manage', (req, res, next) => {
+  if(get_role(req) != "manager")
+    next()
+    staff.student.list(req, (content1) => {
+      staff.faculty.list(req, (content2) => {
+        content = Object.assign({}, content1, content2)
+        
+        res.locals = content
+        res.locals.title = 'Student'
+       
+        res.locals.search = req.query
+        res.locals.username = get_name(req)
+        res.render('manager/student_manage', manager_layout);
+        
+      })
+    
+    })
+  
+});
+
+app.get('/manager/student_detail', (req, res, next) => {
+  if(get_role(req) != "manager")
+      next()
+    staff.user.show(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Student'
+    res.locals.username = get_name(req)
+    res.render('manager/student_detail', manager_layout);
+  })
+    
 });
 
 
-app.get('/manager/file_manage', (req, res) => {
-  res.locals.title = 'File'
-  res.render('manager/file_manage', manager_layout);
+
+app.get('/manager/faculty_manage', (req, res, next) => {
+  if(get_role(req) != "manager")
+    next()
+  staff.faculty.list(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Faculty'
+    res.locals.username = get_name(req)
+    res.render('manager/faculty_manage', manager_layout);
+  })
 });
 
-app.get('/manager', (req, res) => {
+app.get('/manager/faculty_detail', (req, res, next) => {
+  if(get_role(req) != "manager")
+    next()
+    staff.faculty.show(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Faculty Detail'
+    res.locals.username = get_name(req)
+    res.render('manager/faculty_detail', manager_layout);
+  })
+  
+});
+
+
+app.get('/manager/file_manage', (req, res, next) => {
+  if(get_role(req) != "manager")
+    next()
+  staff.contribution.show(req, (content1) => {
+    staff.file.list(req, (content2) => {
+        
+        content = Object.assign({}, content1, content2)
+        res.locals = content
+        res.locals.title = 'File'
+        res.locals.username = get_name(req)
+        res.render('manager/file_manage', manager_layout);
+        
+    })
+})
+  
+});
+
+app.get('/manager', (req, res, next) => {
+  if(get_role(req) != "manager")
+    next()
   res.locals.title = 'Home'
+  res.locals.username = get_name(req)
   res.render('manager', manager_layout);
 });
 
-app.get('/manager/topic_manage', (req, res) => {
-  res.locals.title = 'Topic'
-  res.render('manager/topic_manage', manager_layout);
+app.get('/manager/topic_manage', (req, res, next) => {
+  if(get_role(req) != "manager")
+    next()
+  staff.topic.list(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Topic'
+    res.locals.username = get_name(req)
+   res.render('manager/topic_manage', manager_layout);
+  })
 });
 
-
-
+app.get('/manager/topic_detail', (req, res, next) => {
+  if(get_role(req) != "manager")
+    next()
+    staff.topic.show(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Topic Detail'
+    res.locals.username = get_name(req)
+    res.render('manager/topic_detail', manager_layout);
+  })
+  
+});
 
 // ------ VIEWS FOR COORDINATE ------
 
 var coordinate_layout = {layout: "../layouts/coordinate_layout.ejs"}
 
-app.get('/coordinate/contribution_manage', (req, res) => {
-  res.locals.title = 'Contribution'
-  res.render('coordinate/contribution_manage', coordinate_layout);
+app.get('/coordinate/comment_manage', (req, res, next) => {
+  if(get_role(req) != "coordinate")
+    next()
+    staff.comment.list(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Comment'
+    res.locals.username = get_name(req)
+    res.render('coordinate/comment_manage', coordinate_layout);
+  })
+  
 });
 
-app.get('/coordinate/file_manage', (req, res) => {
-  res.locals.title = 'File'
-  res.render('coordinate/file_manage', coordinate_layout);
+app.get('/coordinate/profile_manage', (req, res, next) => {
+  if(get_role(req) != "coordinate")
+    next()
+  staff.profile.show(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Profile'
+    res.locals.username = get_name(req)
+    res.render('coordinate/profile_manage', coordinate_layout);
+  })
+  
 });
 
-app.get('/coordinate', (req, res) => {
+
+
+app.get('/coordinate/contribution_manage', (req, res, next) => {
+  if(get_role(req) != "coordinate")
+    next()
+  staff.contribution.list(req, (content1) => {
+      staff.faculty.list(req, (content2) => {
+          staff.topic.list(req, (content3) => {
+              content = Object.assign({}, content1, content2, content3)
+              res.locals = content
+              res.locals.title = 'Contribution'
+              res.locals.search = req.query
+              res.locals.username = get_name(req)
+              res.render('coordinate/contribution_manage', coordinate_layout);
+          })
+      })
+  })
+});
+
+app.get('/coordinate/student_manage', (req, res, next) => {
+  if(get_role(req) != "coordinate")
+    next()
+    staff.student.list(req, (content1) => {
+      
+        res.locals = content
+        res.locals.title = 'Student'
+        res.locals.faculty = req.session.user.faculty_id
+        res.locals.search = req.query
+        res.locals.username = get_name(req)
+        res.render('coordinate/student_manage', coordinate_layout);  
+    
+    })
+  
+});
+
+app.get('/coordinate/student_detail', (req, res, next) => {
+  if(get_role(req) != "coordinate")
+      next()
+    staff.user.show(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Student'
+    res.locals.username = get_name(req)
+    res.render('coordinate/student_detail', coordinate_layout);
+  })
+    
+});
+
+
+
+app.get('/coordinate/faculty_manage', (req, res, next) => {
+  if(get_role(req) != "coordinate")
+    next()
+  staff.faculty.list(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Faculty'
+    res.locals.username = get_name(req)
+    res.render('coordinate/faculty_manage', coordinate_layout);
+  })
+});
+
+app.get('/coordinate/faculty_detail', (req, res, next) => {
+  if(get_role(req) != "coordinate")
+    next()
+    staff.faculty.show(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Faculty Detail'
+    res.locals.username = get_name(req)
+    res.render('coordinate/faculty_detail', coordinate_layout);
+  })
+  
+});
+
+
+app.get('/coordinate/file_manage', (req, res, next) => {
+  if(get_role(req) != "coordinate")
+    next()
+  staff.contribution.show(req, (content1) => {
+    staff.file.list(req, (content2) => {
+        
+        content = Object.assign({}, content1, content2)
+        res.locals = content
+        res.locals.title = 'File'
+        res.locals.username = get_name(req)
+        res.render('coordinate/file_manage', coordinate_layout);
+        
+    })
+})
+  
+});
+
+app.get('/coordinate', (req, res, next) => {
+  if(get_role(req) != "coordinate")
+    next()
   res.locals.title = 'Home'
+  res.locals.username = get_name(req)
   res.render('coordinate', coordinate_layout);
 });
 
-app.get('/coordinate/topic_manage', (req, res) => {
-  res.locals.title = 'Topic'
-  res.render('coordinate/topic_manage', coordinate_layout);
+app.get('/coordinate/topic_manage', (req, res, next) => {
+  if(get_role(req) != "coordinate")
+    next()
+  staff.topic.list(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Topic'
+    res.locals.username = get_name(req)
+   res.render('coordinate/topic_manage', coordinate_layout);
+  })
 });
 
-// ------ VIEW 404 -------
-app.get('*', (req, res) => {
-  res.render('404')
+app.get('/coordinate/topic_detail', (req, res, next) => {
+  if(get_role(req) != "coordinate")
+    next()
+    staff.topic.show(req, (content) => {
+    res.locals = content
+    res.locals.title = 'Topic Detail'
+    res.locals.username = get_name(req)
+    res.render('coordinate/topic_detail', coordinate_layout);
+  })
+  
 });
+
+
 
 
 // ----------------------- FUNCTIONS ROUTING -----------------------
 
 // ----- DOWNLOAD FILE -----
-app.get('/download_file', async function(req, res) {
-    await download(req, res, __dirname + "/files/1644_GCS18026_HuynhCamHung_Assignment2.pdf")
+app.get('/download_file', async function(req, res, next) {
+  if(get_role(req) == "guest" || get_role(req) == "student")
+    next()
+    var path = __dirname + `/files/${req.query.path}/${req.query.name}` 
+    await download(req, res, path)
 });
 
 // ----- DELETE FILE -----
-app.get('/delete_file', async function(req, res) {
-    var location =  __dirname + "/files/1644_GCS18026_HuynhCamHung_Assignment1.docx"
-    await delete_file(location)
+app.get('/delete_file', async function(req, res, next) {
+  if(get_role(req) == "guest")
+    next()
+    var path =  __dirname + "/files" + req.query.path 
+    var id = req.query.id
+    staff.file.remove(id, path)
     res.redirect('back')
 })
 
-// ----- UPLOAD FILE -----
-app.post('/upload_file', (upload('./files')).array('files', 12), function(req, res, next) {
-  student.file.add(req, res)
+app.post('/delete_file', async function(req, res) {
+  
+  var path =  __dirname + "/files" + req.body.path 
+  var id = req.body.id
+  staff.file.remove(id, path)
   res.redirect('back')
 })
 
+// ----- UPLOAD FILE -----
+app.post('/upload_file', (upload('./files')).array('files', 12), function(req, res) {
+  
+  student.file.add(req)
+  res.redirect('back')
+})
 
+// ------ UPDATE CONTRIBUTION TITLE
+app.post('/update_title', (req, res) => {
+  
+  
+  staff.contribution.edit_title(req)
+  res.redirect('back')
+  
+})
+
+app.post('/update_mark', (req, res) => {
+  
+  
+  staff.contribution.edit_mark(req)
+  res.redirect('back')
+  
+})
+
+app.get('/update_active', (req, res, next) => {
+  var role = get_role(req) 
+  if(role != 'admin' && role != 'manager' && role != 'coordinate')
+    next()
+  var role = get_role(req) 
+  
+  staff.contribution.edit_active(req)
+  res.redirect('back')
+  
+})
 // --------- DELETE DATA -----------
-app.post('/delete_user', async function (req, res) {
+app.get('/delete_user', async function (req, res, next) {
+  if(get_role(req) == 'guest' || get_role(req) == 'student')
+    next()
   staff.user.remove(req)
 })
 
-app.post('/delete_topic', async function (req, res) {
+app.get('/delete_topic', async function (req, res, next) {
+  if(get_role(req) != 'admin' || get_role(req) != 'manager')
+    next()
   staff.topic.remove(req)
 })
 
-app.post('/delete_faculty', async function (req, res) {
+app.get('/delete_faculty', async function (req, res, next) {
+  if(get_role(req) != 'admin' || get_role(req) != 'manager')
+    next()
   staff.faculty.remove(req)
 })
+
+
+
+
+// ----- LOGOUT -----
+app.get('/logout', function(req, res, next) {
+  if(get_role(req) == 'guest')
+    next()
+  req.session.destroy((error) => {
+     console.log(error)
+  })
+  res.redirect('/')
+});
+// ----- UPLOAD TOPICS -----
+app.post('/add_topics', (req, res) => {
+  
+  var title = req.body.title;
+  var start_date = req.body.start_date;
+  var end_date = req.body.end_date;
+  
+  const response = api.topic.create(title, start_date, end_date)
+  response.then(function(result) {
+      
+  })
+  res.redirect('back')
+});
+// ----- UPLOAD Faculty -----
+app.post('/add_faculty', (req, res) => {
+  
+  var faculty_name = req.body.faculty_name;
+  var description = req.body.description;
+  
+  const response = api.faculty.create(faculty_name, description)
+  response.then(function(result) {
+      console.log(result.data)
+  })
+  res.redirect('back')
+});
+
+app.post('/add_comment', (req, res) => {
+  
+  var contribution_id = req.body.contribution_id;
+  var content = req.body.content;
+  var user_id = req.session.user.id
+  const response = api.comment.create(contribution_id, user_id ,content)
+  response.then(function(result) {
+      
+  })
+  res.redirect('back')
+});
+// ----- UPLOAD user -----
+app.post('/add_user', (req, res) => {
+  
+  var first_name = req.body.first_name;
+  var last_name = req.body.last_name;
+  var role = req.body.role;
+  var faculty = req.body.faculty;
+  var email = req.body.email;
+  var dob = req.body.dob;
+  var gender = req.body.gender;
+  var address = req.body.address;
+  var password = req.body.password;
+  var phone = req.body.phone;
+  
+  const response = api.user.create(first_name, last_name, role, dob, gender, email, password, phone, address, faculty)
+  response.then(function(result) {
+      
+  })
+  res.redirect('back')
+});
+// ----- UPDATE Topic -----
+app.post('/update_topic', function(req, res) {
+  
+  var topic_id = req.body.topic_id //id truyền từ cái input hidden qua
+  var title = req.body.title;
+  var start_date = req.body.start_date//new Date(req.body.start_date).toISOString();
+  var end_date = req.body.end_date//new Date(req.body.end_date).toISOString();
+  
+  db.topic.update(`name = '${title}', start_date = '${start_date}', end_date = '${end_date}'`,`id = ${topic_id}`)
+  
+  res.redirect('back')
+});
+
+// ----- UPDATE Topic -----
+app.post('/update_faculty', function(req, res) {
+  
+  var faculty_id = req.body.faculty_id
+  var name = req.body.name;
+  var description = req.body.description
+  
+  
+  db.faculty.update(`name = '${name}', description = '${description}'`,`id = ${faculty_id}`)
+  
+  res.redirect('back')
+});
+
+// ----- UPDATE user -----
+app.post('/update_user', (req, res) => {
+  
+  var user_id = req.body.user_id; //id truyền từ cái input hidden qua
+  var first_name = req.body.first_name;
+  var last_name = req.body.last_name;
+  var email = req.body.email;
+  var dob = req.body.dob;
+  var phone = req.body.phone;
+  var gender = req.body.gender;
+  var address = req.body.address;
+  
+  db.user.update(`first_name = '${first_name}', last_name = '${last_name}', dob = '${dob}', gender = ${gender}, email= '${email}', phone= '${phone}', address= '${address}'`, `id= ${user_id}`)
+  res.redirect('back')
+});
+
+// ----- CHANGE PASS -----
+app.post('/update_pass', (req, res) => {
+
+  var user_id = req.body.user_id
+  var password = req.body.password
+  db.user.update(`password= '${password}'`, `id= ${user_id}`)
+  res.redirect('back')
+})
+
+app.post('/update_self_pass', (req, res) => {
+  
+  var role = get_role(req)
+  if(role == "admin" || role == "manager" || role == "coordinate")
+    role="staff"
+    
+  var url= `/${role}/change_password`;
+
+  var old_password = req.body.old_password
+  var new_password = req.body.new_password
+  var re_password = req.body.re_password
+
+  var message = undefined
+  if(new_password != re_password){
+    message = "New password and re-password does not match!"
+    res.redirect(`${url}?message=${message}`)
+  }
+     
+  else{
+    db.user.select((result) => {
+      if(result.recordset[0].password != old_password){
+        message = "Invalid old password!"
+        res.redirect(`${url}?message=${message}`)
+      }
+      else{
+        
+        db.user.update(`password= '${new_password}'`, `id= ${req.session.user.id}`)
+        message = "Your password has been changed"
+        res.redirect(`${url}?message=${message}`)
+      }
+    }
+      ,'-password', `-id = ${req.session.user.id}`)
+  }
+})
 // -------------------------------------------------- SET UP SERVER -----------------------------------------------
+
+// ------ VIEW 404 -------
+app.get('*', (req, res) => {
+  res.render('404')
+});
 
 var server = app.listen(80, '127.0.0.1', function() {
   var host = server.address().address

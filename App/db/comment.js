@@ -4,16 +4,15 @@ var modify_field = (fields) => {
     return  fields.replace(/-/g, 'users.');
 }
 
-var select = (fields, conditions = "1 = 1", callback) => {
+var select = (req, callback) => {
     
     conn.connect().then(() => {
-        fields = modify_field(fields)
-        conditions = modify_field(conditions)
-        var query = `SELECT ${fields}, user_types.type, faculties.name, users.id FROM users ` +
+        var query = `SELECT comments.id, comments.contribution_id, comments.user_id, comments.content, comments.comment_date, user_types.type,  users.first_name, users.last_name, contributions.title FROM comments ` +
+        `LEFT JOIN users ON comments.user_id = users.id ` + 
+        `LEFT JOIN contributions ON comments.contribution_id = contributions.id ` +
         `LEFT JOIN user_types ON users.user_type_id = user_types.id ` + 
-        `LEFT JOIN faculties ON users.faculty_id = faculties.id ` + 
-        `WHERE ${conditions}`
-
+        `WHERE comments.contribution_id = ${req.query.id}`
+    
         conn.request().query( query, (err, results) => {
             callback(results)
         })

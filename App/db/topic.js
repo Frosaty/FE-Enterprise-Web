@@ -16,6 +16,16 @@ var select = (callback, conditions = "1 = 1") => {
       
 }
 
+var update = (sets, conditions) => {
+    conn.connect().then(() => {
+        
+        var query = `UPDATE topics SET ${sets} WHERE ${conditions}`
+        conn.request().query( query, (err, result) => {
+        })
+    })
+}
+
 module.exports = {
-    select: select
+    select: select,
+    update: update
 }

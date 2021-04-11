@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    
+    <%- include('../../layouts/functions.ejs') %> 
             <!-- Start Page title and tab -->
             <div class="section-body">
                 <div class="container-fluid">
@@ -43,12 +43,11 @@
                         <div class="tab-pane active" id="comment-list">
 
                             <!-- Comment Card -->
+                            <% for( var index in comments) { %>
                             <div class="card">
                                 <div class="card-header">
                                     
                                     <div class="card-options">
-                                        <a href="#"><i class="fe fe-edit"></i></a>
-                                        <a href="#" class="js-sweetalert" title="Delete" data-type="confirm"><i class="fe fe-trash"></i></a>
                                         <a href="#" class="card-options-fullscreen" data-toggle="card-fullscreen"><i class="fe fe-maximize"></i></a>
                                     </div>
                                 </div>
@@ -56,105 +55,25 @@
                                     <div class="detail-header">
                                         <div class="media">
                                             <div class="media-body">
-                                                <p class="mb-0"><strong class="text-muted mr-1">From </strong><b>Admin</b><span class="text-muted text-sm float-right">Date: 01/01/2021</span></p>
+                                                <p class="mb-0"><strong class="text-muted mr-1">From </strong><b><%= comments[index].type%></b><span class="text-muted text-sm float-right">Date: <%= format_date(comments[index].comment_date)%></span></p>
                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <div class="mail-cnt mt-3">
-                                        <p>Hello <strong>Marshall Nichols</strong>,</p><br>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                                            it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                        <ul>
-                                            <li>standard dummy text ever since the 1500s, when an unknown printer</li>
-                                            <li>Lorem Ipsum has been the industry's standard dummy</li>
-                                        </ul>
-                                        <p>printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrnturies, but also the leap into electronic typesetting,
-                                            remaining essentially unchanged.</p>
                                         <br>
-            
-                                        <p>Thank youm,<br><strong>Wendy Abbott</strong></p>
+                                        <p>
+                                            <%= comments[index].content%>
+                                        </p>
+                                        <br>
                                         <hr>
-                                        
+                                        <p class="mb-0"><%= comments[index].first_name + " " + comments[index].last_name%></p>
                                     </div>
                                 </div>
                             </div>
                             <hr style="border: 1px solid gray;">
-                            <!-- Comment Card -->
-                            <div class="card">
-                                <div class="card-header">
-                                    
-                                    <div class="card-options">
-                                        <a href="#"><i class="fe fe-edit"></i></a>
-                                        <a href="#"><i class="fe fe-trash"></i></a>
-                                        <a href="#" class="card-options-fullscreen" data-toggle="card-fullscreen"><i class="fe fe-maximize"></i></a>
-                                    </div>
-                                </div>
-                                <div class="card-body detail">
-                                    <div class="detail-header">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p class="mb-0"><strong class="text-muted mr-1">From </strong><b>Manager</b><span class="text-muted text-sm float-right">Date: 01/01/2021</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mail-cnt mt-3">
-                                        <p>Hello <strong>Marshall Nichols</strong>,</p><br>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                                            it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                        <ul>
-                                            <li>standard dummy text ever since the 1500s, when an unknown printer</li>
-                                            <li>Lorem Ipsum has been the industry's standard dummy</li>
-                                        </ul>
-                                        <p>printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrnturies, but also the leap into electronic typesetting,
-                                            remaining essentially unchanged.</p>
-                                        <br>
-            
-                                        <p>Thank youm,<br><strong>Wendy Abbott</strong></p>
-                                        <hr>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <hr style="border: 1px solid gray;">
-                            <!-- Comment Card -->
-                            <div class="card">
-                                <div class="card-header">
-                                    
-                                    <div class="card-options">
-                                        <a href="#"><i class="fe fe-edit"></i></a>
-                                        <a href="#"><i class="fe fe-trash"></i></a>
-                                        <a href="#" class="card-options-fullscreen" data-toggle="card-fullscreen"><i class="fe fe-maximize"></i></a>
-                                    </div>
-                                </div>
-                                <div class="card-body detail">
-                                    <div class="detail-header">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p class="mb-0"><strong class="text-muted mr-1">From </strong><b>Coordinate</b><span class="text-muted text-sm float-right">Date: 01/01/2021</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mail-cnt mt-3">
-                                        <p>Hello <strong>Marshall Nichols</strong>,</p><br>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                                            it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                        <ul>
-                                            <li>standard dummy text ever since the 1500s, when an unknown printer</li>
-                                            <li>Lorem Ipsum has been the industry's standard dummy</li>
-                                        </ul>
-                                        <p>printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrnturies, but also the leap into electronic typesetting,
-                                            remaining essentially unchanged.</p>
-                                        <br>
-            
-                                        <p>Thank youm,<br><strong>Wendy Abbott</strong></p>
-                                        <hr>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <hr style="border: 1px solid gray;">
+                            <% } %>
                         </div>
-                        
                         <!-------------------------------------------- Add page ------------------------------------------->
                         
                         <div class="tab-pane" id="comment-add">
@@ -164,11 +83,12 @@
                                     <div class="card-options ">
                                     </div>
                                 </div>
-                                <form class="card-body">
+                                <form class="card-body" action="/add_comment" method="post">
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">To Contribution </label>
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control" value="This is contribution title" disabled>
+                                            <input type="hidden" value='<%= comments[index].contribution_id %>' name="contribution_id">
+                                            <input type="text" class="form-control" value='<%= comments[index].title %>' disabled>
                                         </div>
                                     </div>
                     
@@ -176,13 +96,13 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Comment <span class="text-danger">*</span></label>
                                         <div class="col-md-7">
-                                            <textarea type="text" class="form-control" rows=5></textarea>
+                                            <textarea type="text" class="form-control" rows=5 name="content"></textarea>
                                         </div>
                                     </div>
         
                                     <div class="text-right">
                                         <div class="col-md-10">
-                                            <button type="button" class="btn btn-success">Comment</button>
+                                            <button type="submit" class="btn btn-success">Comment</button>
                                             <button type="reset" class="btn btn-outline-secondary">Clear</button>
                                         </div>
                                     </div>

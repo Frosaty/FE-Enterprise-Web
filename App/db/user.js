@@ -17,7 +17,6 @@ var select = (callback, fields, conditions = "1 = 1") => {
         `LEFT JOIN user_types ON users.user_type_id = user_types.id ` + 
         `LEFT JOIN faculties ON users.faculty_id = faculties.id ` + 
         `WHERE ${conditions}`
-        console.log(query)
         conn.request().query( query, (err, results) => {
             callback(results)
         })
@@ -27,6 +26,15 @@ var select = (callback, fields, conditions = "1 = 1") => {
       
 }
 
+var update = (sets, conditions) => {
+    conn.connect().then(() => {
+        
+        var query = `UPDATE users SET ${sets} WHERE ${conditions}`
+        conn.request().query( query, (err, result) => {
+        })
+    })
+}
 module.exports = {
-    select: select
+    select: select,
+    update: update
 }

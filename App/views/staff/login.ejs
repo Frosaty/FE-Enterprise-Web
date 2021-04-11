@@ -1,57 +1,111 @@
 <!doctype html>
 <html lang="en" dir="ltr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-<title>:: Epic :: Login</title>
+    <title>:: Epic :: Login</title>
 
-<!-- Bootstrap Core and vandor -->
-<link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
 
-<!-- Core css -->
-<link rel="stylesheet" href="../assets/css/style.min.css"/>
+    <!-- Core css -->
+    <link rel="stylesheet" href="../assets/css/style.min.css" />
 
 </head>
+
 <body class="font-muli theme-cyan gradient">
 
-<div class="auth option2">
-    <div class="auth_left">
-        <div class="card">
-            <div class="card-body">
-                <div class="text-center">
-                    <a class="header-brand" href="index.html"><i class="fa fa-graduation-cap brand-logo"></i></a>
-                    <div class="card-title mt-3">Login to your account</div>                 
+    <div class="auth option2">
+        <div class="auth_left">
+            <div class="card">
+
+                <form action="/login_as_staff" method="post" >
+                    <div class="card-body">
+                        <div class="text-center">
+                            <a class="header-brand"><i class="fa fa-graduation-cap brand-logo"></i></a>
+                            <div class="card-title mt-3">Login to your account</div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email" id="email" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" />
+                        <span class="custom-control-label">Remember me</span>
+                        </label>
+                        </div>
+                        <div class="text-center">
+                            <input class="btn btn-primary btn-block" type="submit" value="Login" />
+                        </div>
+                    </div>
+                </form>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+ <div class="modal fade show" id="error-modal" tabindex="-1" role="dialog" aria-labelledby="viewDetail" aria-hidden="true" style='padding-right: 0px; padding-top: 150px; display: <%= alert.visible %>;'>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewDetail">Message</h5>
+                <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            </div>
+            <div >
+                <div class="modal-body">
+                            <h6>
+                                <%= alert.message %>
+                            </h6>
                 </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" />
-                    <span class="custom-control-label">Remember me</span>
-                    </label>
-                </div>
-                <div class="text-center">
-                    <a href="index.html" class="btn btn-primary btn-block" title="">Sign in</a>
-                    <h6 class="mt-3 mb-3">Or</h6>
-                    <a class="btn btn-primary" href="javascript:history.back()"><i class="fe fe-arrow-left mr-2"></i>Go back</a>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Ok</button>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 </div>
-
+    
+    
 <!-- Start Main project js, jQuery, Bootstrap -->
 <script src="../assets/bundles/lib.vendor.bundle.js"></script>
 
+<!-- Start Plugin Js -->
+<script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="../assets/bundles/dataTables.bundle.js"></script>
+<script src="../assets/plugins/dropify/js/dropify.min.js"></script>
+
+<script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
+
 <!-- Start project main js  and page js -->
 <script src="../assets/js/core.js"></script>
+<script src="../assets/js/form/dropify.js"></script>
+
+<script src="../assets/js/page/dialogs.js"></script>
+<script src="../assets/js/table/datatable.js"></script>
+
+<script>
+    $('.btn-close').on('click', function(){
+        
+        $('#error-modal').hide()
+    })
+</script>
+    
 </body>
+
 </html>

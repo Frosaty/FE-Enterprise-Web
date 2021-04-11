@@ -14,13 +14,20 @@ var show = async function(req){
 }
 
 // -------------------- LIST ---------------------- //
-var list = async function(req){
-
+var list = async function(req, callback){
+     await db.file.select( 
+        function(result){
+            content = {
+                files: result.recordset
+            }
+            callback(content)
+    },`contribution_id = ${req.query.id}`)
 }
 
 // -------------------- REMOVE ---------------------- //
-var remove = async function(req){
-
+var remove = async function(id, path){
+    await db.file.delete_file(id)
+    await f.delete_file(path)
 }
 
 

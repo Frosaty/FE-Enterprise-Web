@@ -23,7 +23,7 @@ var show = async function(req, callback){
              }
             
             callback(content)
-        }, "-first_name, -last_name, -phone, -email, -dob, -user_type_id, -faculty_id, -gender, -address, -password", `-id = ${req.query.id}`)
+        }, "-first_name, -last_name, -phone, -email, -dob, -user_type_id, -faculty_id, -gender, -address, -password", `-id = ${req.session.user.id}`)
 }
 
 // -------------------- LIST ---------------------- //

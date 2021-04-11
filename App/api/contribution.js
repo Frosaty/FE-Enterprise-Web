@@ -1,49 +1,53 @@
 const axios = require('axios')
 const api_url = require('./api_url')
-const FULL_URL = api_url.BASE_URL + api_url.FACULTY_URL
+const FULL_URL = api_url.BASE_URL + api_url.CONTRIBUTION_URL
 
 // -----------------------CONTRIBUTION-------------------------
 module.exports = {
     // ------- CREATE --------
-    create : (userId, startDate, endDate) => axios ({
+    create : (userId, title, topicId) => axios ({
         method: "post",
         url: FULL_URL,
         params: {
-            topicName: topicName,
-            startDate: startDate,
-            endDate: endDate
+            userId: userId,
+            title: title,
+            topicId: topicId
         }
 
     }),
 
     // ------- READ --------
-    read : (topicName, startDate, endDate) => axios ({
+    // Only read selected contributions of the topic 
+    read_selected : (topicId) => axios ({
         method: "get",
         url: FULL_URL,
-
+        param: {
+            topicId: topicId,
+            type: "active"
+        }
     }),
 
+    // Read all contributions of the topic 
+    read_all : (topicId) => axios ({
+        method: "get",
+        url: FULL_URL,
+        param: {
+            topicId: topicId,
+            type: ""
+        }
+    }),
     // ------- UPDATE --------
-    update : (topicId, topicName, startDate, endDate) => axios ({
+    // Update the mark of contribution
+    update_mark : (contributionId, mark) => axios ({
         method: "put",
         url: FULL_URL,
         params: {
-            topicId: topicId,
-            topicName: topicName,
-            startDate: startDate,
-            endDate: endDate
+            contributionId: contributionId,
+            mark: mark
         }
     
-    }),
+    })
 
-    // ------- DELETE --------
-    delete : (contributionId) => axios ({
-        method: "delete",
-        url: FULL_URL,
-        params: {
-            contributionId: contributionId
-        }
-    
-    }),
+   
 }
 

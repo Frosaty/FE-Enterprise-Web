@@ -2,7 +2,7 @@
     
 
 </head>
-
+<%- include('../../layouts/functions.ejs') %> 
 
 
             <div class="kingster-page-title-wrap kingster-style-medium kingster-left-align">
@@ -56,8 +56,8 @@
                                                         <div class="gdlr-core-personnel-list-content">
                                                             <p>                                                              
                                                                <b>Description:</b> Topic description<br/> 
-                                                               <b>Start date:</b><%= topics[index].start_date %><br/>
-                                                               <b>End date:</b> <%= topics[index].end_date %>                                                            
+                                                               <b>Start date:</b><%= format_date(topics[index].start_date) %><br/>
+                                                               <b>End date:</b> <%= format_date(topics[index].end_date) %>                                                            
                                                             </p>
                                                         </div>
                                                         
@@ -68,11 +68,7 @@
                                             </div>
                                             <% } %>
 
-                                            <div class="gdlr-core-pagination  gdlr-core-style-round gdlr-core-right-align">
-                                                <span aria-current="page" class="page-numbers current">1</span> 
-                                                <a class="page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit">2</a>
-                                                <a class="next page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit"></a>
-                                            </div>
+                                            
                                         </div>    
                                     </div>                    
                                 </div>

@@ -2,7 +2,7 @@
     
 
 </head>
-
+<%- include('../../layouts/functions.ejs') %> 
 
 
             <div class="kingster-page-title-wrap kingster-style-medium kingster-left-align">
@@ -21,7 +21,7 @@
                     <div class="kingster-breadcrumbs-item kingster-item-pdlr">
                         <!-- Breadcrumb NavXT 6.5.0 -->
                         
-                        <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Finance." href="/student" class="post post-page"><span property="name">Home</span></a>
+                        <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Finance." href="/" class="post post-page"><span property="name">Home</span></a>
                         <meta property="position" content="1">
                         </span> &gt; 
                         <span property="itemListElement" typeof="ListItem"><span property="name" class="post post-page current-item">Topic</span>
@@ -40,7 +40,7 @@
                                     <div class="gdlr-core-pbf-element">
                                         <div class="gdlr-core-personnel-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-personnel-item-style-medium gdlr-core-personnel-style-medium">
                                             
-                                            <% for(var index in topics) { %>
+                                            <% for(var i in topics) { %>
                                             <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
                                                 <div class="gdlr-core-personnel-list clearfix">
                                                     <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
@@ -50,32 +50,36 @@
                                                     </div>
                                                     <div class="gdlr-core-personnel-list-content-wrap row">
                                                         
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#"><%= topics[index].name %></a></h3>
+                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#"><%= topics[i].name %></a></h3>
                                                         
                                                         
                                                         <div class="gdlr-core-personnel-list-content">
                                                             <p>                                                              
-                                                                <b>Description:</b> Topic description<br/> 
-                                                               <b>Start date:</b><%= topics[index].start_date %><br/>
-                                                               <b>End date:</b> <%= topics[index].end_date %>                                                        
+                                                               <b>Start date: </b><%= format_date(topics[i].start_date) %><br/>
+                                                               <b>End date: </b> <%= format_date(topics[i].end_date) %>                                                            
                                                             </p>
                                                         </div>
-                                                        
-                                                             <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/student/self_file_manage" + topics[index].id %>>My Contributions</a> 
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <a class="gdlr-core-personnel-list-button gdlr-core-button" href="/student/contribution_manage">Other Contributions</a>
-                                                        
+                                                            <% var have = false %>
+                                                            <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/student/contribution_manage?topic_id=" + topics[i].id %>>Other Contributions</a>
+                                                            <% for(var j in contributions) { %>
+                                                                <% if (topics[i].id == contributions[j].topic_id) { %>
+                                                                    <% have = true %>
+                                                                    <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/student/self_file_manage?id=" + contributions[j].id %>>My Contribution</a>
+                                                                    <% break %>
+                                                                <% } %>
+                                                            <% } %>
+
+                                                            <% if (!have) { %>
+                                                                <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/add_contribution?topic_id=" + topics[i].id %>>Add Contribution</a>
+                                                            <% } %>
                                                     </div>
                                                 </div>
                                             </div>
-                                            
                                             <% } %>
 
-                                            <div class="gdlr-core-pagination  gdlr-core-style-round gdlr-core-right-align">
-                                                <span aria-current="page" class="page-numbers current">1</span> 
-                                                <a class="page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit">2</a>
-                                                <a class="next page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit"></a>
-                                            </div>
+                                            
+
+                                            
                                         </div>    
                                     </div>                    
                                 </div>

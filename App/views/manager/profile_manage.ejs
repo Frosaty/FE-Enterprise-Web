@@ -1,0 +1,157 @@
+
+
+<head>
+    
+
+    <!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../assets/plugins/dropify/css/dropify.min.css">
+    <link rel="stylesheet" href="../assets/plugins/summernote/dist/summernote.css" />
+    <link rel="stylesheet" href="../assets/plugins/sweetalert/sweetalert.css">
+
+    <link rel="stylesheet" href="../assets/plugins/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css">
+    
+    <!-- Core css -->
+    <link rel="stylesheet" href="../assets/css/style.min.css" />
+</head>
+<%- include('../../layouts/functions.ejs') %> 
+
+    <!-- Start Page title and tab -->
+    <div class="section-body">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center ">
+                <div class="header-action">
+                    <h1 class="page-title">Profile</h1>
+                    <ol class="breadcrumb page-breadcrumb">
+                        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-body mt-4">
+        <div class="container-fluid">
+            <div class="tab-content">
+                
+                <div class="tab-pane active" id="Student-add">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Account Information</h3>
+                            <div class="card-options ">
+                            </div>
+                        </div>
+                        <form class="card-body" action='/update_user' method="post">
+                            <input type="hidden" value='<%= users[0].id %>' name="user_id">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">First Name <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    <input type="hidden" value= <%= users[0].id %>>
+                                    <input type="text" name="first_name" class="form-control" placeholder="Enter First name" value= '<%= users[0].first_name %>'>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Last Name <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    <input type="text" name="last_name" class="form-control" placeholder="Enter Last name" value='<%= users[0].last_name %>'>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Role </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" placeholder="Enter email address" value='<%= users[0].type %>' disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Faculty </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" placeholder="Enter email address" value='<%= users[0].faculty %>' disabled>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Email <span class="text-danger" >*</span></label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" name="email" placeholder="Enter email address" value='<%= users[0].email %>'>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Phone <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" name="phone" placeholder="Enter phone number" value='<%= users[0].phone %>'>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Birth Date <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    
+                                    <input data-provide="datepicker" name="dob" data-date-autoclose="true" class="form-control" placeholder="Enter birth date" value='<%= format_date(users[0].dob) %>'>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Gender <span class="text-danger">*</span></label>
+                                <div class="col-md-5">
+                                    <select class="form-control input-height" name="gender">
+                                        
+                                        <option value=0 <% if (users[0].gender == 0) {%>  selected <% }  %>>Male</option>
+                                        <option value=1 <% if (users[0].gender == 1) {%>  selected <% }  %>>Female</option>
+                                </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Address <span class="text-danger">*</span></label>
+                                <div class="col-md-7">
+                                    <textarea type="text" class="form-control" rows=5 name="address"><%= users[0].address %></textarea>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="col-md-10">
+                                    <button type="submit" class="btn btn-success">Change</button>
+                                    <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                        
+            </div>
+        </div>
+    </div>
+    <!-- Start main footer -->
+    
+</div>
+</div>
+
+<!-- Start Main project js, jQuery, Bootstrap -->
+<script src="../assets/bundles/lib.vendor.bundle.js"></script>
+
+<!-- Start Plugin Js -->
+<script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="../assets/plugins/dropify/js/dropify.min.js"></script>
+<script src="../assets/bundles/summernote.bundle.js"></script>
+<script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!-- Start project main js  and page js -->
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/form/dropify.js"></script>
+<script src="../assets/js/page/summernote.js"></script>
+<script src="../assets/js/page/dialogs.js"></script>
+
+
+<!-- Pagination javascript -->
+<script src="../assets/bundles/dataTables.bundle.js"></script>
+<script src="../assets/js/table/datatable.js"></script>
+
+
+
+

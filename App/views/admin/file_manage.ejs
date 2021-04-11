@@ -14,7 +14,7 @@
 </head>
 
 
-       
+<%- include('../../layouts/functions.ejs') %> 
             <!-- Start Page title and tab -->
             <div class="section-body">
                 <div class="container-fluid">
@@ -28,8 +28,8 @@
                             </ol>
                         </div>
                         <div>
-                            <button type="button" class="btn btn-primary"><i class="fa fa-check-circle"></i> &nbsp;Approve</button>
-                            <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i> &nbsp;Disapprove</button>
+                            <a href='/update_active?id=<%= contributions[0].id%>&active=1' type="button" class="btn btn-primary"><i class="fa fa-check-circle"></i> &nbsp;Approve</a>
+                            <a href='/update_active?id=<%= contributions[0].id%>&active=0' type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i> &nbsp;Disapprove</a>
                         </div>
                         
                     </div>
@@ -41,17 +41,29 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="Library-all">
                             <div class="row justify-content-between">
-                                <h4 class="text-left col-lg-6 col-md-6 col-sm-6" style="color: #17a2b8"><b>APPROVED </b><i class="fa fa-check-circle"></i></h4>
+                                <h4 class="text-left col-lg-6 col-md-6 col-sm-6"><b><%= contributions[0].title%> </b></h4>
                                 <div class="text-right col-lg-6 col-md-6 col-sm-6">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mark-modal" title="View">Edit Mark</button>
-                                    <a href="/admin/comment_manage" type="button" class="btn btn-outline-secondary">Comment</a>
+                                    <a href='/admin/comment_manage?id=<%= contributions[0].id%>' type="button" class="btn btn-outline-secondary">Comment</a>
                                 </div>
                                 
                             </div>
                             <div class="row justify-content-between">
-                                <h6 class="text-left col-lg-6 col-md-6 col-sm-6" >Mark: 6.0</i></h6>
+                                <% if(contributions[0].is_active) { %>
+                                    <h5 class="text-left col-lg-6 col-md-6 col-sm-6" style="color: #17a2b8"><b>APPROVED </b><i class="fa fa-check-circle"></i></h4>
+                                <% } else { %>
+                                    <h5 class="text-left col-lg-6 col-md-6 col-sm-6" style="color: #db2828"><b>DISAPPROVED </b><i class="fa fa-minus-circle"></i></h4>
+                                <% } %>
+                            </div>
+                            <div class="row justify-content-between">
+                                <h6 class="text-left col-lg-12 col-md-12 col-sm-12" >Topic: <%= contributions[0].topic%></h6>
+                                
+                                <h6 class="text-left col-lg-12 col-md-12 col-sm-12">Student: <%= contributions[0].first_name + " " + contributions[0].last_name%></h6>
+                            </div>
+                            <div class="row justify-content-between">
+                                <h6 class="text-left col-lg-6 col-md-6 col-sm-6" >Mark: <%= contributions[0].mark%></i></h6>
                                 <div class="text-right col-lg-6 col-md-6 col-sm-6">
-                                    <span class="text-left col-lg-6 col-md-6 col-sm-6" >Last update: 20/03/2021</i></span>
+                                    <span class="text-left col-lg-6 col-md-6 col-sm-6" >Ebstablish date: <%= format_date(contributions[0].submitted_date)%></i></span>
                                 </div>
                                 
                             </div>
@@ -63,229 +75,27 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Name</th>
-                                                    <th>Path</th>
+                                        
                                                     <th>Submitted date</th>
-                                                    <th>Type</th>
+                                                    
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <% for(var index in files) { %>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.doc</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>document</td>
+                                                    <td><%= parseInt(index) + 1 %></td>
+                                                    <td><%= files[index].file_name %></td>
+            
+                                                    <td><%= format_date(files[index].submitted_date) %></td>
                                                     <td>
                                                         <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                                        <a href='/download_file?path=<%= files[index].path%>&name=<%=files[index].file_name %>' type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
+                                                        
+                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm" data-message='<%= "File " + files[index].file_name  + " will be remoted permantly!" %>' data-link='/delete_file?id=<%=files[index].id %>&path=<%= files[index].path + "/" + files[index].file_name%>'><i class="fa fa-trash-o text-danger"></i></button>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.jpg</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>image</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.doc</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>document</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.jpg</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>image</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.doc</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>document</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.jpg</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>image</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.doc</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>document</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.jpg</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>image</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.doc</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>document</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.jpg</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>image</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.doc</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>document</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.jpg</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>image</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.doc</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>document</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.jpg</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>image</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.doc</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>document</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.jpg</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>image</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.doc</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>document</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Management Basics</td>
-                                                    <td>/Home/file.jpg</td>
-                                                    <td>11/11/2011</td>
-                                                    <td>image</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-cloud-download" style="color:green"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
+                                                <% } %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -307,22 +117,25 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                             </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <div class="form-group row">
-                                                        <label for="mark" class="col-md-3 col-form-label">Mark:</label>
-                                                        <div class="col-md-9">
-                                                            <input type="number" class="form-control" id="mark" min=0 max=10 value=0 step=0.1>
+                                            <form action="/update_mark" method="post">
+                                                <div class="modal-body">
+                                                    
+                                                        <div class="form-group row">
+                                                            <label for="mark" class="col-md-3 col-form-label">Mark:</label>
+                                                            <div class="col-md-9">
+                                                                <input type="hidden" name="id" value=<%= contributions[0].id%>>
+                                                                <input type="number" class="form-control" id="mark" name="mark" min=0 max=10 value=<%= contributions[0].mark%> step=0.1>
+                                                            </div>
+                                                            
                                                         </div>
-                                                        
-                                                    </div>
-            
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Submit</button>
-                                            </div>
+                
+                                                    
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

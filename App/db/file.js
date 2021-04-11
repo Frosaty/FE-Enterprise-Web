@@ -1,18 +1,15 @@
 var conn = require("./db_config").conn
 
 var modify_field = (fields) => {
-    return  fields.replace(/-/g, 'users.');
+    return  fields.replace(/-/g, 'files.');
 }
 
-var select = (fields, conditions = "1 = 1", callback) => {
+var select = (callback, condition = "1 = 1") => {
     
     conn.connect().then(() => {
-        fields = modify_field(fields)
-        conditions = modify_field(conditions)
-        var query = `SELECT ${fields}, user_types.type, faculties.name, users.id FROM users ` +
-        `LEFT JOIN user_types ON users.user_type_id = user_types.id ` + 
-        `LEFT JOIN faculties ON users.faculty_id = faculties.id ` + 
-        `WHERE ${conditions}`
+        
+        var query = `SELECT * FROM files ` +
+        `WHERE ${condition}`
 
         conn.request().query( query, (err, results) => {
             callback(results)
@@ -23,6 +20,24 @@ var select = (fields, conditions = "1 = 1", callback) => {
       
 }
 
+var insert = (fields, values) => {
+    conn.connect().then(() => {
+        fields = modify_field(fields)
+        var query = `INSERT INTO files (${fields}) VALUES (${values})`
+        conn.request().query( query, (err, result) => {})
+        
+    })
+}
+
+var delete_file = (id) => {
+    conn.connect().then(() => {
+        var query = `DELETE files WHERE id = ${id}`
+        conn.request().query( query, (err, result) => {})
+    })
+}
+
 module.exports = {
-    select: select
+    select: select,
+    insert: insert,
+    delete_file: delete_file
 }

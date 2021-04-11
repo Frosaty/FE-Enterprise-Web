@@ -14,7 +14,6 @@ var select = (callback, fields, conditions = "1 = 1") => {
         `LEFT JOIN topics ON contributions.topic_id = topics.id ` + 
         `LEFT JOIN faculties ON users.faculty_id = faculties.id ` + 
         `WHERE ${conditions}`
-
         conn.request().query( query, (err, results) => {
             callback(results)
         })
@@ -24,6 +23,27 @@ var select = (callback, fields, conditions = "1 = 1") => {
       
 }
 
+var insert = (fields, values, callback) => {
+    conn.connect().then(() => {
+        fields = modify_field(fields)
+        var query = `INSERT INTO contributions (${fields}) VALUES (${values}); SELECT @@identity as id`
+        conn.request().query( query, (err, result) => {
+            callback(result.recordset[0].id)
+        })
+    })
+}
+
+var update = (sets, conditions) => {
+    conn.connect().then(() => {
+        
+        var query = `UPDATE contributions SET ${sets} WHERE ${conditions}`
+        
+        conn.request().query( query, (err, result) => {
+        })
+    })
+}
 module.exports = {
-    select: select
+    select: select,
+    insert: insert,
+    update: update
 }

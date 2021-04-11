@@ -16,6 +16,18 @@ var select = (callback, condition = "1 = 1") => {
       
 }
 
+var update = (sets, conditions) => {
+    conn.connect().then(() => {
+        
+        var query = `UPDATE faculties SET ${sets} WHERE ${conditions}`
+        
+        conn.request().query( query, (err, result) => {
+        })
+    })
+
+    
+}
 module.exports = {
-    select: select
+    select: select,
+    update: update
 }
