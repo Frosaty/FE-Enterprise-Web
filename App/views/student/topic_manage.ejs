@@ -68,6 +68,7 @@
                                                             <% var have = false %>
                                                             <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/student/contribution_manage?topic_id=" + topics[i].id %>>Other Contributions</a>
                                                             <% for(var j in contributions) { %>
+                                                                
                                                                 <% if (topics[i].id == contributions[j].topic_id) { %>
                                                                     <% have = true %>
                                                                     <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/student/self_file_manage?id=" + contributions[j].id %>>My Contribution</a>

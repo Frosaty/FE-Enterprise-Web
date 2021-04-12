@@ -135,6 +135,31 @@
                                         </div>
                                     </div>
 
+                                     <!-- MODAL FOR ADD COMMENT -->
+                                     <div class="modal fade" id="add-comment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="false">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Add Comment</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                                </div>
+                                                <form action='/add_comment' class="form-group" method="post">
+                                                    <div class="modal-body">
+                                                        <input type="hidden" class="form-control" value='<%= contributions[0].id %>' name="contribution_id">
+                                                        <label class="">Content:</label>
+                                                        <textarea class="form-control" name="content" rows=5></textarea>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Add comment</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!-- MODAL FOR DELETE FILE -->
                                     <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="false">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -165,7 +190,7 @@
                                     <!-- SUBMIT FILE -->
                                     <% if (Date.parse(contributions[0].end_date) > Date.now()) { %>
                                     <form action="/upload_file" method="post" enctype="multipart/form-data" id="upload-form">
-                                        <input name="topic" type="hidden" value='<%= contributions[0].topic %>'>
+                                        <input name="topic_id" type="hidden" value='<%= contributions[0].topic_id %>'>
                                         <input name="contribution_id" type="hidden" value='<%= contributions[0].id %>'>
                                         <div class="file-loading">
                                             
@@ -202,15 +227,26 @@
                                         </div>
                                             
                                         
-                                        
                                     <% } %>
                                     <!-- COMMENT -->
-
+                                    <div class="gdlr-core-course-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-course-style-list-info gdlr-core-left-align clearfix " style="padding-bottom: 0px ;">
+                                        <div class="gdlr-core-right-align">
+                                            
+                                            <a data-whatever="@mdo" data-toggle="modal" data-target="#add-comment" href=""  class="gdlr-core-course-item-button gdlr-core-button">Comment</a>
+                                        </div>
+                                    </div>
+                                    <br>
                                     <div class="gdlr-core-course-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-course-style-list-info gdlr-core-left-align clearfix " style="padding-bottom: 0px ;">
                                         
                                         <% for( var index in comments) { %>
                                         <div class="gdlr-core-course-item-list">
-                                            <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption"><%= comments[index].type%></span><%= comments[index].first_name + " " + comments[index].last_name%></h3>
+                                            <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">
+                                                <% if(comments[index].user_id != contributions[0].user_id ) { %>
+                                                <%= comments[index].type%></span><%= comments[index].first_name + " " + comments[index].last_name%>
+                                                <% } else { %>
+                                                    <%= "My comment" %>
+                                                <% } %>
+                                            </h3>
                                             <div class="gdlr-core-course-item-info-wrap">
 
                                                 <div class="gdlr-core-course-item-info">

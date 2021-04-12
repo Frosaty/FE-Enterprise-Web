@@ -339,7 +339,7 @@ app.get('/student/file_manage', (req, res, next) => {
 app.get('/add_contribution', (req, res, next) => {
   if(get_role(req) != "student")
     next()
-  student.contribution.add(req, (result) => {
+  student.contribution.add(req, __dirname + "/files" ,(result) => {
 
       res.locals.title = 'My File'
       res.locals.username = get_name(req)
@@ -416,13 +416,16 @@ var admin_layout = {layout: "../layouts/admin_layout.ejs"}
 app.get('/admin/comment_manage', (req, res, next) => {
   if(get_role(req) != "admin")
     next()
-    staff.comment.list(req, (content) => {
-    res.locals = content
-    res.locals.title = 'Comment'
-    res.locals.username = get_name(req)
-    res.render('admin/comment_manage', admin_layout);
+
+    staff.contribution.show(req, (content1) => {
+      staff.comment.list(req, (content2) => {
+        content = Object.assign({}, content1, content2)
+        res.locals = content
+        res.locals.title = 'Comment'
+        res.locals.username = get_name(req)
+        res.render('admin/comment_manage', admin_layout);
+    })
   })
-  
 });
 
 app.get('/admin/profile_manage', (req, res, next) => {
@@ -578,12 +581,17 @@ var manager_layout = {layout: "../layouts/manager_layout.ejs"}
 app.get('/manager/comment_manage', (req, res, next) => {
   if(get_role(req) != "manager")
     next()
-    staff.comment.list(req, (content) => {
-    res.locals = content
-    res.locals.title = 'Comment'
-    res.locals.username = get_name(req)
-    res.render('manager/comment_manage', manager_layout);
-  })
+    staff.contribution.show(req, (content1) => {
+        staff.comment.list(req, (content2) => {
+        content = Object.assign({}, content1, content2)
+        res.locals = content
+        res.locals.title = 'Comment'
+        res.locals.username = get_name(req)
+        
+        res.render('manager/comment_manage', manager_layout);
+      })
+    })
+    
   
 });
 
@@ -731,12 +739,17 @@ var coordinate_layout = {layout: "../layouts/coordinate_layout.ejs"}
 app.get('/coordinate/comment_manage', (req, res, next) => {
   if(get_role(req) != "coordinate")
     next()
-    staff.comment.list(req, (content) => {
-    res.locals = content
-    res.locals.title = 'Comment'
-    res.locals.username = get_name(req)
-    res.render('coordinate/comment_manage', coordinate_layout);
-  })
+    staff.contribution.show(req, (content1) => {
+      staff.comment.list(req, (content2) => {
+        content = Object.assign({}, content1, content2)
+        res.locals = content
+        res.locals.title = 'Comment'
+        res.locals.username = get_name(req)
+        res.locals.contribution_id = req.query.id
+        res.render('coordinate/comment_manage', coordinate_layout);
+      })
+    })
+    
   
 });
 
@@ -886,6 +899,8 @@ app.get('/download_file', async function(req, res, next) {
     await download(req, res, path)
 });
 
+
+
 // ----- DELETE FILE -----
 app.get('/delete_file', async function(req, res, next) {
   if(get_role(req) == "guest")
@@ -1002,7 +1017,11 @@ app.post('/add_comment', (req, res) => {
   const response = api.comment.create(contribution_id, user_id ,content)
   response.then(function(result) {
       
+  }).catch((error) => {
+    console.log(error)
   })
+
+  
   res.redirect('back')
 });
 // ----- UPLOAD user -----

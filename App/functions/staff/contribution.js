@@ -68,6 +68,9 @@ var edit_active = async function(req){
     await db.contribution.update(`is_active = ${req.query.active}`, `id = ${req.query.id}`)
 }
 
+var edit_mark = async function(req){
+    await db.contribution.update(`mark = ${req.body.mark}`, `id = ${req.body.id}`)
+}
 
 
 // ------------------- EXPORT ------------------------ //
@@ -75,5 +78,6 @@ module.exports = {
     show: show,
     list: list,
     edit_title: edit_title,
-    edit_active: edit_active
+    edit_active: edit_active,
+    edit_mark: edit_mark
 }

@@ -16,16 +16,16 @@ app.use(bodyParser.urlencoded({extended: true}))
 var upload = function(location){
     var set_storage = function(location) { 
         var storage = multer.diskStorage({
-            destination: function (request, file, cb){ 
-                var dir = location + "/" + request.body.topic + "/" + request.session.user.faculty + "/" + request.session.user.first_name +  "-" + request.session.user.last_name +  "-" + request.session.user.id
-                dir.replace(/\s/g, '-')
+            destination: function (req, file, cb){ 
+                var dir = location + "/Topic_" + req.body.topic_id + "/Faculty_" + req.session.user.faculty_id + "/Student_" + req.session.user.id
+                
                 mkdirp(dir, err => {
                     cb(err,  dir)
                 })
                 
             },
         
-            filename: function (request, file, cb){cb(null, file.originalname )
+            filename: function (req, file, cb){cb(null, file.originalname )
         }
         })
         return storage
@@ -39,13 +39,17 @@ var upload = function(location){
 var download =  async function (req,res,path) {
     
     var file_name = req.query.name
+    var download_name = file_name
+    if(req.query.title != undefined && req.query.title != "" ){
+        download_name = req.query.title
+    } 
 
     await res.zip({
         files: [{
             path: path,
             name: file_name
         }],
-        filename: `${file_name}.zip`
+        filename: `${download_name}.zip`
     });
   }
 

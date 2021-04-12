@@ -16,7 +16,7 @@ var add = async function(req){
     // ----- Validate sending file ------
     var files = req.files
     var contribution_id = req.body.contribution_id
-    var path = "/" + req.body.topic + "/" + req.session.user.faculty + "/" + req.session.user.first_name +  "-" + req.session.user.last_name +  "-" + req.session.user.id
+    var path = "/Topic_" + req.body.topic_id + "/Faculty_" + req.session.user.faculty_id + "/Student_" + req.session.user.id
     path.replace(/\s/g, '-')
     var submitted_date = new Date().toISOString()
     db.file.select((result) => {

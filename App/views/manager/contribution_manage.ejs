@@ -126,8 +126,10 @@
                                                 <td style="color: red;">Disapproved</td>
                                             <% } %>
                                             <td>
+                                                <% name = "Student_" + contributions[index].user_id %>
+                                                <% path = "/Topic_" + contributions[index].topic_id + "/Faculty_" + contributions[index].faculty_id %>
                                                 <a href=<%= "/manager/file_manage?id=" + contributions[index].id %> type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
-                                                
+                                                <a href='/download_file?path=<%= path %>&name=<%= name %>' type="button" class="btn btn-icon btn-sm" title="Download"><i class="fa fa-cloud-download" style="color:green"></i></a>
                                             </td>
                                         </tr>
                                         <% } %>
