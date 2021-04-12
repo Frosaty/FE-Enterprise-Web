@@ -23,7 +23,7 @@
                             <h1 class="page-title">Topic Detail</h1>
                             <ol class="breadcrumb page-breadcrumb">
                                 <li class="breadcrumb-item"><a href="/coordinate">Home</a></li>
-                                <li class="breadcrumb-item"><a href="javascript:history.back()">Topic</a></li>
+                                <li class="breadcrumb-item"><a href="/coordinate/topic_manage">Topic</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Topic Detail</li>
                             </ol>
                         </div>
@@ -62,18 +62,18 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-form-label">Actual End Date </label>
-                                        <div class="col-md-5">
-                                            <input type="text" class="form-control" value=<%= format_date(topics[0].end_date_actual)%> >
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="col-md-3 col-form-label">Active </label>
-                                        <div class="col-md-3 row">
-                                            <input type="text" class="form-control" value=<%= topics[0].is_active %>>
+                                        <label class="col-md-3 col-form-label">Status
                                             
+                                        </label>
+                                        <div class="col-md-5">
+                                            
+                                            <% if (Date.parse(topics[0].end_date) > Date.now() ) { %>
+                                                <h6 class="col-md-5" style="color: green;">Ongoing</h6>
+                                            <% } else { %>
+                                                <h6 class="col-md-5" style="color: red;">Expired</h6>
+                                            <% } %>
                                         </div>
+                                       
                                     </div>
                                     
                                 </form>

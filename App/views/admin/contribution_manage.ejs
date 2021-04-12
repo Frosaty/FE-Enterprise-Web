@@ -120,7 +120,11 @@
                                             <td><%= contributions[index].faculty %></td>
                                             <td><%= contributions[index].mark %></td>
                                             <td><%= format_date(contributions[index].submitted_date) %></td>
-                                            <td><%= contributions[index].is_active %></td>
+                                            <% if (contributions[index].is_active) { %>
+                                                <td style="color: green;">Approved</td>
+                                            <% } else { %>
+                                                <td style="color: red;">Disapproved</td>
+                                            <% } %>
                                             <td>
                                                 <a href='/admin/file_manage?id=<%=contributions[index].id %>' type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></a>
                 

@@ -19,7 +19,6 @@ var add = async function(req){
     var path = "/" + req.body.topic + "/" + req.session.user.faculty + "/" + req.session.user.first_name +  "-" + req.session.user.last_name +  "-" + req.session.user.id
     path.replace(/\s/g, '-')
     var submitted_date = new Date().toISOString()
-    console.log(files)
     db.file.select((result) => {
         
         for(var i in files){
@@ -47,28 +46,37 @@ var add = async function(req){
 
 
     // ------- Send email ---------
-    var receiver_email = req.session.coordinate_contact
-    var email_subject = 'Upload files'
+    var send_mail = (email) => {
+        var receiver_email = email
+        var email_subject = 'Upload files'
 
-    // Set sending email content
-    var student_id = req.session.user.id
-    var student_name = req.session.user.first_name +  " " + req.session.user.last_name
-    var word_file = 'file'
-    if(files.length > 1)
-        word_file += 's'
-    var email_content = `Student ${student_name} ID: ${student_id} has uploaded ${files.length} ${word_file}. Marketing Coordinate please comments within 14 days!\nUpload ${word_file}:\n`
-    
-    files.forEach(file => {
-        email_content += file.filename + '\n'
-    })
-
-    f.send_mail(receiver_email, email_subject, email_content)
-
-    try{
-    
-    }catch(ex){
-        onError(ex)
+        // Set sending email content
+        var student_id = req.session.user.id
+        var student_name = req.session.user.first_name +  " " + req.session.user.last_name
+        var word_file = 'file'
+        if(files.length > 1)
+            word_file += 's'
+        var email_content = `Student ${student_name} ID: ${student_id} has uploaded ${files.length} ${word_file} to Topic: ${req.body.topic}. Marketing Coordinate please comments within 14 days!\nUpload ${word_file}:\n`
+        
+        files.forEach(file => {
+            email_content += file.filename + '\n'
+        })
+        try {
+            f.send_mail(receiver_email, email_subject, email_content)
+        } catch (error) {
+            
+        }
     }
+    
+
+    await db.user.select( 
+            function(result){
+                var coordinates = result.recordset
+                coordinates.forEach(coordinate => {
+                    send_mail(coordinate.email)
+                })
+            }, "-email", `-faculty_id = ${req.session.user.faculty_id} AND -user_type_id = 3`)
+    
     
 }
 
