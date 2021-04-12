@@ -47,7 +47,7 @@
                                                     <th>Title</th>
                                                     <th>Start date</th>
                                                     <th>End date</th>
-                                                    <th>Actual end</th>
+                                                    
                                                     <th>Active</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -61,8 +61,12 @@
                                 
                                                     <td><%= format_date(topics[index].start_date) %></td>
                                                     <td><%= format_date(topics[index].end_date) %></td>
-                                                    <td><%= format_date(topics[index].end_date_actual) %></td>
-                                                    <td><%= topics[index].is_active %></td>
+                                                    
+                                                    <% if (Date.parse(topics[index].end_date) > Date.now() ) { %>
+                                                        <td style="color: green;">Ongoing</td>
+                                                    <% } else { %>
+                                                        <td style="color: red;">Expired</td>
+                                                    <% } %>
                                                     <td>
                                                         <a href='/manager/contribution_manage?topic=<%= topics[index].id %>' type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
                                                         <a href=<%= "/manager/topic_detail?id="  + topics[index].id %> type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>

@@ -78,7 +78,13 @@
                                                 <p>
                                                     <b>Topic: </b><span><%= contributions[0].topic %></span> <br>
                                                     <b>Last update: </b><span><%= format_date(contributions[0].submitted_date) %></span> <br>
-                                                    <b>Mark: </b><span><%= contributions[0].mark %></span>
+                                                    <b>Mark: </b><span><%= contributions[0].mark %></span> <br>
+                                                    <b>Status: </b>
+                                                        <% if(contributions[0].is_active) { %>
+                                                            <span style="color: green;">Approve</span>
+                                                        <% } else { %>
+                                                            <span style="color: red;">Disapproved</span>
+                                                        <% }%>
                                                 </p>
                                                 
                                             
@@ -157,6 +163,7 @@
                                     
 
                                     <!-- SUBMIT FILE -->
+                                    <% if (Date.parse(contributions[0].end_date) > Date.now()) { %>
                                     <form action="/upload_file" method="post" enctype="multipart/form-data" id="upload-form">
                                         <input name="topic" type="hidden" value='<%= contributions[0].topic %>'>
                                         <input name="contribution_id" type="hidden" value='<%= contributions[0].id %>'>
@@ -189,7 +196,14 @@
 
                                         </div>
                                     </form>
-
+                                    <% } else { %>
+                                        <div class="gdlr-core-course-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-course-style-list-info gdlr-core-left-align clearfix " style="padding-bottom: 0px ;">
+                                            <h6>Sorry, this topic is already expired after <%= format_date(contributions[0].end_date) %>. You can not edit it anymore!</h6>
+                                        </div>
+                                            
+                                        
+                                        
+                                    <% } %>
                                     <!-- COMMENT -->
 
                                     <div class="gdlr-core-course-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-course-style-list-info gdlr-core-left-align clearfix " style="padding-bottom: 0px ;">

@@ -40,7 +40,7 @@
                                     <div class="gdlr-core-pbf-element">
                                         <div class="gdlr-core-personnel-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-personnel-item-style-medium gdlr-core-personnel-style-medium">
                                             
-                                            <% for(var index in topics) { %>
+                                            <% for(var i in topics) { %>
                                             <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
                                                 <div class="gdlr-core-personnel-list clearfix">
                                                     <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
@@ -50,18 +50,23 @@
                                                     </div>
                                                     <div class="gdlr-core-personnel-list-content-wrap row">
                                                         
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#"><%= topics[index].name %></a></h3>
+                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#"><%= topics[i].name %></a></h3>
                                                         
                                                         
                                                         <div class="gdlr-core-personnel-list-content">
                                                             <p>                                                              
-                                                               <b>Description:</b> Topic description<br/> 
-                                                               <b>Start date:</b><%= format_date(topics[index].start_date) %><br/>
-                                                               <b>End date:</b> <%= format_date(topics[index].end_date) %>                                                            
+                                                               <b>Start date: </b><%= format_date(topics[i].start_date) %><br/>
+                                                               <b>End date: </b> <%= format_date(topics[i].end_date) %> <br/>
+                                                               <b>Status: </b>
+                                                               <% if (Date.parse(topics[i].end_date) > Date.now() ) { %>
+                                                                    <span style="color: green;">Ongoing</span>
+                                                                <% } else { %>
+                                                                    <span style="color: red;">Expired</span>
+                                                                <% } %>                                                            
                                                             </p>
                                                         </div>
                                                         
-                                                            <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/guest/contribution_manage?topic_id=" + topics[index].id %>>Contributions</a>
+                                                            <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/guest/contribution_manage?topic_id=" + topics[i].id %>>Contributions</a>
                                                         
                                                     </div>
                                                 </div>

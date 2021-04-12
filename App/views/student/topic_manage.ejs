@@ -56,7 +56,13 @@
                                                         <div class="gdlr-core-personnel-list-content">
                                                             <p>                                                              
                                                                <b>Start date: </b><%= format_date(topics[i].start_date) %><br/>
-                                                               <b>End date: </b> <%= format_date(topics[i].end_date) %>                                                            
+                                                               <b>End date: </b> <%= format_date(topics[i].end_date) %> <br/>
+                                                               <b>Status: </b>
+                                                               <% if (Date.parse(topics[i].end_date) > Date.now() ) { %>
+                                                                    <span style="color: green;">Ongoing</span>
+                                                                <% } else { %>
+                                                                    <span style="color: red;">Expired</span>
+                                                                <% } %>                                                            
                                                             </p>
                                                         </div>
                                                             <% var have = false %>

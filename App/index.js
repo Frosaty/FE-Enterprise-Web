@@ -138,21 +138,36 @@ app.get('/guest/login', (req, res, next) => {
   if(get_role(req) != "guest")
     next()
   res.locals.title = "Login"
-  res.locals.alert = functions.alert(req.query.message)
+  res.locals.alert = functions.alert()
   res.render('guest/login', guest_layout);
 });
+
+app.post('/guest/login', (req, res) => {
+  
+  staff.session.login(req, (result) => {
+    if(result.length != 0 && result[0].user_type_id == 2){
+          req.session.user = result[0]
+          res.redirect('/student')
+    }
+    else{
+        res.locals.title = "Login"
+        res.locals.alert = functions.alert("Invalid email or password!")
+        res.render('guest/login', guest_layout);
+    }
+  })
+})
 
 // LOGIN PAGE FOR GUEST LOGIN AS STAFF
 app.get('/staff/login', (req, res, next) => {
   if(get_role(req) != "guest")
     next()
   
-  res.locals.alert = functions.alert(req.query.message)
+  res.locals.alert = functions.alert()
   res.render('staff/login');
 });
 
 // LOGIN/LOG OUT FUNCTIONS
-app.post('/login_as_staff', (req, res) => {
+app.post('/staff/login', (req, res) => {
   
   staff.session.login(req, (result) => {
     
@@ -175,28 +190,13 @@ app.post('/login_as_staff', (req, res) => {
               res.redirect(link)
         }
         else{
-             res.redirect(`/staff/login?message=Invalid email or password`)
+          res.locals.alert = functions.alert("Invalid email or password!")
+          res.render('staff/login');
         }
   })
 })
 
-app.post('/login_as_student', (req, res) => {
-  
-  staff.session.login(req, (result) => {
-    if(result.length != 0 && result[0].user_type_id == 2){
-          req.session.user = result[0]
-       staff.session.add_coordinate_contact(req, (result) => {
-         req.session.coordinate_contact = result
 
-          res.redirect('/student')
-       })
-          
-    }
-    else{
-        res.redirect(`/guest/login?message=Invalid email or password`)
-    }
-  })
-})
 
 // GUEST VIEW LIST OF TOPICS
 
@@ -227,7 +227,7 @@ app.get('/guest/faculty_manage', (req, res, next) => {
 app.get('/guest/contribution_manage', (req, res, next) => {
   if(get_role(req) != "guest")
     next()
-  staff.contribution.list(req, (content1) => {
+  student.contribution.list_select(req, (content1) => {
     staff.faculty.list(req, (content2) => {
         staff.topic.list(req, (content3) => {
             content = Object.assign({}, content1, content2, content3)
@@ -290,7 +290,7 @@ app.get('/student/contribution_manage', (req, res, next) => {
   if(get_role(req) != "student")
     next()
 
-  staff.contribution.list(req, (content1) => {
+  student.contribution.list_select(req, (content1) => {
     staff.faculty.list(req, (content2) => {
         staff.topic.list(req, (content3) => {
             var content = Object.assign({}, content1, content2, content3)
@@ -990,7 +990,6 @@ app.post('/add_faculty', (req, res) => {
   
   const response = api.faculty.create(faculty_name, description)
   response.then(function(result) {
-      console.log(result.data)
   })
   res.redirect('back')
 });

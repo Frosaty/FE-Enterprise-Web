@@ -43,7 +43,7 @@
                                             
                                             <% for(var index in contributions) { %>
                                             <div class="gdlr-core-course-item-list">
-                                                <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span><%= contributions[index].title %></h3>
+                                                <h3 class="gdlr-core-course-item-title"><span class="gdlr-core-course-item-id gdlr-core-skin-caption"><%= parseInt(index) + 1 %></span><%= contributions[index].title %></h3>
                                                 <div class="gdlr-core-course-item-info-wrap">
                                                     
                                                     <div class="gdlr-core-course-item-info">
@@ -57,7 +57,11 @@
                                                     </div>
                                                     <div class="gdlr-core-course-item-info">
                                                         <span class="gdlr-core-head">Status : </span>
-                                                        <span class="gdlr-core-tail" style="color: green;"><%= contributions[index].is_active %></span>
+                                                        <% if(contributions[index].is_active) { %>
+                                                            <span class="gdlr-core-tail" style="color: green;">Approve</span>
+                                                        <% } else { %>
+                                                            <span class="gdlr-core-tail" style="color: red;">Disapproved</span>
+                                                        <% }%>
                                                     </div>
                                                 </div>
                                                 <div class="gdlr-core-right-align">
