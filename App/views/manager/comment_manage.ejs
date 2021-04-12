@@ -1,0 +1,134 @@
+
+
+<head>
+    
+    <!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../assets/plugins/sweetalert/sweetalert.css">
+
+    <!-- Table css -->
+    <link rel="stylesheet" href="../assets/plugins/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css">
+    <!-- Core css -->
+    <link rel="stylesheet" href="../assets/css/style.min.css" />
+</head>
+
+<body>
+    <%- include('../../layouts/functions.ejs') %> 
+            <!-- Start Page title and tab -->
+            <div class="section-body">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between align-items-center ">
+                        <div class="header-action">
+                            <h1 class="page-title">Comment</h1>
+                            <ol class="breadcrumb page-breadcrumb">
+                                <li class="breadcrumb-item"><a href="/manager">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/manager/contribution_manage">Contribution</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:history.back()">File</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Comment</li>
+                            </ol>
+                        </div>
+                        <ul class="nav nav-tabs page-header-tab">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#comment-list">List View</a></li>
+                            <li class="nav-item"><a class="nav-link" id="Dep-tab-Boot" data-toggle="tab" href="#comment-add">Add New</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="section-body mt-4">
+                <div class="container-fluid">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="comment-list">
+
+                            <!-- Comment Card -->
+                            <% for( var index in comments) { %>
+                            <div class="card">
+                                <div class="card-header">
+                                    
+                                    <div class="card-options">
+                                        <a href="#" class="card-options-fullscreen" data-toggle="card-fullscreen"><i class="fe fe-maximize"></i></a>
+                                    </div>
+                                </div>
+                                <div class="card-body detail">
+                                    <div class="detail-header">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="mb-0"><strong class="text-muted mr-1">From </strong><b><%= comments[index].type%></b><span class="text-muted text-sm float-right">Date: <%= format_date(comments[index].comment_date)%></span></p>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="mail-cnt mt-3">
+                                        <br>
+                                        <p>
+                                            <%= comments[index].content%>
+                                        </p>
+                                        <br>
+                                        <hr>
+                                        <p class="mb-0"><%= comments[index].first_name + " " + comments[index].last_name%></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="border: 1px solid gray;">
+                            <% } %>
+                        </div>
+                        <!-------------------------------------------- Add page ------------------------------------------->
+                        
+                        <div class="tab-pane" id="comment-add">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Add Comment</h3>
+                                    <div class="card-options ">
+                                    </div>
+                                </div>
+                                <form class="card-body" action="/add_comment" method="post">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">To Contribution </label>
+                                        <div class="col-md-7">
+                                            <input type="hidden" value='<%= comments[index].contribution_id %>' name="contribution_id">
+                                            <input type="text" class="form-control" value=<%= comments[index].title %> disabled>
+                                        </div>
+                                    </div>
+                    
+                                    
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Comment <span class="text-danger">*</span></label>
+                                        <div class="col-md-7">
+                                            <textarea type="text" class="form-control" rows=5 name="content"></textarea>
+                                        </div>
+                                    </div>
+        
+                                    <div class="text-right">
+                                        <div class="col-md-10">
+                                            <button type="submit" class="btn btn-success">Comment</button>
+                                            <button type="reset" class="btn btn-outline-secondary">Clear</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Start main footer -->
+            
+    
+
+    <!-- Start Main project js, jQuery, Bootstrap -->
+    <script src="../assets/bundles/lib.vendor.bundle.js"></script>
+
+    <!-- Start Plugin Js -->
+    <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Start project main js  and page js -->
+    <script src="../assets/js/core.js"></script>
+    <script src="../assets/js/page/dialogs.js"></script>
+
+    <!-- Pagination javascript -->
+<script src="../assets/bundles/dataTables.bundle.js"></script>
+<script src="../assets/js/table/datatable.js"></script>
+</body>
+

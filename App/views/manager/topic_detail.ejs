@@ -1,0 +1,95 @@
+
+
+<head>
+    
+    <!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css">
+
+    <!-- Core css -->
+    <link rel="stylesheet" href="../assets/css/style.min.css" />
+</head>
+
+<body>
+    <%- include('../../layouts/functions.ejs') %> 
+            <!-- Start Page title and tab -->
+            <div class="section-body">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between align-items-center ">
+                        <div class="header-action">
+                            <h1 class="page-title">Topic Detail</h1>
+                            <ol class="breadcrumb page-breadcrumb">
+                                <li class="breadcrumb-item"><a href="/manager">Home</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:history.back()">Topic</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Topic Detail</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-body mt-4">
+                <div class="container-fluid">
+                    <div class="tab-content">                   
+                        <div class="tab-pane active">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Topic Information</h3>
+                    
+                                </div>
+                                <form class="card-body" method="post" action="/update_topic">
+                                    <input type="hidden" value='<%= topics[0].id %>' name="topic_id">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Title <span class="text-danger">*</span></label>
+                                        <div class="col-md-7">
+                                            <input type="text" name="title" class="form-control" placeholder="Enter topic title" value='<%= topics[0].name %>'>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Start Date <span class="text-danger">*</span></label>
+                                        <div class="col-md-5">
+                                            <input data-provide="datepicker" name="start_date" data-date-autoclose="true" class="form-control" placeholder="Enter start date" value='<%= format_date(topics[0].start_date) %>'>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">End Date <span class="text-danger">*</span></label>
+                                        <div class="col-md-5">
+                                            <input data-provide="datepicker" name="end_date" data-date-autoclose="true" class="form-control" placeholder="Enter end date" value='<%= format_date(topics[0].end_date) %>'>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-right">
+                                        <div class="col-md-10">
+                                            <button type="submit" class="btn btn-success">Change</button>
+                                            <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Start main footer -->
+            
+        
+    
+
+    <!-- Start Main project js, jQuery, Bootstrap -->
+    <script src="../assets/bundles/lib.vendor.bundle.js"></script>
+
+    <!-- Start Plugin Js -->
+    <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="../assets/bundles/dataTables.bundle.js"></script>
+    <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Start project main js  and page js -->
+    <script src="../assets/js/core.js"></script>
+    <script src="../assets/js/page/dialogs.js"></script>
+    <script src="../assets/js/table/datatable.js"></script>
+</body>
+

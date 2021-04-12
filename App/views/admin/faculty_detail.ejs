@@ -43,11 +43,13 @@
                                     <div class="card-options ">
                                     </div>
                                 </div>
-                                <form class="card-body">
+                                <form class="card-body" action="/update_faculty" method="POST">
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Faculty name <span class="text-danger">*</span></label>
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control" placeholder="Enter Faculty name">
+                                            <input type="hidden" name="faculty_id" value=<%= faculties[0].id %> >
+                                            <input type="text" class="form-control" name="name" placeholder="Enter Faculty name" value='<%= faculties[0].name %>' >
+                                            
                                         </div>
                                     </div>
                     
@@ -55,7 +57,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Description <span class="text-danger">*</span></label>
                                         <div class="col-md-7">
-                                            <textarea type="text" class="form-control" rows=5></textarea>
+                                            <textarea type="text" name="description" class="form-control" rows=5><%= faculties[0].description %></textarea>
                                         </div>
                                     </div>
         

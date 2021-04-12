@@ -1,5 +1,7 @@
 const f = require('./../assist_functions')
 const api = require('./../../api')
+const db = require('./../../db')
+const { conn } = require('../../db/db_config')
 
 //-------Description---------
 // add: add new element
@@ -9,27 +11,48 @@ const api = require('./../../api')
 // edit: update single element
 
 // -------------------- ADD ---------------------- //
-var add = async function(req, onError){
+var add = async function(req){
     
     // ----- Validate sending file ------
     var files = req.files
-    if (!files.length) {
-        const error = new Error('Please upload a file')
-        error.httpStatusCode = 400
-        return next(error)
-    }
+    var contribution_id = req.body.contribution_id
+    var path = "/" + req.body.topic + "/" + req.session.user.faculty + "/" + req.session.user.first_name +  "-" + req.session.user.last_name +  "-" + req.session.user.id
+    path.replace(/\s/g, '-')
+    var submitted_date = new Date().toISOString()
+    console.log(files)
+    db.file.select((result) => {
+        
+        for(var i in files){
+            var have = false
+            var file_name = files[i].filename
+            for(var j in result.recordset) {
+                
+                
+                if(result.recordset[j].file_name == file_name)
+                {
+                    
+                    have = true;
+                    break;
+                } 
+            }
 
-    // ------- Store file location --------
+            if(!have){
+                db.file.insert("contribution_id, file_name, path, submitted_date", `${contribution_id}, '${file_name}', '${path}', '${submitted_date}'`)
+            }
+        }
+        
+    }, `contribution_id = ${contribution_id}`)
+    // // ------- Store file location --------
 
 
 
     // ------- Send email ---------
-    var receiver_email = 'hunghcgcs18026@fpt.edu.vn'
+    var receiver_email = req.session.coordinate_contact
     var email_subject = 'Upload files'
 
     // Set sending email content
-    var student_id = 1
-    var student_name = 'Nguyen Van A'
+    var student_id = req.session.user.id
+    var student_name = req.session.user.first_name +  " " + req.session.user.last_name
     var word_file = 'file'
     if(files.length > 1)
         word_file += 's'

@@ -2,7 +2,7 @@
     
 
 </head>
-
+<%- include('../../layouts/functions.ejs') %> 
 
 
             <div class="kingster-page-title-wrap kingster-style-medium kingster-left-align">
@@ -39,32 +39,8 @@
                                 <div class="gdlr-core-pbf-sidebar-content-inner" data-skin="Personnel">
                                     <div class="gdlr-core-pbf-element">
                                         <div class="gdlr-core-personnel-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-personnel-item-style-medium gdlr-core-personnel-style-medium">
-                                            <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-                                                <div class="gdlr-core-personnel-list clearfix">
-                                                    <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
-                                                        <a href="#"><img src="../upload/Portrait5-500x500.jpg" alt="" width="250" height="250" title="Portrait5" /></a>
-                                                        <div class="gdlr-core-hover-opacity">
-                                                        </div>
-                                                    </div>
-                                                    <div class="gdlr-core-personnel-list-content-wrap row">
-                                                        
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#">Topic 01</a></h3>
-                                                        
-                                                        
-                                                        <div class="gdlr-core-personnel-list-content">
-                                                            <p>                                                              
-                                                               <b>Description:</b> Topic description<br/> 
-                                                               <b>Start date:</b> 01-01-2021<br/>
-                                                               <b>End date:</b> 31-12-2021                                                            
-                                                            </p>
-                                                        </div>
-                                                        
-                                                            <a class="gdlr-core-personnel-list-button gdlr-core-button" href="/guest/contribution_manage">Contributions</a>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
                                             
+                                            <% for(var index in topics) { %>
                                             <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
                                                 <div class="gdlr-core-personnel-list clearfix">
                                                     <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
@@ -74,107 +50,25 @@
                                                     </div>
                                                     <div class="gdlr-core-personnel-list-content-wrap row">
                                                         
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#">Topic 01</a></h3>
+                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#"><%= topics[index].name %></a></h3>
                                                         
                                                         
                                                         <div class="gdlr-core-personnel-list-content">
                                                             <p>                                                              
                                                                <b>Description:</b> Topic description<br/> 
-                                                               <b>Start date:</b> 01-01-2021<br/>
-                                                               <b>End date:</b> 31-12-2021                                                            
+                                                               <b>Start date:</b><%= format_date(topics[index].start_date) %><br/>
+                                                               <b>End date:</b> <%= format_date(topics[index].end_date) %>                                                            
                                                             </p>
                                                         </div>
-                            
-                                                            <a class="gdlr-core-personnel-list-button gdlr-core-button" href="/guest/contribution_manage">Contributions</a>
+                                                        
+                                                            <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/guest/contribution_manage?topic_id=" + topics[index].id %>>Contributions</a>
                                                         
                                                     </div>
                                                 </div>
                                             </div>
+                                            <% } %>
 
-                                            <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-                                                <div class="gdlr-core-personnel-list clearfix">
-                                                    <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
-                                                        <a href="#"><img src="../upload/Portrait5-500x500.jpg" alt="" width="250" height="250" title="Portrait5" /></a>
-                                                        <div class="gdlr-core-hover-opacity">
-                                                        </div>
-                                                    </div>
-                                                    <div class="gdlr-core-personnel-list-content-wrap row">
-                                                        
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#">Topic 01</a></h3>
-                                                        
-                                                        
-                                                        <div class="gdlr-core-personnel-list-content">
-                                                            <p>                                                              
-                                                               <b>Description:</b> Topic description<br/> 
-                                                               <b>Start date:</b> 01-01-2021<br/>
-                                                               <b>End date:</b> 31-12-2021                                                            
-                                                            </p>
-                                                        </div>
-                            
-                                                            <a class="gdlr-core-personnel-list-button gdlr-core-button" href="/guest/contribution_manage">Contributions</a>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-                                                <div class="gdlr-core-personnel-list clearfix">
-                                                    <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
-                                                        <a href="#"><img src="../upload/Portrait5-500x500.jpg" alt="" width="250" height="250" title="Portrait5" /></a>
-                                                        <div class="gdlr-core-hover-opacity">
-                                                        </div>
-                                                    </div>
-                                                    <div class="gdlr-core-personnel-list-content-wrap row">
-                                                        
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#">Topic 01</a></h3>
-                                                        
-                                                        
-                                                        <div class="gdlr-core-personnel-list-content">
-                                                            <p>                                                              
-                                                               <b>Description:</b> Topic description<br/> 
-                                                               <b>Start date:</b> 01-01-2021<br/>
-                                                               <b>End date:</b> 31-12-2021                                                            
-                                                            </p>
-                                                        </div>
-                            
-                                                            <a class="gdlr-core-personnel-list-button gdlr-core-button" href="/guest/contribution_manage">Contributions</a>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-                                                <div class="gdlr-core-personnel-list clearfix">
-                                                    <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
-                                                        <a href="#"><img src="../upload/Portrait5-500x500.jpg" alt="" width="250" height="250" title="Portrait5" /></a>
-                                                        <div class="gdlr-core-hover-opacity">
-                                                        </div>
-                                                    </div>
-                                                    <div class="gdlr-core-personnel-list-content-wrap row">
-                                                        
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#">Topic 01</a></h3>
-                                                        
-                                                        
-                                                        <div class="gdlr-core-personnel-list-content">
-                                                            <p>                                                              
-                                                               <b>Description:</b> Topic description<br/> 
-                                                               <b>Start date:</b> 01-01-2021<br/>
-                                                               <b>End date:</b> 31-12-2021                                                            
-                                                            </p>
-                                                        </div>
-                            
-                                                            <a class="gdlr-core-personnel-list-button gdlr-core-button" href="/guest/contribution_manage">Contributions</a>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
                                             
-
-                                            <div class="gdlr-core-pagination  gdlr-core-style-round gdlr-core-right-align">
-                                                <span aria-current="page" class="page-numbers current">1</span> 
-                                                <a class="page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit">2</a>
-                                                <a class="next page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit"></a>
-                                            </div>
                                         </div>    
                                     </div>                    
                                 </div>

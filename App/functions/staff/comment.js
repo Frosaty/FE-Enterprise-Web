@@ -1,5 +1,6 @@
 const f = require('./../assist_functions')
 const api = require('./../../api')
+const db = require('./../../db')
 
 //-------Description---------
 // add: add new element
@@ -21,8 +22,11 @@ var show = async function(req){
 }
 
 // -------------------- LIST ---------------------- //
-var list = async function(req){
-
+var list = async function(req, callback){
+    db.comment.select(req, (result) => {
+        content = {comments: result.recordset}
+        callback(content)
+    })
 }
 
 // -------------------- REMOVE ---------------------- //

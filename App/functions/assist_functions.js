@@ -4,6 +4,7 @@ const multer = require('multer')
 const fs = require('fs')
 const nodemailer = require("nodemailer")
 const app = express()
+const mkdirp = require('mkdirp')
 
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -11,12 +12,20 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 // -------------------------------------------------- FILE SYSTEM FUNCTIONS -----------------------------------------------
 // -----------------------UPLOAD-------------------------
+
 var upload = function(location){
     var set_storage = function(location) { 
         var storage = multer.diskStorage({
-            destination: function (request, file, cb){ cb(null, location)},
+            destination: function (request, file, cb){ 
+                var dir = location + "/" + request.body.topic + "/" + request.session.user.faculty + "/" + request.session.user.first_name +  "-" + request.session.user.last_name +  "-" + request.session.user.id
+                dir.replace(/\s/g, '-')
+                mkdirp(dir, err => {
+                    cb(err,  dir)
+                })
+                
+            },
         
-            filename: function (request, file, cb){cb(null, file.originalname)
+            filename: function (request, file, cb){cb(null, file.originalname )
         }
         })
         return storage
@@ -27,14 +36,16 @@ var upload = function(location){
 }
 
 // -----------------------DOWNLOAD-------------------------
-var download =  async function (req, res, location) {
-    var dirPath = location;
+var download =  async function (req,res,path) {
+    
+    var file_name = req.query.name
+
     await res.zip({
         files: [{
-            path: dirPath,
-            name: 'docfile'
+            path: path,
+            name: file_name
         }],
-        filename: 'docfile.zip'
+        filename: `${file_name}.zip`
     });
   }
 
@@ -80,10 +91,22 @@ var on_error = function(err){
 }
 // -------------------------------------------------- EXPORT FUNCTIONS -----------------------------------------------
 
+var alert = function (message = null) {
+    var visible = "none"
+    if(message != undefined){
+        visible = "block"
+    }
+    return {
+        visible: visible,
+        message: message
+    }
+}
+
 module.exports = {
     upload: upload,
     download: download,
     delete_file: delete_file,
     send_mail: send_mail,
-    on_error: on_error
+    on_error: on_error,
+    alert: alert
 }

@@ -1,5 +1,6 @@
 const f = require('./../assist_functions')
 const api = require('./../../api')
+const db = require('./../../db')
 
 //-------Description---------
 // show: show single element

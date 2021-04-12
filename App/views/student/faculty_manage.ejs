@@ -21,7 +21,7 @@
                     <div class="kingster-breadcrumbs-item kingster-item-pdlr">
                         <!-- Breadcrumb NavXT 6.5.0 -->
                         
-                        <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Finance." href="/student" class="post post-page"><span property="name">Home</span></a>
+                        <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Finance." href="/" class="post post-page"><span property="name">Home</span></a>
                         <meta property="position" content="1">
                         </span> &gt; 
                         <span property="itemListElement" typeof="ListItem"><span property="name" class="post post-page current-item">Faculty</span>
@@ -39,34 +39,9 @@
                                 <div class="gdlr-core-pbf-sidebar-content-inner" data-skin="Personnel">
                                     <div class="gdlr-core-pbf-element">
                                         <div class="gdlr-core-personnel-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-personnel-item-style-medium gdlr-core-personnel-style-medium">
-                                            <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-                                                <div class="gdlr-core-personnel-list clearfix">
-                                                    <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
-                                                        <a href="#"><img src="../upload/Portrait5-500x500.jpg" alt="" width="250" height="250" title="Portrait5" /></a>
-                                                        <div class="gdlr-core-hover-opacity">
-                                                        </div>
-                                                    </div>
-                                                    <div class="gdlr-core-personnel-list-content-wrap row">
-                                                        
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#">Faculty 01</a></h3>
-                                                        
-                                                        
-                                                        <div class="gdlr-core-personnel-list-content">
-                                                            <p>                                                              
-                                                               <b>Description:</b> Faculty description<br/> 
-                                                                <br>
-                                                                <br> 
-                                                                <br>                            
-                                                            </p>
-                                                        </div>
-                                                        
-                                                             
-                                                        <a class="gdlr-core-personnel-list-button gdlr-core-button" href="/student/contribution_manage">Contributions</a>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
                                             
+                                            
+                                            <% for(var index in faculties) { %>
                                             <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
                                                 <div class="gdlr-core-personnel-list clearfix">
                                                     <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
@@ -76,114 +51,27 @@
                                                     </div>
                                                     <div class="gdlr-core-personnel-list-content-wrap row">
                                                         
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#">Faculty 01</a></h3>
+                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#"><%= faculties[index].name %></a></h3>
                                                         
                                                         
                                                         <div class="gdlr-core-personnel-list-content">
                                                             <p>                                                              
-                                                               <b>Description:</b> Faculty description<br/> 
+                                                               <b>Description:</b> <%= faculties[index].description %><br/> 
                                                                 <br>
                                                                 <br> 
                                                                 <br>                            
                                                             </p>
                                                         </div>
                                                         
-                                                             
-                                                        <a class="gdlr-core-personnel-list-button gdlr-core-button" href="/student/contribution_manage">Contributions</a>
+                                                            <a class="gdlr-core-personnel-list-button gdlr-core-button" href=<%= "/student/contribution_manage?faculty_id=" + faculties[index].id %>>Contributions</a>
+                                                            
                                                         
                                                     </div>
                                                 </div>
                                             </div>
+                                            <% } %>
 
-                                            <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-                                                <div class="gdlr-core-personnel-list clearfix">
-                                                    <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
-                                                        <a href="#"><img src="../upload/Portrait5-500x500.jpg" alt="" width="250" height="250" title="Portrait5" /></a>
-                                                        <div class="gdlr-core-hover-opacity">
-                                                        </div>
-                                                    </div>
-                                                    <div class="gdlr-core-personnel-list-content-wrap row">
-                                                        
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#">Faculty 01</a></h3>
-                                                        
-                                                        
-                                                        <div class="gdlr-core-personnel-list-content">
-                                                            <p>                                                              
-                                                               <b>Description:</b> Faculty description<br/> 
-                                                                <br>
-                                                                <br> 
-                                                                <br>                            
-                                                            </p>
-                                                        </div>
-                                                        
-                                                             
-                                                        <a class="gdlr-core-personnel-list-button gdlr-core-button" href="/student/contribution_manage">Contributions</a>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-                                                <div class="gdlr-core-personnel-list clearfix">
-                                                    <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
-                                                        <a href="#"><img src="../upload/Portrait5-500x500.jpg" alt="" width="250" height="250" title="Portrait5" /></a>
-                                                        <div class="gdlr-core-hover-opacity">
-                                                        </div>
-                                                    </div>
-                                                    <div class="gdlr-core-personnel-list-content-wrap row">
-                                                        
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#">Faculty 01</a></h3>
-                                                        
-                                                        
-                                                        <div class="gdlr-core-personnel-list-content">
-                                                            <p>                                                              
-                                                               <b>Description:</b> Faculty description<br/> 
-                                                                <br>
-                                                                <br> 
-                                                                <br>                            
-                                                            </p>
-                                                        </div>
-                                                        
-                                                             
-                                                        <a class="gdlr-core-personnel-list-button gdlr-core-button" href="/student/contribution_manage">Contributions</a>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-                                                <div class="gdlr-core-personnel-list clearfix">
-                                                    <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-hover-element gdlr-core-zoom-on-hover">
-                                                        <a href="#"><img src="../upload/Portrait5-500x500.jpg" alt="" width="250" height="250" title="Portrait5" /></a>
-                                                        <div class="gdlr-core-hover-opacity">
-                                                        </div>
-                                                    </div>
-                                                    <div class="gdlr-core-personnel-list-content-wrap row">
-                                                        
-                                                        <h3 class="gdlr-core-personnel-list-title" style="font-size: 30px ;font-weight: 700 ;letter-spacing: 0px ;text-transform: none ;"><a href="#">Faculty 01</a></h3>
-                                                        
-                                                        
-                                                        <div class="gdlr-core-personnel-list-content">
-                                                            <p>                                                              
-                                                               <b>Description:</b> Faculty description<br/> 
-                                                                <br>
-                                                                <br> 
-                                                                <br>                            
-                                                            </p>
-                                                        </div>
-                                                        
-                                                             
-                                                        <a class="gdlr-core-personnel-list-button gdlr-core-button" href="/student/contribution_manage">Contributions</a>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="gdlr-core-pagination  gdlr-core-style-round gdlr-core-right-align">
-                                                <span aria-current="page" class="page-numbers current">1</span> 
-                                                <a class="page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit">2</a>
-                                                <a class="next page-numbers" href="https://demo.goodlayers.com/kingster/homepages/college/course-search/page/2/?course-keywords&amp;course-id&amp;department&amp;campus&amp;level&amp;instructor&amp;semester&amp;credit"></a>
-                                            </div>
+                                            
                                         </div>    
                                     </div>                    
                                 </div>

@@ -6,7 +6,7 @@
 </head>
 
 
-
+<%- include('../../layouts/functions.ejs') %> 
 
 
 <div class="kingster-page-title-wrap kingster-style-medium kingster-left-align">
@@ -25,12 +25,12 @@
     <div class="kingster-breadcrumbs-container kingster-container">
         <div class="kingster-breadcrumbs-item kingster-item-pdlr"> 
             <span property="itemListElement" typeof="ListItem">
-                <a property="item" typeof="WebPage" title="Go to Kingster - College." href="/student" class="home">
+                <a property="item" typeof="WebPage" title="Go to Kingster - College." href="/" class="home">
                     <span property="name">Home</span>
                 </a><meta property="position" content="1">
             </span> &gt; 
             <span property="itemListElement" typeof="ListItem">
-                <a property="item" typeof="WebPage" title="Go to Kingster - College." href="javascript:history.back()" class="home">
+                <a property="item" typeof="WebPage" title="Go to Kingster - College." href="/student/contribution_manage" class="home">
                     <span property="name">Contribution</span>
                 </a><meta property="position" content="3">
             </span> &gt; 
@@ -56,7 +56,7 @@
                                 <div class="gdlr-core-pbf-element">
                                     <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr">
                                         <div class="gdlr-core-title-item-title-wrap clearfix">
-                                            <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " style="font-size: 27px ;font-weight: 600 ;letter-spacing: 0px ;text-transform: none ;">Contribution title</h3>
+                                            <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " style="font-size: 27px ;font-weight: 600 ;letter-spacing: 0px ;text-transform: none ;"><%= contributions[0].title %></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -64,11 +64,11 @@
                                     <div class="gdlr-core-text-box-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align">
                                         <div class="gdlr-core-text-box-item-content" style="font-size: 16px ;text-transform: none ;">
                                             <p>
-                                                <b>Student: </b><span>Some body</span> <br>
-                                                <b>Faculty: </b><span>Some faculty</span> <br>
-                                                <b>Topic: </b><span>Some topic</span> <br>
-                                                <b>Last update: </b><span>03/03/2021</span> <br>
-                                                <b>Mark: </b><span>6.0</span>
+                                                <b>Student: </b><span><%= contributions[0].first_name + " " + contributions[0].last_name %></span> <br>
+                                                <b>Faculty: </b><span><%= contributions[0].faculty %></span> <br>
+                                                <b>Topic: </b><span><%= contributions[0].topic %></span> <br>
+                                                <b>Last update: </b><span><%= format_date(contributions[0].submitted_date) %></span> <br>
+                                                <b>Mark: </b><span><%= contributions[0].mark %></span>
                                             </p>
                                             
                                         </div>
@@ -77,25 +77,11 @@
                                 <div class="gdlr-core-pbf-element">
                                     
                                     <div class="gdlr-core-course-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-course-style-list" style="padding-bottom: 45px ;">
-                                        
+                                        <% for (var index in files) {%>
                                         <div class="gdlr-core-course-item-list ">
-                                            <a class="gdlr-core-course-item-link" href="#"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">01</span><span class="gdlr-core-course-item-title gdlr-core-skin-title">Introduction to Financial Accounting</span><i class="gdlr-core-course-item-icon gdlr-core-skin-icon fa fa-long-arrow-right"></i></a>
+                                            <a class="gdlr-core-course-item-link" href=<%= files[index].id%>><span class="gdlr-core-course-item-id gdlr-core-skin-caption"><%= parseInt(index) + 1 %></span><span class="gdlr-core-course-item-title gdlr-core-skin-title"><%= files[index].file_name %></span><i class="gdlr-core-course-item-icon gdlr-core-skin-icon fa fa-long-arrow-right"></i></a>
                                         </div>
-                                        <div class="gdlr-core-course-item-list ">
-                                            <a class="gdlr-core-course-item-link" href="#"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">02</span><span class="gdlr-core-course-item-title gdlr-core-skin-title">Introduction to Managerial Accounting</span><i class="gdlr-core-course-item-icon gdlr-core-skin-icon fa fa-long-arrow-right"></i></a>
-                                        </div>
-                                        <div class="gdlr-core-course-item-list ">
-                                            <a class="gdlr-core-course-item-link" href="#"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">03</span><span class="gdlr-core-course-item-title gdlr-core-skin-title">Intermediate Accounting I</span><i class="gdlr-core-course-item-icon gdlr-core-skin-icon fa fa-long-arrow-right"></i></a>
-                                        </div>
-                                        <div class="gdlr-core-course-item-list ">
-                                            <a class="gdlr-core-course-item-link" href="#"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">04</span><span class="gdlr-core-course-item-title gdlr-core-skin-title">Contemporary Accounting Topics</span><i class="gdlr-core-course-item-icon gdlr-core-skin-icon fa fa-long-arrow-right"></i></a>
-                                        </div>
-                                        <div class="gdlr-core-course-item-list ">
-                                            <a class="gdlr-core-course-item-link" href="#"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">05</span><span class="gdlr-core-course-item-title gdlr-core-skin-title">Introduction to Taxation</span><i class="gdlr-core-course-item-icon gdlr-core-skin-icon fa fa-long-arrow-right"></i></a>
-                                        </div>
-                                        <div class="gdlr-core-course-item-list ">
-                                            <a class="gdlr-core-course-item-link" href="#"><span class="gdlr-core-course-item-id gdlr-core-skin-caption">06</span><span class="gdlr-core-course-item-title gdlr-core-skin-title">Accounting Systems and Auditing</span><i class="gdlr-core-course-item-icon gdlr-core-skin-icon fa fa-long-arrow-right"></i></a>
-                                        </div>
+                                        <% }%>
                                     </div>
                                 </div>                                                                                           
                             </div>

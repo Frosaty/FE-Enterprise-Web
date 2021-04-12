@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="../assets/plugins/datatable/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css">
     <link rel="stylesheet" href="../assets/plugins/datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css">
-
+    <link rel="stylesheet" href="../assets/plugins/sweetalert/sweetalert.css">
     <!-- Core css -->
     <link rel="stylesheet" href="../assets/css/style.min.css" />
 </head>
 
 <body>
-        
+    <%- include('../../layouts/functions.ejs') %> 
             <!-- Start Page title and tab -->
             <div class="section-body">
                 <div class="container-fluid">
@@ -22,13 +22,13 @@
                         <div class="header-action">
                             <h1 class="page-title">Topic</h1>
                             <ol class="breadcrumb page-breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/manager">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Topic</li>
                             </ol>
                         </div>
                         <ul class="nav nav-tabs page-header-tab">
-                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Library-all">List View</a></li>
-                            <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#Library-add-Boot">Add New</a></li>
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#topic-list">List View</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#topic-add">Add New</a></li>
                         </ul>
                     </div>
                 </div>
@@ -36,148 +36,89 @@
             <div class="section-body mt-4">
                 <div class="container-fluid">
                     <div class="tab-content">
-                        <div class="tab-pane active" id="Library-all">
+                        <div class="tab-pane active" id="topic-list">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-hover js-basic-example dataTable table-striped table_custom border-style spacing5">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
+                                                    <th>No</th>
                                                     <th>Title</th>
-                                                    <th>Faculty</th>
-                                                    <th>Topic</th>
-                                                    <th>Date Time</th>
+                                                    <th>Start date</th>
+                                                    <th>End date</th>
+                                                    <th>Actual end</th>
+                                                    <th>Active</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <% for(var index in topics) { %>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Management Basics</td>
-                                                    <td>Designing</td>
-                                                    <td>Architecture</td>
-                                                    <td>11/11/2011</td>
+                                                    <% num = parseInt(index) + 1 %>
+                                                    <td><%= num%></td>
+                                                    <td><%= topics[index].name %></td>
+                                
+                                                    <td><%= format_date(topics[index].start_date) %></td>
+                                                    <td><%= format_date(topics[index].end_date) %></td>
+                                                    <td><%= format_date(topics[index].end_date_actual) %></td>
+                                                    <td><%= topics[index].is_active %></td>
                                                     <td>
-                                                        <button type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></button>
-                                                        <button type="button" class="btn btn-icon btn-sm" data-toggle="modal" data-target="#editModal" title="Edit"><i class="fa fa-edit"></i></button>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                                        <a href='/manager/contribution_manage?topic=<%= topics[index].id %>' type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                        <a href=<%= "/manager/topic_detail?id="  + topics[index].id %> type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                        
                                                     </td>
                                                 </tr>
-
+                                                <% } %>
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
-                                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Edit Form</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="message-text" class="col-form-label">Message:</label>
-                                                        <textarea class="form-control" id="message-text"></textarea>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Send message</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewDetail" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="viewDetail">View Detail Form</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="message-text" class="col-form-label">Message:</label>
-                                                        <textarea class="form-control" id="message-text"></textarea>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Send message</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>              
                             </div>
                         </div>
-                        <div class="tab-pane" id="Library-add-Boot">
+                        <div class="tab-pane" id="topic-add">
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Add Topic</h3>
-                                    <div class="card-options ">
-                                        <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                        <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
-                                    </div>
+        
                                 </div>
-                                <form class="card-body">
+                                <form action="/add_topics" method="POST" class="card-body">
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Title <span class="text-danger">*</span></label>
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" placeholder="Enter topic title" name="title" id="title">
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-3 col-form-label">Faculty  <span class="text-danger">*</span></label>
-                                        <div class="col-md-7">
-                                            <select class="form-control input-height" name="sub">
-                                            <option value="">Select...</option>
-                                            <option value="Category 1">Mathematics</option>
-                                            <option value="Category 2">Science</option>
-                                            <option value="Category 3">Software</option>
-                                            <option value="Category 3">Other</option>
-                                        </select>
-                                        </div>
-                                    </div>
+        
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Start Date <span class="text-danger">*</span></label>
-                                        <div class="col-md-7">
-                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="">
+                                        <div class="col-md-5">
+                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter start date" name="start_date" id="start_date">
                                         </div>
                                     </div>
+        
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">End Date <span class="text-danger">*</span></label>
-                                        <div class="col-md-7">
-                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="">
+                                        <div class="col-md-5">
+                                            <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Enter end date" name="end_date" id="end_date">
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-3 col-form-label">Author Name <span class="text-danger">*</span></label>
-                                        <div class="col-md-7">
-                                            <input type="text" class="form-control">
+        
+        
+        
+                                    <!-- <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Active <span class="text-danger">*</span></label>
+                                        <div class="col-md-3 row">
+                                            <select class="form-control" name="active" id="active">
+                                                        <option value=1>Yes</option>
+                                                        <option value=0>No</option>
+                                                    </select>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-3 col-form-label"></label>
-                                        <div class="col-md-7">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                            <button type="submit" class="btn btn-outline-secondary">Cancel</button>
+                                    </div> -->
+                                    <div class="text-right">
+                                        <div class="col-md-10">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <button type="reset" class="btn btn-outline-secondary">Clear</button>
                                         </div>
                                     </div>
                                 </form>
@@ -187,17 +128,7 @@
                 </div>
             </div>
             <!-- Start main footer -->
-            <div class="section-body">
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                Copyright © 2021 <a href="facebook.com/diivn">ND</a>.
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
+            
         
     
 
@@ -208,6 +139,10 @@
     <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="../assets/bundles/dataTables.bundle.js"></script>
     <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
+    
+    <!-- Start project main js  and page js -->
+    <script src="../assets/js/form/dropify.js"></script>
+    <script src="../assets/js/page/summernote.js"></script>
 
     <!-- Start project main js  and page js -->
     <script src="../assets/js/core.js"></script>

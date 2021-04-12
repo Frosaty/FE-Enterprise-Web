@@ -98,8 +98,9 @@
                         <div class="kingster-top-bar-left kingster-item-pdlr">
                             
                             <div class="kingster-top-bar-left-text">
-                                <span style="color: #8dd7e5; margin-right: 10px;">Welcome </span>
-                                <a href="#" style="margin-right: 0px;">Student name</a>
+                                <br>
+                                <span style="color: #8dd7e5; margin-right: 10px;">Welcome to our university</span>
+                                
                             </div>
                             
                         </div>
@@ -107,8 +108,23 @@
                         <div class="kingster-top-bar-right kingster-item-pdlr">
                             
                             <div class="kingster-top-bar-right-text">
-                                <span style="color: #8dd7e5; margin-right: 30px;">Phone: +84 969 696 969</span>
-                                <a href="/logout" style="margin-right: 0px;">Sign Out</a>
+
+                                <div class="kingster-main-menu" id="kingster-main-menu">
+
+                                    <ul id="menu-main-navigation-1" class="sf-menu">
+                                        <span style="margin-right: 30px;"></span>
+                                        <li class="menu-itemmenu-item-has-children  kingster-normal-menu">
+                                            <span style="color: #8dd7e5; margin-right: 30px;">Phone: +84 969 696 969</span>
+                                        </li>
+                                        <li class="menu-itemmenu-item-has-children  kingster-normal-menu">
+                                            <span style="margin-right: 30px;"><%= username %></span>
+                                            <ul class="sub-menu ">
+                                                <li class="menu-item " style="padding: 1rem; "><a href="/student/change_password">Change Password</a></li>
+                                                <li class="menu-item " style="padding: 1rem; "><a href="/logout">Sign Out</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                             
                         </div>
@@ -251,6 +267,10 @@
 </div>
       
         <%- script %>
-    
+        <script>
+           
+           
+           
+        </script>
 </body>
 </html>

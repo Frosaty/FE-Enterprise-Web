@@ -52,56 +52,19 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <% for(var index in faculties) { %>
                                                 <tr>
-                                                    <td>01</td> 
-                                                    <td>Business</td>
-                                                    <td>This is description of faculty, and it will be very long.</td>
+                                                    <% num = parseInt(index) + 1 %>
+                                                    <td><%= num%></td> 
+                                                    <td><%= faculties[index].name %></td>
+                                                    <td><%= faculties[index].description %></td>
                                                     <td>
-                                                        <a href="/admin/contribution_manage" type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                        <a href="/admin/faculty_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                                        <a href=<%= "/admin/contribution_manage?faculty=" + faculties[index].id %> type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
+                                                        <a href=<%= "/admin/faculty_detail?id=" + faculties[index].id %> type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                        
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>01</td> 
-                                                    <td>IT</td>
-                                                    <td>This is description of faculty, and it will be very long.</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                        <a href="/admin/faculty_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>01</td> 
-                                                    <td>Business</td>
-                                                    <td>This is description of faculty, and it will be very long.</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                        <a href="/admin/faculty_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>01</td> 
-                                                    <td>IT</td>
-                                                    <td>This is description of faculty, and it will be very long.</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                        <a href="/admin/faculty_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>01</td> 
-                                                    <td>Graphic design</td>
-                                                    <td>This is description of faculty, and it will be very long.</td>
-                                                    <td>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#viewModal" class="btn btn-icon btn-sm" title="View"><i class="fa fa-book"></i></a>
-                                                        <a href="/admin/faculty_detail" type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
-                                                    </td>
-                                                </tr>
+                                                <% } %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -118,26 +81,26 @@
                                     <div class="card-options ">
                                     </div>
                                 </div>
-                                <form class="card-body">
+                                <form class="card-body" action="/add_faculty" method="POST">
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Faculty name <span class="text-danger">*</span></label>
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control" placeholder="Enter Faculty name">
+                                            <input type="text" class="form-control" placeholder="Enter Faculty name" name="faculty_name" id="faculty_name">
                                         </div>
                                     </div>
-                    
-                                    
+        
+        
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Description <span class="text-danger">*</span></label>
                                         <div class="col-md-7">
-                                            <textarea type="text" class="form-control" rows=5></textarea>
+                                            <textarea type="text" class="form-control" rows=5 name="description" id="description"></textarea>
                                         </div>
                                     </div>
         
                                     <div class="form-group row">
                                         <div class="col-md-10 text-right">
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                            <button type="reset"class="btn btn-outline-secondary">Clear</button>
+                                            <button type="reset" class="btn btn-outline-secondary">Clear</button>
                                         </div>
                                     </div>
                                 </form>
